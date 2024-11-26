@@ -15,7 +15,7 @@ public class DisplayMenu {
             String[] userDetails = getUserDetails("user.csv", userId);
             if (userDetails != null) {
                 String correctPassword = userDetails[1]; // password is at index 1
-                String role = userDetails[2]; // role is at index 4
+                String role = userDetails[2]; // role is at index 2
 
                 // Ask for password and authenticate user
                 System.out.print("Enter your password: ");
