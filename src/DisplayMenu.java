@@ -5,20 +5,9 @@ public class DisplayMenu {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
-        // Predefined passwords for roles
-        final String EMPLOYEE_PASSWORD = "employee123";
-        final String ADMIN_PASSWORD = "admin123";
-        final String HR_PASSWORD = "hr123";
-
         while (running) {
             // Main Menu
-            System.out.println("Welcome to the UL Payroll System");
-            System.out.println("Please select your role:");
-            System.out.println("1. Employee");
-            System.out.println("2. Admin");
-            System.out.println("3. Human Resources");
-            System.out.println("4. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your UserID: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine();  // Clear the newline character left in the input buffer
