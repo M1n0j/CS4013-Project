@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 
-public abstract class Employee {
+/**
+ * 
+ */
+public class Employee {
     private String name;
     private int employeeId;
     private LocalDate dateOfBirth;
@@ -102,8 +105,6 @@ public abstract class Employee {
         this.position = position;
     }
 
-    // Abstract method to calculate salary (to be implemented by subclasses)
-    public abstract double calculateSalary();
 
     // Method to print employee details
     public void printEmployee() {
