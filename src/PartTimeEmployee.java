@@ -7,6 +7,8 @@ public class PartTimeEmployee extends Employee {
 
     public PartTimeEmployee(String name, int employeeId, LocalDate dateOfBirth, String address, String email, String phoneNumber, String department, String position, double hoursWorked, double hourlyPay) {
         super(name, employeeId, dateOfBirth, address, email, phoneNumber, department, position);
+        this.hoursWorked = hoursWorked;
+        this.hourlyPay = hourlyPay;
     }
 
     @Override

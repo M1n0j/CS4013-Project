@@ -112,7 +112,8 @@ public class DisplayMenu {
                                     System.out.println("Implementing promotion...");
                                     break;
                                 case 2:
-                                    hrMenuRunning = false;
+
+                                hrMenuRunning = false;
                                     break;
                                 default:
                                     System.out.println("Invalid selection. Please try again.");
