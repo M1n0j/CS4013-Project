@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class Employee {
     private String name;
     private int employeeId;
+    private String employeePassword;
     private LocalDate dateOfBirth;
     private String address;
     private String email;
