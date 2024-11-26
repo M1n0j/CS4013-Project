@@ -1,55 +1,45 @@
+import java.util.List;
+
 public class SalaryScale {
-    private String positionName;
-    private String level;
-    private double salary;
+    private String scaleId;
+    private String scaleName;
+    private List<Double> salaryPoints;
+    private int maxPoints;
 
-    // Constructor
-    public SalaryScale(String positionName, String level, double salary) {
-        this.positionName = positionName;
-        this.level = level;
-        this.salary = salary;
+    public SalaryScale(String scaleId, String scaleName, List<Double> salaryPoints, int maxPoints){
+        this.scaleId = scaleId;
+        this.scaleName = scaleName;
+        this.salaryPoints = salaryPoints;
+        this.maxPoints = maxPoints;
     }
 
-    // Getter methods
-    public String getPositionName() {
-        return positionName;
+    // Getter for scaleId
+    public String getScaleId() {
+        return scaleId;
     }
 
-    public String getLevel() {
-        return level;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    // Method to parse the CSV line into a SalaryScale object
-    public static SalaryScale fromCSV(String csvLine) {
-        String[] values = csvLine.split(",");
-        if (values.length != 3) {
-            throw new IllegalArgumentException("Invalid CSV format: " + csvLine);
+    public double getSalaryPoint(int point){
+        if (point < 1 || point > maxPoints){
+            throw new IllegalArgumentException("Invalid salary point");
         }
-
-        try {
-            String positionName = values[0].replaceAll("\"", "").trim();  // Remove quotes
-            String level = values[1].replaceAll("\"", "").trim();  // Remove quotes
-            // Ensure to remove quotes around the salary value and parse it as double
-            double salary = Double.parseDouble(values[2].replaceAll("\"", "").trim());
-
-            return new SalaryScale(positionName, level, salary);
-        } catch (NumberFormatException e) {
-            System.err.println("Error parsing salary scale data: " + csvLine);
-            throw new RuntimeException(e);
-        }
+        return salaryPoints.get(point - 1);
     }
 
-    // Method to convert the SalaryScale object to a CSV format string
-    public String toCSV() {
-        return positionName + "," + level + "," + salary;
+    // Method to get salary at a specific point
+    public double getSalaryAtPoint(int point) {
+        return getSalaryPoint(point);
     }
 
-    @Override
-    public String toString() {
-        return "SalaryScale{" + "positionName='" + positionName + "', level='" + level + "', salary=" + salary + '}';
+    public boolean isAtMaxPoint(int currentPoint){
+        return currentPoint >= maxPoints;
+    }
+
+    // Additional getters for completeness
+    public String getScaleName() {
+        return scaleName;
+    }
+
+    public int getMaxPoints() {
+        return maxPoints;
     }
 }
