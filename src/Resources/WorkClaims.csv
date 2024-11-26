@@ -1,0 +1,3 @@
+ClaimId,EmployeeId,Date,HoursWorked,WorkDescription,Approved
+1,1,2023-10-01,8,Worked on project X,True
+2,2,2023-10-05,4,Training session,False

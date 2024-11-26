@@ -1,0 +1,3 @@
+EmployeeId,PaymentDate,GrossPay,PRSI,Usc,IncomeTax,NetPay
+1,23/10/2023,2500,100,50,400,1950
+2,23/10/2023,4000,160,80,800,2960
