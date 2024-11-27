@@ -12,11 +12,11 @@ public class SalaryScale {
 
     // Load salary data from CSV file into the list
     private void loadSalaryData(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader salaryReader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            reader.readLine();  // Skip header line
+            salaryReader.readLine();  // Skip header line
 
-            while ((line = reader.readLine()) != null) {
+            while ((line = salaryReader.readLine()) != null) {
                 String[] fields = line.split(",");
                 salaryData.add(fields); // Store each row (Position, Level, Salary) in the list
             }
