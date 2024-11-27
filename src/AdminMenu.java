@@ -99,26 +99,21 @@ public class AdminMenu {
     // Method to view employee details
     private void viewEmployeeDetails() {
         try {
-            // Prompt the user for the employee ID
             System.out.print("\nEnter Employee ID to view details: ");
             int employeeId = scanner.nextInt();
             scanner.nextLine(); // Clear newline character
 
-            // Open the employees.csv file
-            BufferedReader reader = new BufferedReader(new FileReader(Admin.EMPLOYEES_CSV_PATH));
+            // Use the `admin` instance to access the non-static field
+            BufferedReader reader = new BufferedReader(new FileReader(admin.EmployeesCsv));
             String line;
             boolean found = false;
 
-            // Skip the header
+            // Skip header
             reader.readLine();
 
-            // Read through each line in the file
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-
-                // Check if the employee ID matches the one entered by the user
                 if (Integer.parseInt(fields[0]) == employeeId) {
-                    // Print employee details if found
                     System.out.println("\nEmployee Details:");
                     System.out.println("Employee ID: " + fields[0]);
                     System.out.println("Name: " + fields[1]);
@@ -132,12 +127,10 @@ public class AdminMenu {
                 }
             }
 
-            // If employee not found, display a message
             if (!found) {
                 System.out.println("Employee not found.");
             }
 
-            // Close the file reader
             reader.close();
         } catch (IOException e) {
             System.out.println("Error reading employee details: " + e.getMessage());
@@ -166,9 +159,9 @@ public class AdminMenu {
             Admin admin = new Admin();
 
             // Create temporary files for each CSV file to store updated data
-            File employeesFile = new File(admin.EMPLOYEES_CSV_PATH);  // Accessing instance fields
-            File payslipsFile = new File(admin.PAYSLIPS_CSV_PATH);    // Accessing instance fields
-            File usersFile = new File(admin.USERS_CSV_PATH);          // Accessing instance fields
+            File employeesFile = new File(admin.EmployeesCsv);  // Accessing instance fields
+            File payslipsFile = new File(admin.PayslipsCsv);    // Accessing instance fields
+            File usersFile = new File(admin.UsersCSV);          // Accessing instance fields
             File tempEmployeesFile = new File("src/resources/temp_employees.csv");
             File tempPayslipsFile = new File("src/resources/temp_payslips.csv");
             File tempUsersFile = new File("src/resources/temp_users.csv");
