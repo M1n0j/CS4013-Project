@@ -1,4 +1,6 @@
-public class User {
+import java.util.Scanner;
+
+public abstract class User {
     private String employeeID;
     private String password;
 
@@ -16,9 +18,14 @@ public class User {
         this.employeeID = employeeID;
     }
     public String getPassword() {
-        return password;
+        return this.password.equals(inputPassword);
     }
+
+    public abstract void displayUserMenu(Scanner scanner);
+
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }
