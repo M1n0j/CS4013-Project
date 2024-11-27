@@ -18,20 +18,20 @@ public class DisplayMenu {
             // Get user details from the CSV file based on userId
             String[] userDetails = getUserDetails("src/resources/User.csv", userId);
             if (userDetails != null) {
-                String correctPassword = userDetails[1].trim(); // Trim password from CSV
-                String role = userDetails[2].trim(); // Trim role from CSV
+                String correctPassword = userDetails[1];
+                String role = userDetails[2];
 
                 // Debugging: Print the role to check if it's correctly read
                 System.out.println("User Role: " + role);
 
                 // Ask for password and authenticate user
                 System.out.print("Enter your password: ");
-                String inputPassword = scanner.nextLine().trim(); // User input password (trimmed)
+                String inputPassword = scanner.nextLine();
 
                 if (inputPassword.equals(correctPassword)) {
                     System.out.println("Access granted!");
 
-                    // Role-based menu handling (with trimming and case-insensitive comparison)
+                    // Role-based menu handling
                     if (role.equalsIgnoreCase("Admin")) {
                         AdminMenu adminMenu = new AdminMenu(scanner);
                         adminMenu.displayMenu(); // Show Admin Menu
@@ -82,7 +82,7 @@ public class DisplayMenu {
                 String[] userDetails = line.split(",");
 
                 // Trim whitespace to ensure clean parsing
-                if (Integer.parseInt(userDetails[0].trim()) == userId) {
+                if (Integer.parseInt(userDetails[0]) == userId) {
                     return userDetails; // Return the user details if UserID matches
                 }
             }
