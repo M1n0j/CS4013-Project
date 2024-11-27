@@ -1,15 +1,15 @@
 import java.io.*;
 
 public class Admin {
-    // Static final constants for CSV file paths
-    public static final String EMPLOYEES_CSV_PATH = "src/resources/employees.csv";
-    public static final String PAYSLIPS_CSV_PATH = "src/resources/payslips.csv";
-    public static final String USERS_CSV_PATH = "src/resources/users.csv";
+    //  Final constants for CSV file paths(Bomberclart)
+    public final String EmployeesCsv = "src/resources/employees.csv";
+    public final String PayslipsCsv = "src/resources/payslips.csv";
+    public final String UsersCSV = "src/resources/users.csv";
 
-    // Static header constants for CSV files
-    public static final String EMPLOYEES_CSV_HEADER = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
-    public static final String PAYSLIPS_CSV_HEADER = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
-    public static final String USERS_CSV_HEADER = "userId,password,role";
+    // Header constants for CSV files
+    public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
+    public final String PayslipsCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
+    public final String UsersCsvHeader = "userId,password,role";
 
     // Method to add employee (to be used in AdminMenu)
     public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId) throws IOException {
@@ -26,9 +26,9 @@ public class Admin {
         String userCSVLine = String.format("%d,%s,%s", newUserId, password, isFullTime ? "Full-Time" : "Part-Time");
 
         // Write to the CSV files
-        writeToCSV(EMPLOYEES_CSV_PATH, EMPLOYEES_CSV_HEADER, employeeCSVLine);
-        writeToCSV(PAYSLIPS_CSV_PATH, PAYSLIPS_CSV_HEADER, payslipCSVLine);
-        writeToCSV(USERS_CSV_PATH, USERS_CSV_HEADER, userCSVLine);
+        writeToCSV(EmployeesCsv, EmployeesCsvHeader, employeeCSVLine);
+        writeToCSV(PayslipsCsv, PayslipsCsvHeader, payslipCSVLine);
+        writeToCSV(UsersCSV, UsersCsvHeader, userCSVLine);
     }
 
     // Helper method to write data to a CSV file
@@ -51,7 +51,7 @@ public class Admin {
     // Generate a new unique employee ID by finding the max existing ID
     private int generateNewEmployeeId() throws IOException {
         int maxId = 0;
-        File file = new File(EMPLOYEES_CSV_PATH);
+        File file = new File(EmployeesCsv);
 
         if (!file.exists()) {
             return 1; // Start at employeeId 1 if file doesn't exist
