@@ -1,11 +1,10 @@
 import java.util.Scanner;
 
 public class PartTimeMenu {
-
     private Scanner scanner;
     private String[] userDetails;
 
-    public PartTimeMenu(Scanner scanner, String[] userDetails) {
+    public PartTimeMenu(Scanner scanner) {
         this.scanner = scanner;
         this.userDetails = userDetails;
     }
@@ -25,10 +24,13 @@ public class PartTimeMenu {
 
             if (choice == 1) {
                 System.out.println("\nEmployee Details:");
+                // Display user details
             } else if (choice == 2) {
                 System.out.println("\nMost Recent Payslip:");
+                // Display most recent payslip
             } else if (choice == 3) {
                 System.out.println("\nHistorical Payslips:");
+                // Display historical payslips
             } else if (choice == 4) {
                 partTimeMenuRunning = false;
             } else {

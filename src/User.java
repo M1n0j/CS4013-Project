@@ -1,24 +1,38 @@
 public class User {
-    private String employeeID;
-    private String password;
+    private int employeeId; // Unique ID for the user
+    private String password; // Account password
 
-    public User(String employeeID, String password) {
-        this.employeeID = employeeID;
+    // Constructor
+    public User(int employeeId, String password) {
+        this.employeeId = employeeId;
         this.password = password;
     }
 
-    //getters and setter methods
-    public String getEmployeeID() {
-        return employeeID;
+    // Getters
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployeeID(String employeeID) {
-        this.employeeID = employeeID;
-    }
     public String getPassword() {
         return password;
     }
+
+    // Setters
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    // Method to verify password
+    public boolean verifyPassword(String inputPassword) {
+        return this.password.equals(inputPassword);
+    }
+
+    @Override
+    public String toString() {
+        return "Users{employeeId=" + employeeId + "}";
     }
 }

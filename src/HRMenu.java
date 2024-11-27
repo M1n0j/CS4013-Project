@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class HRMenu {
-
     private Scanner scanner;
 
     public HRMenu(Scanner scanner) {
@@ -21,6 +20,7 @@ public class HRMenu {
 
             if (choice == 1) {
                 System.out.println("Implementing promotion...");
+                // Add functionality here
             } else if (choice == 2) {
                 hrMenuRunning = false;
             } else {
