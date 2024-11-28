@@ -1,4 +1,6 @@
-employeeId,employeePassword, name,email,role,salaryScale,currentPoint,isFullTime,yearsAtTopPoint
-1, J4v4John, John Doe,john.doe@example.com,Professor,Level 1,5,TRUE,2
-2, JaneTheG04t, Jane Smith,jane.smith@example.com,Associate Professor,Level 2,3,FALSE,1
-3, Br0wnTh0m4s, Bob Brown,bob.brown@example.com,Assistant Professor,Level 3,4,TRUE,3
+employeeId,name,email,role,salaryScale,currentPoint,isFullTime
+1,John Doe,john.doe@example.com,Professor,Level 1,5,TRUE
+3,Bob Brown,bob.brown@example.com,Assistant Professor,Level 3,4,TRUE
+4,John Doe,john.doe@example.com,Software Engineer,A1,3,true
+5,Jane Smith,jane.smith@example.com,Graphic Designer,N/A,0,false
+
