@@ -73,11 +73,6 @@ public abstract class Employee {
         this.employeeId = employeeId;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-
 
     public void setEmail(String email) {
         this.email = email;

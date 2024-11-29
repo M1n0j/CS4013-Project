@@ -9,6 +9,7 @@ public class PartTimeEmployee extends Employee {
         super(name, employeeId, email, department, position, promotion);
     }
 
+
     @Override
     public double calculateSalary() {
         return 0;

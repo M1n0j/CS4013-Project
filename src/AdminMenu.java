@@ -87,6 +87,7 @@ public class AdminMenu {
                 employee = new PartTimeEmployee(name, 0, "", email, "", false, 0.0, 0.0);
             }
 
+
             // Add the employee to the CSV files
             admin.addEmployee(employee, isFullTime, "N/A", currentPoint, password, employeeId);
             System.out.println("Employee added successfully!");
