@@ -113,7 +113,6 @@ public class DisplayMenu {
         } catch (NumberFormatException e) {
             System.err.println("Error with UserID. Contact the administrator.");
         }
-
         // Return null if no matching UserID is found
         return null;
     }
