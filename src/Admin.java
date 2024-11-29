@@ -7,9 +7,9 @@ public class Admin {
     public final String UsersCSV = "src/resources/users.csv";
 
     // Header constants for CSV files
-    public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
+    public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime, promotion";
     public final String PayslipsCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
-    public final String UsersCsvHeader = "userId,password,role";
+    public final String UsersCsvHeader = "userId,password,role, promotion";
 
     // Method to add employee (to be used in AdminMenu)
     public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId) throws IOException {
@@ -17,13 +17,13 @@ public class Admin {
         int newUserId = newEmployeeId; // Use the same ID for user
 
         // Prepare CSV lines
-        String employeeCSVLine = String.format("%d,%s,%s,%s,%s,%d,%b",
+        String employeeCSVLine = String.format("%d,%s,%s,%s,%s,%d,%b,%b",
                 newEmployeeId, employee.getName(), employee.getEmail(), employee.getPosition(),
-                isFullTime ? salaryScaleId : "N/A", currentPoint, isFullTime);
+                isFullTime ? salaryScaleId : "N/A", currentPoint, isFullTime, false);
         String payslipCSVLine = String.format("%d,%s,%s,%s,%s,%d,%b",
                 newEmployeeId, employee.getName(), employee.getEmail(), employee.getPosition(),
                 isFullTime ? salaryScaleId : "N/A", currentPoint, isFullTime);
-        String userCSVLine = String.format("%d,%s,%s", newUserId, password, isFullTime ? "Full-Time" : "Part-Time");
+        String userCSVLine = String.format("%d,%s,%s,%b", newUserId, password, isFullTime ? "Full-Time" : "Part-Time", false);
 
         // Write to the CSV files
         writeToCSV(EmployeesCsv, EmployeesCsvHeader, employeeCSVLine);
