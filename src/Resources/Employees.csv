@@ -1,6 +1,6 @@
-employeeId,name,email,role,salaryScale,currentPoint,isFullTime
-1,John Doe,john.doe@example.com,Professor,Level 1,5,TRUE
-3,Bob Brown,bob.brown@example.com,Assistant Professor,Level 3,4,TRUE
-4,John Doe,john.doe@example.com,Software Engineer,A1,3,true
-5,Jane Smith,jane.smith@example.com,Graphic Designer,N/A,0,false
+employeeId,name,email,role,level,isFullTime,promotion
+1,John Doe,john.doe@example.com,Professor,5,TRUE,FALSE
+3,Bob Brown,bob.brown@example.com,Assistant Professor,3,TRUE,FALSE
+4,John Doe,john.doe@example.com,Software Engineer,2,true,FLASE
+5,Jane Smith,jane.smith@example.com,Graphic Designer,1,false,FALSE
 
