@@ -4,7 +4,7 @@ public class Admin {
     //  Final constants for CSV file paths(Bomberclart)
     public final String EmployeesCsv = "src/resources/employees.csv";
     public final String PayslipsCsv = "src/resources/payslips.csv";
-    public final String UsersCSV = "src/resources/users.csv";
+    public final String UsersCSV = "src/resources/user.csv";
 
     // Header constants for CSV files
     public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime, promotion";
