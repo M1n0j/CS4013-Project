@@ -1,13 +1,10 @@
 import java.time.LocalDate;
 
-public class FullTimeEmployee extends  Employee{
-
-    private int salary;
+public class FullTimeEmployee extends Employee{
 
 
-    public FullTimeEmployee(String name, int employeeId, LocalDate dateOfBirth, String address, String email, String phoneNumber, String department, String position, int salary) {
-        super(name, employeeId, dateOfBirth, address, email, phoneNumber, department, position);
-        this.salary = salary;
+    public FullTimeEmployee(String name, int employeeId, String address, String email, String department, String position, boolean promotion) {
+        super(name, employeeId, email, department, position, promotion);
     }
 
     @Override
