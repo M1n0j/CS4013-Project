@@ -207,7 +207,7 @@ public class AdminMenu {
                 }
             }
 
-            // Remove employee from users.csv
+            // Remove employee from user.csv
             while ((line = usersReader.readLine()) != null) {
                 String[] fields = line.split(",");
                 int currentUserId = Integer.parseInt(fields[0]);
