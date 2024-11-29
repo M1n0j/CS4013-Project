@@ -3,17 +3,19 @@ import java.time.LocalDate;
 public abstract class Employee {
     private String name;
     private int employeeId;
+    private String employeePassword;
     private LocalDate dateOfBirth;
     private String address;
     private String email;
     private String phoneNumber;
     private String department;
     private String position;
+    private boolean promotion;
 
     // Constructor with all fields
     public Employee(String name, int employeeId, LocalDate dateOfBirth,
                     String address, String email, String phoneNumber,
-                    String department, String position) {
+                    String department, String position, boolean promotion) {
         this.name = name;
         this.employeeId = employeeId;
         this.dateOfBirth = dateOfBirth;
@@ -22,6 +24,7 @@ public abstract class Employee {
         this.phoneNumber = phoneNumber;
         this.department = department;
         this.position = position;
+        this.promotion = promotion;
     }
 
     // Default constructor
@@ -100,6 +103,14 @@ public abstract class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
+    }
+
+    public boolean getPromotion() {
+        return promotion;
     }
 
     // Abstract method to calculate salary (to be implemented by subclasses)
