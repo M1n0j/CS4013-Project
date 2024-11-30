@@ -87,8 +87,7 @@ public abstract class Employee {
     public void setEmployeePassword(String employeePassword) {
         this.employeePassword = employeePassword;
     }
-
-
+    
 
     // Abstract method to calculate salary (to be implemented by subclasses)
     public abstract double calculateSalary();
