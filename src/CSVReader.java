@@ -95,7 +95,7 @@ public class CSVReader {
     public static List<SalaryScale> readSalaryScales(String salaryScaleCSVPath) {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(salaryScaleCSVPath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(salaryCSVPath))) {
             // Skip the header
             reader.readLine();
 
