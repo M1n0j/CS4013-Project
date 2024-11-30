@@ -1,3 +1,1 @@
-employeeId,name,email,role,salaryScale,currentPoint,isFullTime,yearsAtTopPoint
-3,John Doe,john.doe@example.com,Software Engineer,A1,3,true,0
-4,Jane Smith,jane.smith@example.com,Graphic Designer,N/A,0,false,0
+payslipId, employeeId, name, payPeriod, grossPay, usc, prsi, incomeTax, netPay

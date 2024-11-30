@@ -33,7 +33,7 @@ public class AdminMenu {
                     viewEmployeeDetails();
                     break;
                 case 3:
-                    removeEmployee();  // Added option to remove employee
+                    removeEmployee();
                     break;
                 case 4:
                     adminMenuRunning = false; // Go back to the main menu
