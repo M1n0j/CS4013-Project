@@ -84,7 +84,7 @@ public class AdminMenu {
                 double hoursWorked = scanner.nextDouble();
                 scanner.nextLine(); // Clear newline character
 
-                employee = new PartTimeEmployee("", 0,"","", "", "", false, 0.0, 0.0);
+                employee = new PartTimeEmployee("", 0,"","", false, 0, 0);
             }
 
 
