@@ -76,7 +76,7 @@ public class AdminMenu {
             // Create the employee object
             Employee employee;
             if (isFullTime) {
-                employee = new FullTimeEmployee("", 0, "", "", "", "",  false);
+                employee = new FullTimeEmployee("", 1004, "", "", false, 1, true);
             } else {
                 System.out.print("Hourly Pay: ");
                 double hourlyPay = scanner.nextDouble();

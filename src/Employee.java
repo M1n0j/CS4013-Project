@@ -10,7 +10,7 @@ public abstract class Employee {
 
 
     // Constructor with all fields
-    public Employee(String name, int employeeId, String email, String position, boolean promotion) {
+    public Employee(String name, int employeeId, String email, String position, boolean promotion, boolean fullTime) {
         this.name = name;
         this.employeeId = employeeId;
         this.email = email;
@@ -36,9 +36,13 @@ public abstract class Employee {
         return position;
     }
 
-    public boolean isPromotion() {return promotion;}
+    public boolean isPromotion() {
+        return promotion;
+    }
 
-    public boolean isFullTime() {return fullTime;}
+    public boolean isFullTime() {
+        return fullTime;
+    }
 
     // Setters
     public void setName(String name) {
@@ -61,10 +65,13 @@ public abstract class Employee {
         this.promotion = promotion;
     }
 
-    public void setFullTime(boolean fullTime) {this.fullTime = fullTime;}
+    public void setFullTime(boolean fullTime) {
+        this.fullTime = fullTime;
+    }
 
     // Abstract method to calculate salary (to be implemented by subclasses)
     public abstract double calculateSalary();
 
     public abstract String toCSV();
 }
+
