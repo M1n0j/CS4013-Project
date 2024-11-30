@@ -3,25 +3,22 @@ import java.time.LocalDate;
 public abstract class Employee {
     private String name;
     private int employeeId;
+    private String employeePassword;
     private LocalDate dateOfBirth;
-    private String address;
     private String email;
-    private String phoneNumber;
     private String department;
     private String position;
+    private boolean promotion;
+
 
     // Constructor with all fields
-    public Employee(String name, int employeeId, LocalDate dateOfBirth,
-                    String address, String email, String phoneNumber,
-                    String department, String position) {
+    public Employee(String name, int employeeId, String email, String department, String position, boolean promotion) {
         this.name = name;
         this.employeeId = employeeId;
-        this.dateOfBirth = dateOfBirth;
-        this.address = address;
         this.email = email;
-        this.phoneNumber = phoneNumber;
         this.department = department;
         this.position = position;
+        this.promotion = promotion;
     }
 
     // Default constructor
@@ -29,11 +26,13 @@ public abstract class Employee {
         this.name = "";
         this.employeeId = 0;
         this.dateOfBirth = LocalDate.now(); // Default to the current date
-        this.address = "";
+
         this.email = "";
-        this.phoneNumber = "";
+
         this.department = "";
         this.position = "";
+
+        this.promotion = false;
     }
 
     // Getters
@@ -49,17 +48,13 @@ public abstract class Employee {
         return dateOfBirth;
     }
 
-    public String getAddress() {
-        return address;
-    }
+
 
     public String getEmail() {
         return email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+
 
     public String getDepartment() {
         return department;
@@ -78,21 +73,12 @@ public abstract class Employee {
         this.employeeId = employeeId;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+
 
     public void setDepartment(String department) {
         this.department = department;
@@ -102,6 +88,16 @@ public abstract class Employee {
         this.position = position;
     }
 
+    public void setPromotion(boolean promotion) {
+        this.promotion = promotion;
+    }
+
+    public boolean getPromotion() {
+        return promotion;
+    }
+
+
+
     // Abstract method to calculate salary (to be implemented by subclasses)
     public abstract double calculateSalary();
 
@@ -110,10 +106,9 @@ public abstract class Employee {
         System.out.println("Name: " + name);
         System.out.println("Employee ID: " + employeeId);
         System.out.println("Date of Birth: " + dateOfBirth);
-        System.out.println("Address: " + address);
         System.out.println("Email: " + email);
-        System.out.println("Phone Number: " + phoneNumber);
         System.out.println("Department: " + department);
         System.out.println("Position: " + position);
+        System.out.println("Promotion: " + promotion);
     }
 }
