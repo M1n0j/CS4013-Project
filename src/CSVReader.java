@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.text.Position;
 
 public class CSVReader {
     private static String employeeCSVPath;
@@ -18,8 +18,59 @@ public class CSVReader {
     }
 
     /**
-     * Reads user data from the user CSV file and returns a list of User objects.
+     * Reads employee data from the employee CSV file and returns a list of Employee objects.
+     * Includes file existence check and improved error handling.
      */
+    public static List<Employee> readEmployees(String employeeCSVPath) {
+        List<Employee> employees = new ArrayList<>();
+
+        // Add file existence check
+        File file = new File(employeeCSVPath);
+        if (!file.exists()) {
+            System.err.println("Error: Employee CSV file not found at " + employeeCSVPath);
+            System.err.println("Current working directory: " + System.getProperty("user.dir"));
+            return employees;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(employeeCSVPath))) {
+            // Skip header line
+            String header = reader.readLine();
+            if (header == null) {
+                System.err.println("CSV file is empty or cannot be read.");
+                return employees;
+            }
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Debug print to see what's being read
+                System.out.println("Reading line: " + line);
+
+                // Split the line and validate fields
+                String[] fields = line.split(",");
+
+                // Ensure you have enough fields
+                if (fields.length >= 6) {
+                    boolean isFullTime = Boolean.parseBoolean(fields[5]);
+                    if (isFullTime) {
+                        // Full-time employee
+                        employees.add(FullTimeEmployee.fromCSV(line));
+                    } else {
+                        // Part-time employee
+                        employees.add(PartTimeEmployee.fromCSV(line));
+                    }
+                } else {
+                    System.err.println("Skipping invalid line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading employee file: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return employees;
+    }
+
+    // Other methods from the original class remain the same
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
 
@@ -40,42 +91,6 @@ public class CSVReader {
         return users;
     }
 
-    /**
-     * Reads employee data from the employee CSV file and returns a list of Employee objects.
-     */
-    public static List<Employee> readEmployees(String EmployeeCSVPath) {
-        List<Employee> employees = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(employeeCSVPath))) {
-            String line;
-
-            // Skip header line
-            reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
-                // Create an Employee object from the CSV line and add it to the list
-                String[] fields = line.split(",");
-                boolean isFullTime = Boolean.parseBoolean(fields[5]);
-                if (isFullTime) {
-                    // Full-time employee
-                    employees.add(FullTimeEmployee.fromCSV(line));
-                } else {
-                    // Part-time employee
-                    employees.add(PartTimeEmployee.fromCSV(line));
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading employee file: " + e.getMessage());
-        }
-
-        return employees;
-    }
-
-    /**
-     * Reads Salary data from SalaryCSV and returns list of salarys
-     */
-
-    // Method to read SalaryScale data from CSV
     // Method to read SalaryScales from a CSV file
     public static List<SalaryScale> readSalaryScales(String salaryScaleCSVPath) {
         List<SalaryScale> salaryScales = new ArrayList<>();
