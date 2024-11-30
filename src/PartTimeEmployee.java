@@ -4,8 +4,8 @@ public class PartTimeEmployee extends Employee {
     private double hoursWorked;
 
     // Constructor
-    public PartTimeEmployee(String name, int employeeId, String email, String position, boolean promotion, double hoursWorked, double hourlyPay) {
-        super(name, employeeId, email, position, promotion, false);
+    public PartTimeEmployee(String name, int employeeId, String email, String position, int level, boolean promotion, double hoursWorked, double hourlyPay) {
+        super(name, employeeId, email, position, level, false, false);
         this.hoursWorked = hoursWorked;
         this.hourlyPay = hourlyPay;
     }
@@ -27,8 +27,13 @@ public class PartTimeEmployee extends Employee {
 
     @Override
     public double calculateSalary() {
-        return hourlyPay * hoursWorked;
+        double grossSalary = hoursWorked * hourlyPay;
+        Deductions deductions = new Deductions();
+        return deductions.calcDeductions(grossSalary);
+
     }
+
+    public double
 
 
     @Override
