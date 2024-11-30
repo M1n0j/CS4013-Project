@@ -3,7 +3,6 @@ import java.time.LocalDate;
 public abstract class Employee {
     private String name;
     private int employeeId;
-    private String employeePassword;
     private String email;
     private String position;
     private boolean promotion;
@@ -11,13 +10,12 @@ public abstract class Employee {
 
 
     // Constructor with all fields
-    public Employee(String name, int employeeId, String employeePassword, String email, String department, String position, boolean promotion) {
+    public Employee(String name, int employeeId, String email, String position, boolean promotion) {
         this.name = name;
         this.employeeId = employeeId;
         this.email = email;
         this.position = position;
         this.promotion = promotion;
-        this.employeePassword = employeePassword;
         this.fullTime = fullTime;
     }
 
@@ -38,8 +36,6 @@ public abstract class Employee {
         return position;
     }
 
-    public String getEmployeePassword() {return employeePassword;}
-
     public boolean isPromotion() {return promotion;}
 
     public boolean isFullTime() {return fullTime;}
@@ -52,7 +48,6 @@ public abstract class Employee {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
-
 
     public void setEmail(String email) {
         this.email = email;
@@ -67,7 +62,6 @@ public abstract class Employee {
     }
 
     public void setFullTime(boolean fullTime) {this.fullTime = fullTime;}
-
 
     // Abstract method to calculate salary (to be implemented by subclasses)
     public abstract double calculateSalary();
