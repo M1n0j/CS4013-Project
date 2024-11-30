@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class HRMenu {
@@ -20,12 +21,39 @@ public class HRMenu {
 
             if (choice == 1) {
                 System.out.println("Implementing promotion...");
-                // Add functionality here
+                promoteEmployee(scanner);
             } else if (choice == 2) {
                 hrMenuRunning = false;
             } else {
                 System.out.println("Invalid selection. Please try again.");
             }
         }
+    }
+
+    private void promoteEmployee(Scanner inputScanner) {
+
+        List<Employee> employees = CSVReader.readEmployees("src/resources/Employees.csv");
+        System.out.println("Select the employee ID of the employee you wish to promote:");
+        int employeeID = inputScanner.nextInt();
+        inputScanner.nextLine();
+
+        Employee employeeToPromote = null;
+
+        for(Employee employee : employees) {
+            if(employee.getEmployeeId() == employeeID) {
+                employeeToPromote = employee;
+                break;
+            }
+        }
+
+        if(employeeToPromote == null) {
+            System.out.println("Employee ID not found");
+            return;
+        }
+
+        employeeToPromote.setPromotion(true);
+        //  CSVReader.writeEmployees(employees, "Employees.csv");
+
+        System.out.println("Employee " + employeeID + ", awaiting employee approval");
     }
 }
