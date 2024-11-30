@@ -12,13 +12,14 @@ public abstract class Employee {
 
 
     // Constructor with all fields
-    public Employee(String name, int employeeId, String email, String department, String position, boolean promotion) {
+    public Employee(String name, int employeeId, String employeePassword, String email, String department, String position, boolean promotion) {
         this.name = name;
         this.employeeId = employeeId;
         this.email = email;
         this.department = department;
         this.position = position;
         this.promotion = promotion;
+        this.employeePassword = employeePassword;
     }
 
     // Default constructor

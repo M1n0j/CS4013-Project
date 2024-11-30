@@ -76,7 +76,7 @@ public class AdminMenu {
             // Create the employee object
             Employee employee;
             if (isFullTime) {
-                employee = new FullTimeEmployee("", 0, "", "", "", "", false);
+                employee = new FullTimeEmployee("", 0, "", "", "", "", "", false);
             } else {
                 System.out.print("Hourly Pay: ");
                 double hourlyPay = scanner.nextDouble();
@@ -84,7 +84,7 @@ public class AdminMenu {
                 double hoursWorked = scanner.nextDouble();
                 scanner.nextLine(); // Clear newline character
 
-                employee = new PartTimeEmployee(name, 0, "", email, "", false, 0.0, 0.0);
+                employee = new PartTimeEmployee("", 0,"","", "", "", false, 0.0, 0.0);
             }
 
 
