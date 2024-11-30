@@ -30,7 +30,6 @@ public class DisplayMenu {
                 String correctPassword = userDetails[1];
                 String role = userDetails[2];
 
-                // Debugging: Print the role to check if it's correctly read
                 System.out.println("User Role: " + role);
 
                 // Ask for password and authenticate user
