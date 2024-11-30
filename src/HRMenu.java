@@ -2,9 +2,12 @@ import java.util.Scanner;
 
 public class HRMenu {
     private Scanner scanner;
+    private HrUser hrUser; // Add a reference to HrUser
 
+    // Modify the constructor to accept an HrUser
     public HRMenu(Scanner scanner) {
         this.scanner = scanner;
+        this.hrUser = hrUser; // Store the HrUser reference
     }
 
     public void displayMenu() {
@@ -19,8 +22,8 @@ public class HRMenu {
             scanner.nextLine(); // Clear newline character
 
             if (choice == 1) {
-                System.out.println("Implementing promotion...");
-                // Add functionality here
+                // Call the promotion method from the HrUser instance
+                HrUser.promoteEmployee(scanner);
             } else if (choice == 2) {
                 hrMenuRunning = false;
             } else {
