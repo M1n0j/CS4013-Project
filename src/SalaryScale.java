@@ -1,40 +1,46 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class SalaryScale {
-    // List to store salary scale data: position, level, and salary
-    private List<String[]> salaryData = new ArrayList<>();
+    private String position;
+    private int level;
+    private double salary;
 
-    public SalaryScale(String filePath) throws IOException {
-        loadSalaryData(filePath);
+    // Constructor to initialize the salary scale object
+    public SalaryScale(String position, int level, double salary) {
+        this.position = position;
+        this.level = level;
+        this.salary = salary;
     }
 
-    // Load salary data from CSV file into the list
-    private void loadSalaryData(String filePath) throws IOException {
-        try (BufferedReader salaryReader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            salaryReader.readLine();  // Skip header line
-
-            while ((line = salaryReader.readLine()) != null) {
-                String[] fields = line.split(",");
-                salaryData.add(fields); // Store each row (Position, Level, Salary) in the list
-            }
-        }
+    // Getters for SalaryScale
+    public String getPosition() {
+        return position;
     }
 
-    // Method to get the salary based on position and level
-    public double getSalary(String position, String level) {
-        for (String[] row : salaryData) {
-            String role = row[0].trim();  // Position (role)
-            String levelInFile = row[1].trim();  // Level
-            double salary = Double.parseDouble(row[2].trim());  // Salary
+    public int getLevel() {
+        return level;
+    }
 
-            // If both the role and level match, return the corresponding salary
-            if (role.equalsIgnoreCase(position) && levelInFile.equalsIgnoreCase(level)) {
-                return salary;
-            }
+    public double getSalary() {
+        return salary;
+    }
+
+    // Method to convert the SalaryScale object to a CSV string format (for writing to CSV)
+    public String toCSV() {
+        return position + "," + level + "," + salary;
+    }
+
+    // Static method to create a SalaryScale object from a CSV line
+    public static SalaryScale fromCSV(String csvLine) {
+        String[] fields = csvLine.split(",");
+
+        // Handle potential errors in CSV format
+        if (fields.length < 3) {
+            throw new IllegalArgumentException("Invalid CSV line for SalaryScale: " + csvLine);
         }
-        return -1.0; // Return -1 if no match is found
+
+        String position = fields[0];
+        int level = Integer.parseInt(fields[1]);
+        double salary = Double.parseDouble(fields[2]);
+
+        return new SalaryScale(position, level, salary);
     }
 }
