@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class CSVWriter {
-    private String employeeCSVPath;
+    private static String employeeCSVPath;
     private String userCSVPath;
 
     // Constructor accepting both paths
@@ -34,7 +34,7 @@ public class CSVWriter {
     /**
      * Writes a list of Employee objects to the employee CSV file.
      */
-    public void writeEmployees(List<Employee> employees) {
+    public static void writeEmployees(List<Employee> employees, String s) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(employeeCSVPath))) {
             // Write header
             writer.write("id,name,department,salary,isFullTime"); // Adjust this header based on your Employee fields
@@ -48,4 +48,10 @@ public class CSVWriter {
             System.err.println("Error writing employee file: " + e.getMessage());
         }
     }
+
+    /**
+     * Writes a
+     */
+
+
 }

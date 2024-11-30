@@ -90,17 +90,17 @@ public class CSVReader {
 
                 // Ensure we have at least 3 fields
                 if (fields.length >= 3) {
-                    String position = fields[0].trim();
+                    String position = fields[0];
 
                     // Check if level is "N/A" or empty and handle accordingly
-                    String levelString = fields[1].trim();
-                    int level = 0;
+                    String levelString = fields[1];
+                    int level = 1;
                     if (!levelString.isEmpty() && !levelString.equalsIgnoreCase("N/A")) {
                         level = Integer.parseInt(levelString);
                     }
 
                     // Check if salary is "N/A" or empty and handle accordingly
-                    String salaryString = fields[2].trim();
+                    String salaryString = fields[2];
                     double salary = 0.0;
                     if (!salaryString.isEmpty() && !salaryString.equalsIgnoreCase("N/A")) {
                         salary = Double.parseDouble(salaryString);
