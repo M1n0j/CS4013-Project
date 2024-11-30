@@ -5,9 +5,10 @@ public class PartTimeEmployee extends Employee {
     private double hourlyPay;
     private double hoursWorked;
 
-    public PartTimeEmployee(String name, int employeeId, LocalDate dateOfBirth, String address, String email, String phoneNumber, String department, String position, double hoursWorked, double hourlyPay) {
-        super(name, employeeId, dateOfBirth, address, email, phoneNumber, department, position);
+    public PartTimeEmployee(String name, int employeeId, String employeePassword, String email, String department, String position, boolean promotion, double hoursWorked, double hourlyPay) {
+        super(name, employeeId, employeePassword, email, department, position, promotion);
     }
+
 
     @Override
     public double calculateSalary() {
