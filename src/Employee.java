@@ -27,12 +27,9 @@ public abstract class Employee {
         this.name = "";
         this.employeeId = 0;
         this.dateOfBirth = LocalDate.now(); // Default to the current date
-
         this.email = "";
-
         this.department = "";
         this.position = "";
-
         this.promotion = false;
     }
 
@@ -112,4 +109,6 @@ public abstract class Employee {
         System.out.println("Position: " + position);
         System.out.println("Promotion: " + promotion);
     }
+
+    public abstract String toCSV();
 }

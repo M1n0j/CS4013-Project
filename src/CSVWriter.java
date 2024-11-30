@@ -1,27 +1,51 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class CSVWriter {
-    // Save Payslip to CSV
-    public static void savePayslip(Payslip payslip, String filePath) throws IOException {
-        try (FileWriter fw = new FileWriter(filePath, true);
-             BufferedWriter bw = new BufferedWriter(fw)) {
+    private String employeeCSVPath;
+    private String userCSVPath;
 
-            // Format: employeeId,paymentDate,grossPay,prsi,usc,incomeTax,netPay
-            String payslipData = String.format("%d,%s,%.2f,%.2f,%.2f,%.2f,%.2f",
-                    payslip.getEmployeeId(),
-                    payslip.getPaymentDate(),
-                    payslip.getGrossPay(),
-                    Deductions.getPrsi(),
-                    Deductions.getUsc(),
-                    Deductions.getIncomeTax()
-            );
+    // Constructor accepting both paths
+    public CSVWriter(String employeeCSVPath, String userCSVPath) {
+        this.employeeCSVPath = employeeCSVPath;
+        this.userCSVPath = userCSVPath;
+    }
 
-            bw.write(payslipData);
-            bw.newLine();
+    /**
+     * Writes a list of User objects to the user CSV file.
+     */
+    public void writeUsers(List<User> users) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(userCSVPath))) {
+            // Write header
+            writer.write("id,name,email"); // Adjust this header based on your User fields
+            writer.newLine();
+
+            for (User  user : users) {
+                writer.write(user.toCSV());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing user file: " + e.getMessage());
         }
     }
 
-    // Additional methods for saving other entities can be added here
+    /**
+     * Writes a list of Employee objects to the employee CSV file.
+     */
+    public void writeEmployees(List<Employee> employees) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(employeeCSVPath))) {
+            // Write header
+            writer.write("id,name,department,salary,isFullTime"); // Adjust this header based on your Employee fields
+            writer.newLine();
+
+            for (Employee employee : employees) {
+                writer.write(employee.toCSV());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error writing employee file: " + e.getMessage());
+        }
+    }
 }
