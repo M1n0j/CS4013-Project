@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 import java.time.LocalDate;
@@ -15,31 +16,36 @@ public class AdminMenu {
     public void displayMenu() {
         boolean adminMenuRunning = true;
         while (adminMenuRunning) {
-            System.out.println("\nAdmin Menu:");
-            System.out.println("1. Add New Employee");
-            System.out.println("2. View Employee Details");
-            System.out.println("3. Remove Employee");
-            System.out.println("4. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            try {
+                System.out.println("\nAdmin Menu:");
+                System.out.println("1. Add New Employee");
+                System.out.println("2. View Employee Details");
+                System.out.println("3. Remove Employee");
+                System.out.println("4. Back to Main Menu");
+                System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Clear newline character
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Clear newline character
 
-            switch (choice) {
-                case 1:
-                    addNewEmployee();
-                    break;
-                case 2:
-                    viewEmployeeDetails();
-                    break;
-                case 3:
-                    removeEmployee();
-                    break;
-                case 4:
-                    adminMenuRunning = false; // Go back to the main menu
-                    break;
-                default:
-                    System.out.println("Invalid selection. Please try again.");
+                switch (choice) {
+                    case 1:
+                        addNewEmployee();
+                        break;
+                    case 2:
+                        viewEmployeeDetails();
+                        break;
+                    case 3:
+                        removeEmployee();
+                        break;
+                    case 4:
+                        adminMenuRunning = false; // Go back to the main menu
+                        break;
+                    default:
+                        System.out.println("Invalid selection. Please try again.");
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+                scanner.nextLine(); // Clear scanner buffer
             }
         }
     }
@@ -50,26 +56,81 @@ public class AdminMenu {
             System.out.println("\nEnter employee details:");
 
             // Collect the employee's common details
-            System.out.print("Name: ");
-            String name = scanner.nextLine();
-            System.out.print("Email: ");
-            String email = scanner.nextLine();
-            System.out.print("Position: ");
-            String position = scanner.nextLine();
+            String name;
+            while (true) {
+                System.out.print("Name: ");
+                name = scanner.nextLine();
+                if (!name.isEmpty()) {
+                    break; // Exit the loop if the input is valid
+                }
+                System.out.println("Name cannot be empty. Please try again.");
+            }
+            String email;
+            while (true) {
+                System.out.print("Email: ");
+                email = scanner.nextLine();
+                if (email.endsWith("@gmail.com")) {
+                    break; // Exit the loop if the input is valid
+                }
+                System.out.println("Invalid email. Please enter a valid Gmail address (e.g., example@gmail.com).");
+            }
+
+            String inputPosition = "";
+            boolean isValidPosition = false;
+
+            try {
+                while (!isValidPosition) {
+                    System.out.print("Position: ");
+                    inputPosition = scanner.nextLine();
+
+                    // Check if the position is valid using `findPosition` method
+                    String[] positionDetails = PositionChecker.checkPosition("src/Resources/Salaries.csv", inputPosition);
+
+                    if (positionDetails != null) {
+                        isValidPosition = true; // Exit the loop if position is valid
+                        System.out.println("Valid position: " + inputPosition);
+                    } else {
+                        System.out.println("Invalid position. Please try again.");
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("An error occurred while validating the position: " + e.getMessage());
+            }
 
             // Collect additional details specific to full-time or part-time
-            System.out.print("Is the employee Full-Time? (true/false): ");
-            boolean isFullTime = scanner.nextBoolean();
-            scanner.nextLine(); // Clear the newline character
+            boolean isFullTime = false;
+            while (true) {
+                System.out.print("Is the employee Full-Time? (true/false): ");
+                String fullTimeInput = scanner.nextLine().toLowerCase();
+                if (fullTimeInput.equals("true") || fullTimeInput.equals("false")) {
+                    isFullTime = Boolean.parseBoolean(fullTimeInput);
+                    break; // Exit the loop if the input is valid
+                }
+                System.out.println("Invalid input. Please enter 'true' or 'false'.");
+            }
 
-            String password = "defaultPassword";  // Default password, can be changed as needed
-            System.out.print("Set password for the employee: ");
-            password = scanner.nextLine();
+            String password;
+            while (true) {
+                System.out.print("Set password for the employee: ");
+                password = scanner.nextLine();
+                if (!password.isEmpty()) {
+                    break; // Exit the loop if the input is valid
+                }
+                System.out.println("Password cannot be empty. Please try again.");
+            }
 
-            // Optionally set employeeId (for testing purposes, or can be left as null)
-            System.out.print("Enter employeeId (leave blank for auto-generate): ");
-            String employeeIdInput = scanner.nextLine();
-            Integer employeeId = (employeeIdInput.isEmpty()) ? null : Integer.parseInt(employeeIdInput);
+            // Automatically set employeeId if nothing is entered
+            Integer employeeId = null;
+            while (true) {
+                System.out.print("Enter employeeId: ");
+                String employeeIdInput = scanner.nextLine();
+                try {
+                    employeeId = Integer.parseInt(employeeIdInput);
+                    break; // Exit the loop if the input is valid
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid ID. Please enter a valid integer.");
+                }
+            }
 
             int currentPoint = 0;  // For now, we are assuming this as 0
 
@@ -78,13 +139,34 @@ public class AdminMenu {
             if (isFullTime) {
                 employee = new FullTimeEmployee("", 1004, "", "", false, 1, true);
             } else {
-                System.out.print("Hourly Pay: ");
-                double hourlyPay = scanner.nextDouble();
-                System.out.print("Hours Worked per week: ");
-                double hoursWorked = scanner.nextDouble();
-                scanner.nextLine(); // Clear newline character
+                while (true) {
+                    System.out.print("Hourly Pay: ");
+                    try {
+                        hourlyPay = Double.parseDouble(scanner.nextLine().trim());
+                        if (hourlyPay > 0) {
+                            break;
+                        } else {
+                            System.out.println("Hourly pay must be positive. Please try again.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a numeric value.");
+                    }
+                }
+                while (true) {
+                    System.out.print("Hours Worked per week: ");
+                    try {
+                        hoursWorked = Double.parseDouble(scanner.nextLine().trim());
+                        if (hoursWorked > 0) {
+                            break;
+                        } else {
+                            System.out.println("Hours worked must be positive. Please try again.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a numeric value.");
+                    }
+                }
 
-                employee = new PartTimeEmployee("", 0,"","", 0, false, false, 0.0, 0.0);
+                employee = new PartTimeEmployee("", 0, "", "", 0, false, false, 0.0, 0.0);
             }
 
 
@@ -94,6 +176,8 @@ public class AdminMenu {
 
         } catch (IOException e) {
             System.out.println("Error adding employee: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
         }
     }
 
@@ -248,5 +332,45 @@ public class AdminMenu {
         } catch (IOException e) {
             System.out.println("Error removing employee: " + e.getMessage());
         }
+    }
+
+    public class PositionChecker {
+
+        private static String[] checkPosition(String fileName, String position) {
+            File file = new File(fileName);
+
+            // Check if the file exists
+            if (!file.exists()) {
+                System.out.println("Error: File not found. Please contact the administrator.");
+                return null;
+            }
+
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                boolean isHeader = true;
+
+                // Read the file line by line
+                while ((line = br.readLine()) != null) {
+                    // Skip the header row
+                    if (isHeader) {
+                        isHeader = false;
+                        continue;
+                    }
+
+                    // Split the line by commas into an array
+                    String[] details = line.split(",");
+
+                    // Trim whitespace and compare positions
+                    if (details[0].equalsIgnoreCase(position)) {
+                        return details; // Return the row details if the position matches
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading the file: " + e.getMessage());
+            }
+
+            return null; // Return null if no matching position is found
+        }
+
     }
 }
