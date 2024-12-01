@@ -10,6 +10,21 @@ public class PartTimeEmployee extends Employee {
         this.hourlyPay = hourlyPay;
     }
 
+    public double getHourlyPay() {
+        return hourlyPay;
+    }
+    public void setHourlyPay(double hourlyPay) {
+        this.hourlyPay = hourlyPay;
+    }
+
+    public double getHoursWorked() {
+        return hoursWorked;
+    }
+    public void setHoursWorked(double hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+
+
     // Factory method to create PartTimeEmployee from a CSV string
     public static PartTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
