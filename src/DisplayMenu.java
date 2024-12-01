@@ -58,7 +58,7 @@ public class DisplayMenu {
                             fullTimeMenu.displayMenu(); // Show Full-Time Menu
                             break;
                         default:
-                            System.out.println("Invalid role! Contact admin.");
+                            System.out.println("Invalid role! Contact the Administrator.");
                     }
                 } else {
                     System.out.println("Invalid password! Access denied.");
