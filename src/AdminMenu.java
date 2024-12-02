@@ -21,6 +21,10 @@ public class AdminMenu {
         this.admin = new Admin();
     }
 
+    public static String checkPosition() {
+        return checkPosition();
+    }
+
     /**
      * Displays the admin menu and handles user input for various admin operations.
      */
@@ -156,7 +160,7 @@ public class AdminMenu {
             // Create the employee object
             Employee employee;
             if (isFullTime) {
-                employee = new FullTimeEmployee("", 0, "", "", false, 1, true);
+                employee = new FullTimeEmployee(0, "", "", "", 0, false, true);
             } else {
                 while (true) {
                     double hourlyPay;
@@ -187,7 +191,7 @@ public class AdminMenu {
                     }
                 }
 
-                employee = new PartTimeEmployee("", 0, "", "", 0, false, false, 0.0, 0.0);
+                employee = new PartTimeEmployee(0, "", "", "", 0, false, false);
             }
 
 
@@ -383,27 +387,25 @@ public class AdminMenu {
                 String line;
                 boolean isHeader = true;
 
-                // Read the file line by line
                 while ((line = br.readLine()) != null) {
-                    // Skip the header row
+
                     if (isHeader) {
                         isHeader = false;
                         continue;
                     }
 
-                    // Split the line by commas into an array
+
                     String[] details = line.split(",");
 
-                    // Trim whitespace and compare positions
                     if (details[0].equalsIgnoreCase(position)) {
-                        return details; // Return the row details if the position matches
+                        return details;
                     }
                 }
             } catch (IOException e) {
                 System.err.println("Error reading the file: " + e.getMessage());
             }
 
-            return null; // Return null if no matching position is found
+            return null;
         }
 
     }
