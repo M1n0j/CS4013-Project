@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 
 public class Payslip {
-    private double grossSalary;
-    private double netSalary;
-    private Deductions deductions;
+    private static double grossSalary;
+    private static double netSalary;
+    private static Deductions deductions;
 
     public Payslip(double grossSalary) {
         this.grossSalary = grossSalary;
@@ -18,8 +18,8 @@ public class Payslip {
 
 
 
-    public void printPayslip() {
-        System.out.println("----- Payslip -----");
+    public static void printPayslip() {
+        System.out.println("\n----- Payslip -----");
         System.out.println("Gross Salary: €" + String.format("%.2f", grossSalary));
         System.out.println("PRSI: €" + String.format("%.2f", deductions.getPrsi()));
         System.out.println("USC: €" + String.format("%.2f", deductions.getUsc()));

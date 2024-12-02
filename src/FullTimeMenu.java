@@ -49,6 +49,7 @@ public class FullTimeMenu {
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
                 Payslip payslip = new Payslip(grossSalary);
+                Payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
                 // Display historical payslips
