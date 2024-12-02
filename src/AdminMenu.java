@@ -3,14 +3,28 @@ import java.util.Scanner;
 import java.io.*;
 import java.time.LocalDate;
 
+/**
+ * AdminMenu class provides menu for admin users to manage employees.
+ * It allows admins to add and remove employees as well as view their details.
+ */
 public class AdminMenu {
     private Scanner scanner;
     private Admin admin;
+
+    /**
+     * Constructs AdminMenu instance with a scanner for user input/
+     * @param scanner the Scanner object for reading user input
+     */
 
     public AdminMenu(Scanner scanner) {
         this.scanner = scanner;
         this.admin = new Admin();
     }
+
+    /**
+     * Displays the admin menu and handles user input for various admin operations.
+     */
+
 
     // Display menu to the admin
     public void displayMenu() {
@@ -49,6 +63,11 @@ public class AdminMenu {
             }
         }
     }
+
+    /**
+     * Allows user to enter details for a new employee and adds the employee to csv
+     * @throws IOException if an error occurs while reading/writing to csv files
+     */
 
     // Method to add a new employee
     private void addNewEmployee() {
@@ -183,6 +202,12 @@ public class AdminMenu {
         }
     }
 
+    /**
+     * Displays the details of an employee given their ID.
+     * This method reads the employee data from the Employees csv file and displays the details.
+     * @throws IOException if an error occurs while reading from the employee file
+     */
+
     // Method to view employee details
     private void viewEmployeeDetails() {
         try {
@@ -222,6 +247,12 @@ public class AdminMenu {
             System.out.println("Error reading employee details: " + e.getMessage());
         }
     }
+
+    /**
+     * Removes employee from all csv files
+     *  Employee removed from the Employee, Payslip and Users csv files
+     * @throws IOException if error occurs while reading/writing to csv files
+     */
 
     // Method to remove an employee from all CSV files with a confirmation check
     private void removeEmployee() throws IOException {
@@ -329,7 +360,14 @@ public class AdminMenu {
 
     }
 
-
+    /**
+     * checks if the given position exists in the csv file
+     * if position is found it returns the details of the position
+     * @param fileName the path of the csv file being checked
+     * @param position the position to search for in the csv file
+     * @return a string array containing the details of the position if found or null if not found
+     * @throws IOException if an error occurs while reading the file
+     */
 
 
         private static String[] checkPosition(String fileName, String position) {
