@@ -3,3 +3,4 @@ employeeId, name, email, position, level, isFullTime, promotion
 3,Bob Brown,bob.brown@example.com,Assistant Professor,2,false,true
 4,John Doe,john.doe@example.com,Administrator,5,false,false
 5,Jane Smith,jane.smith@example.com,Administrator,1,false,false
+7,,,,N/A,0,true,false

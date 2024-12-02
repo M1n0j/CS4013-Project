@@ -14,7 +14,6 @@ public class FullTimeMenu {
 
     public void displayMenu() {
 
-            // Check if the user is promoted
         if (checkPromotionStatus()) {
             System.out.println("You have been promoted! Type 'accept' to accept or 'decline' to decline:");
             String response = scanner.nextLine().toLowerCase();
@@ -41,7 +40,7 @@ public class FullTimeMenu {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Clear newline character
+            scanner.nextLine();
 
             if (choice == 1) {
                 System.out.println("Employee Details:");
@@ -52,7 +51,6 @@ public class FullTimeMenu {
                 Payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
-                // Display historical payslips
             } else if (choice == 4) {
                 fullTimeMenuRunning = false;
             } else {
@@ -68,7 +66,6 @@ public class FullTimeMenu {
             String line;
             boolean found = false;
 
-            // Skiping header
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
@@ -182,7 +179,7 @@ public class FullTimeMenu {
         } catch (IOException e) {
             System.out.println("Error reading current level: " + e.getMessage());
         }
-        return 0;  // Return 0 if no matching userId was found or an error occurred
+        return 0;
     }
 
     private int maxLevelForPosition() {

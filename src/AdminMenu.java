@@ -32,7 +32,7 @@ public class AdminMenu {
      */
 
 
-    // Display menu to the admin
+
     public void displayMenu() {
         boolean adminMenuRunning = true;
         while (adminMenuRunning) {
@@ -45,7 +45,7 @@ public class AdminMenu {
                 System.out.print("Enter your choice: ");
 
                 int choice = scanner.nextInt();
-                scanner.nextLine(); // Clear newline character
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
@@ -58,14 +58,14 @@ public class AdminMenu {
                         removeEmployee();
                         break;
                     case 4:
-                        adminMenuRunning = false; // Go back to the main menu
+                        adminMenuRunning = false;
                         break;
                     default:
                         System.out.println("Invalid selection. Please try again.");
                 }
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
-                scanner.nextLine(); // Clear scanner buffer
+                scanner.nextLine();
             }
         }
     }
@@ -75,18 +75,18 @@ public class AdminMenu {
      * @throws IOException if an error occurs while reading/writing to csv files
      */
 
-    // Method to add a new employee
+
     private void addNewEmployee() {
         try {
             System.out.println("\nEnter employee details:");
 
-            // Collect the employee's common details
+
             String name;
             while (true) {
                 System.out.print("Name: ");
                 name = scanner.nextLine();
                 if (!name.isEmpty()) {
-                    break; // Exit the loop if the input is valid
+                    break;
                 }
                 System.out.println("Name cannot be empty. Please try again.");
             }
@@ -95,7 +95,7 @@ public class AdminMenu {
                 System.out.print("Email: ");
                 email = scanner.nextLine();
                 if (email.endsWith("@gmail.com")) {
-                    break; // Exit the loop if the input is valid
+                    break;
                 }
                 System.out.println("Invalid email. Please enter a valid Gmail address (e.g., example@gmail.com).");
             }
@@ -108,11 +108,11 @@ public class AdminMenu {
                     System.out.print("Position: ");
                     inputPosition = scanner.nextLine();
 
-                    // Check if the position is valid using `findPosition` method
+
                     String[] positionDetails = checkPosition("src/Resources/Salaries.csv", inputPosition);
 
                     if (positionDetails != null) {
-                        isValidPosition = true; // Exit the loop if position is valid
+                        isValidPosition = true;
                         System.out.println("Valid position: " + inputPosition);
                     } else {
                         System.out.println("Invalid position. Please try again.");
@@ -122,14 +122,14 @@ public class AdminMenu {
                 System.err.println("An error occurred while validating the position: " + e.getMessage());
             }
 
-            // Collect additional details specific to full-time or part-time
+
             boolean isFullTime = false;
             while (true) {
                 System.out.print("Is the employee Full-Time? (true/false): ");
                 String fullTimeInput = scanner.nextLine().toLowerCase();
                 if (fullTimeInput.equals("true") || fullTimeInput.equals("false")) {
                     isFullTime = Boolean.parseBoolean(fullTimeInput);
-                    break; // Exit the loop if the input is valid
+                    break;
                 }
                 System.out.println("Invalid input. Please enter 'true' or 'false'.");
             }
@@ -139,27 +139,27 @@ public class AdminMenu {
                 System.out.print("Set password for the employee: ");
                 password = scanner.nextLine();
                 if (!password.isEmpty()) {
-                    break; // Exit the loop if the input is valid
+                    break;
                 }
                 System.out.println("Password cannot be empty. Please try again.");
             }
 
-            // Automatically set employeeId if nothing is entered
+
             Integer employeeId = null;
             while (true) {
                 System.out.print("Enter employeeId: ");
                 String employeeIdInput = scanner.nextLine();
                 try {
                     employeeId = Integer.parseInt(employeeIdInput);
-                    break; // Exit the loop if the input is valid
+                    break;
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid ID. Please enter a valid integer.");
                 }
             }
 
-            int currentPoint = 0;  // For now, we are assuming this as 0
+            int currentPoint = 0;
 
-            // Create the employee object
+
             Employee employee;
             if (isFullTime) {
                 employee = new FullTimeEmployee(0, "", "", "", 0, false, true);
@@ -197,7 +197,7 @@ public class AdminMenu {
             }
 
 
-            // Add the employee to the CSV files
+
             admin.addEmployee(employee, isFullTime, "N/A", currentPoint, password, employeeId);
             System.out.println("Employee added successfully!");
 
@@ -214,19 +214,19 @@ public class AdminMenu {
      * @throws IOException if an error occurs while reading from the employee file
      */
 
-    // Method to view employee details
+
     private void viewEmployeeDetails() {
         try {
             System.out.println("Enter Employee ID to view details: ");
             int employeeId = scanner.nextInt();
-            scanner.nextLine(); // Clear newline character
+            scanner.nextLine();
 
-            // Use the `admin` instance to access the non-static field
+
             BufferedReader reader = new BufferedReader(new FileReader(admin.EmployeesCsv));
             String line;
             boolean found = false;
 
-            // Skip header
+
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
@@ -260,9 +260,9 @@ public class AdminMenu {
      * @throws IOException if error occurs while reading/writing to csv files
      */
 
-    // Method to remove an employee from all CSV files with a confirmation check
+
     private void removeEmployee() throws IOException {
-        // Prompt the user for the employee ID to remove
+
         int employeeId;
         while (true) {
             System.out.print("\nEnter Employee ID to remove: ");
@@ -281,31 +281,31 @@ public class AdminMenu {
             String confirmationInput = scanner.nextLine().trim().toLowerCase();
             if (confirmationInput.equals("yes") || confirmationInput.equals("no")) {
                 confirmDeletion = confirmationInput.equals("yes");
-                break; // Exit the loop if the input is valid
+                break;
             }
             System.out.println("Invalid input. Please enter 'yes' or 'no'.");
         }
 
         if (!confirmDeletion) {
             System.out.println("Employee deletion canceled.");
-            return; // Exit the method if not confirmed
+            return;
         }
 
-// Proceed with deletion
+
         System.out.println("Proceeding with employee deletion...");
 
-        // Create an instance of Admin to access the file paths
+
         Admin admin = new Admin();
 
-        // Create temporary files for each CSV file to store updated data
-        File employeesFile = new File(admin.EmployeesCsv);  // Accessing instance fields
-        File payslipsFile = new File(admin.PayslipsCsv);    // Accessing instance fields
-        File usersFile = new File(admin.UsersCSV);          // Accessing instance fields
+
+        File employeesFile = new File(admin.EmployeesCsv);
+        File payslipsFile = new File(admin.PayslipsCsv);
+        File usersFile = new File(admin.UsersCSV);
         File tempEmployeesFile = new File("src/resources/temp_employees.csv");
         File tempPayslipsFile = new File("src/resources/temp_payslips.csv");
         File tempUsersFile = new File("src/resources/temp_users.csv");
 
-        // BufferedReader and PrintWriter for all files
+
         BufferedReader reader = new BufferedReader(new FileReader(employeesFile));
         PrintWriter writerEmployees = new PrintWriter(new FileWriter(tempEmployeesFile));
         BufferedReader payslipsReader = new BufferedReader(new FileReader(payslipsFile));
@@ -316,7 +316,7 @@ public class AdminMenu {
         String line;
         boolean found = false;
 
-        // Read headers and write them to temporary files
+
         String headerEmployees = reader.readLine();
         writerEmployees.println(headerEmployees);
         String headerPayslips = payslipsReader.readLine();
@@ -324,39 +324,38 @@ public class AdminMenu {
         String headerUsers = usersReader.readLine();
         writerUsers.println(headerUsers);
 
-        // Remove employee from employees.csv
+
         while ((line = reader.readLine()) != null) {
             String[] fields = line.split(",");
             int currentEmployeeId = Integer.parseInt(fields[0]);
 
             if (currentEmployeeId != employeeId) {
-                writerEmployees.println(line); // Write non-matching records to tempEmployees
+                writerEmployees.println(line);
             } else {
-                found = true;  // Employee found, we will not write this line to the temp file
+                found = true;
             }
         }
 
-        // Remove employee from payslips.csv
+
         while ((line = payslipsReader.readLine()) != null) {
             String[] fields = line.split(",");
             int currentEmployeeId = Integer.parseInt(fields[0]);
 
             if (currentEmployeeId != employeeId) {
-                writerPayslips.println(line); // Write non-matching records to tempPayslips
+                writerPayslips.println(line);
             }
         }
 
-        // Remove employee from user.csv
+
         while ((line = usersReader.readLine()) != null) {
             String[] fields = line.split(",");
             int currentUserId = Integer.parseInt(fields[0]);
 
             if (currentUserId != employeeId) {
-                writerUsers.println(line); // Write non-matching records to tempUsers
+                writerUsers.println(line);
             }
         }
 
-        // Close readers and writers
         reader.close();
         payslipsReader.close();
         usersReader.close();
@@ -379,7 +378,7 @@ public class AdminMenu {
         private static String[] checkPosition(String fileName, String position) {
             File file = new File(fileName);
 
-            // Check if the file exists
+
             if (!file.exists()) {
                 System.out.println("Error: File not found. Please contact the administrator.");
                 return null;
@@ -399,7 +398,7 @@ public class AdminMenu {
 
                     String[] details = line.split(",");
 
-                    if (details[3].equalsIgnoreCase(position)) {
+                    if (details[0].equalsIgnoreCase(position)) {
                         return details;
                     }
                 }

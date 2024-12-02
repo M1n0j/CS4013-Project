@@ -26,14 +26,13 @@ public class DisplayMenu {
             try {
                 System.out.println("Enter your UserID:");
                 userId = scanner.nextInt();
-                scanner.nextLine(); // Clear the newline character left by nextInt()
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! UserID must be a number!");
-                scanner.nextLine(); // Clear invalid input
-                continue; // Restart the loop
+                scanner.nextLine();
+                continue;
             }
 
-            // Get user details from the CSV file based on userId
             String[] userDetails = getUserDetails("src/resources/User.csv", userId);
             if (userDetails != null) {
                 String correctPassword = userDetails[1];
@@ -41,30 +40,28 @@ public class DisplayMenu {
 
                 System.out.println("User Role: " + role);
 
-                // Ask for password and authenticate user
                 System.out.print("Enter your password: ");
                 String inputPassword = scanner.nextLine();
 
                 if (inputPassword.equals(correctPassword)) {
                     System.out.println("Access granted!");
 
-                    // Role-based menu handling
                     switch (role.toLowerCase()) {
                         case "admin":
                             AdminMenu adminMenu = new AdminMenu(scanner);
-                            adminMenu.displayMenu(); // Show Admin Menu
+                            adminMenu.displayMenu();
                             break;
                         case "hr":
                             HRMenu hrMenu = new HRMenu(scanner);
-                            hrMenu.displayMenu(); // Show HR Menu
+                            hrMenu.displayMenu();
                             break;
                         case "part-time":
                             PartTimeMenu partTimeMenu = new PartTimeMenu(scanner, userId);
-                            partTimeMenu.displayMenu(); // Show Part-Time Menu
+                            partTimeMenu.displayMenu();
                             break;
                         case "full-time":
                             FullTimeMenu fullTimeMenu = new FullTimeMenu(scanner, userId);
-                            fullTimeMenu.displayMenu(); // Show Full-Time Menu
+                            fullTimeMenu.displayMenu();
                             break;
                         default:
                             System.out.println("Invalid role! Contact the Administrator.");
@@ -91,30 +88,30 @@ public class DisplayMenu {
     private static String[] getUserDetails(String fileName, int userId) {
         File file = new File(fileName);
 
-        // Check if the file exists
+
         if (!file.exists()) {
             System.out.println("Error: User data file not found. Please contact the administrator.");
-            return null; // Return null to indicate the file is missing
+            return null;
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            boolean isHeader = true; // Flag to identify the first row as a header
+            boolean isHeader = true;
 
-            // Read the file line by line
+
             while ((line = br.readLine()) != null) {
-                // Skip the header row (first row)
+
                 if (isHeader) {
-                    isHeader = false; // Mark the header as skipped
-                    continue;         // Move to the next line
+                    isHeader = false;
+                    continue;
                 }
 
-                // Split the line by commas into an array
+
                 String[] userDetails = line.split(",");
 
-                // Trim whitespace to ensure clean parsing
+
                 if (Integer.parseInt(userDetails[0]) == userId) {
-                    return userDetails; // Return the user details if UserID matches
+                    return userDetails;
                 }
             }
         } catch (IOException e) {
@@ -122,7 +119,7 @@ public class DisplayMenu {
         } catch (NumberFormatException e) {
             System.err.println("Error with UserID. Contact the administrator.");
         }
-        // Return null if no matching UserID is found
+
         return null;
     }
 }

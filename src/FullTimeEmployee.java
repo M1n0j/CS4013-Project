@@ -7,7 +7,6 @@ public class FullTimeEmployee extends Employee {
         super(employeeId, name, email, position, level, fullTime, promotion);
     }
 
-    // Instance method to create a FullTimeEmployee from a CSV line
     public static FullTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
         return new FullTimeEmployee

@@ -6,25 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVReader {
-    private String employeeCSVPath;
+    private static String employeeCSVPath;
     private String userCSVPath;
-    private String salaryCSVPath;
+    private static String salaryCSVPath;
 
-    // Constructor accepting both paths
+
     public CSVReader(String employeeCSVPath, String userCSVPath, String salaryCSVPath) {
         this.employeeCSVPath = employeeCSVPath;
         this.userCSVPath = userCSVPath;
         this.salaryCSVPath = salaryCSVPath;
     }
 
+    public static List<SalaryScale> readSalaryScales(String s) {
+        return null;
+    }
+
     /**
      * Reads employee data from the employee CSV file and returns a list of Employee objects.
      * Includes file existence check and improved error handling.
      */
-    public List<Employee> readEmployees() {
+    public static List<Employee> readEmployees(String s) {
         List<Employee> employees = new ArrayList<>();
 
-        // Add file existence check
+
         File file = new File(employeeCSVPath);
         if (!file.exists()) {
             System.err.println("Error: Employee CSV file not found at " + employeeCSVPath);
@@ -33,7 +37,7 @@ public class CSVReader {
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(employeeCSVPath))) {
-            // Skip header line
+
             String header = reader.readLine();
             if (header == null) {
                 System.err.println("CSV file is empty or cannot be read.");
@@ -45,14 +49,12 @@ public class CSVReader {
 
                 String[] fields = line.split(",");
 
-                // Ensure you have enough fields
+
                 if (fields.length >= 6) {
                     boolean isFullTime = Boolean.parseBoolean(fields[5]);
                     if (isFullTime) {
-                        // Full-time employee
                         employees.add(FullTimeEmployee.fromCSV(line));
                     } else {
-                        // Part-time employee
                         employees.add(PartTimeEmployee.fromCSV(line));
                     }
                 } else {
@@ -67,18 +69,15 @@ public class CSVReader {
         return employees;
     }
 
-    // Other methods from the original class remain the same
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(userCSVPath))) {
             String line;
 
-            // Skip header line
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
-                // Create a User object from the CSV line and add it to the list
                 users.add(User.fromCSV(line));
             }
         } catch (IOException e) {
@@ -88,30 +87,25 @@ public class CSVReader {
         return users;
     }
 
-    // Method to read SalaryScales from a CSV file
-    public List<SalaryScale> readSalaryScales() {
+    public static List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(salaryCSVPath))) {
-            // Skip the header
             reader.readLine();
 
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
 
-                // Ensure we have at least 3 fields
                 if (fields.length >= 3) {
                     String position = fields[0];
 
-                    // Check if level is "N/A" or empty and handle accordingly
                     String levelString = fields[1];
                     int level = 1;
                     if (!levelString.isEmpty() && !levelString.equalsIgnoreCase("N/A")) {
                         level = Integer.parseInt(levelString);
                     }
 
-                    // Check if salary is "N/A" or empty and handle accordingly
                     String salaryString = fields[2];
                     double salary = 0.0;
                     if (!salaryString.isEmpty() && !salaryString.equalsIgnoreCase("N/A")) {

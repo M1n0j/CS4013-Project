@@ -1,23 +1,20 @@
 public class User {
     private String employeeID;
     private String password;
-    private String role; // Role for user (Admin, HR, etc.)
+    private String role;
 
-    // Constructor with employeeID, password, and role
     public User(String employeeID, String password, String role) {
         this.employeeID = employeeID;
         this.password = password;
         this.role = role;
     }
 
-    // Constructor for cases where the role isn't needed (optional)
     public User(String employeeID, String password) {
         this.employeeID = employeeID;
         this.password = password;
         this.role = "Unknown";
     }
 
-    // Getters and Setters
     public String getEmployeeID() {
         return employeeID;
     }

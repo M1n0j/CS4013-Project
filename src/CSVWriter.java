@@ -7,7 +7,6 @@ public class CSVWriter {
     private static String employeeCSVPath;
     private String userCSVPath;
 
-    // Constructor accepting both paths
     public CSVWriter(String employeeCSVPath, String userCSVPath) {
         this.employeeCSVPath = employeeCSVPath;
         this.userCSVPath = userCSVPath;
@@ -18,7 +17,6 @@ public class CSVWriter {
      */
     public void writeUsers(List<User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(userCSVPath))) {
-            // Write header
             writer.write("userID, userPassword, Role");
             writer.newLine();
 
@@ -36,7 +34,6 @@ public class CSVWriter {
      */
     public static void writeEmployees(List<Employee> employees, String s) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(s))) {
-            // Write header
             writer.write("employeeId, name, email, position, level, isFullTime, promotion");
             writer.newLine();
 
@@ -54,7 +51,6 @@ public class CSVWriter {
  */
     public void writePayslips(List<Payslip> payslips, String payslipCSVPath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(payslipCSVPath))) {
-        // Write header
         writer.write("payslipId, employeeId, payDate, grossPay, tax, netPay");
         writer.newLine();
 
