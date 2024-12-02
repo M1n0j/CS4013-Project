@@ -21,7 +21,7 @@ public class HrUser extends User {
             return;
         }
 
-        System.out.println("Employees:");
+        System.out.println("\nEmployees:");
         for (Employee employee : employees) {
             System.out.println("ID: " + employee.getEmployeeId() + ", Name: " + employee.getName());
         }
@@ -34,6 +34,8 @@ public class HrUser extends User {
         for (Employee employee : employees) {
             if (employee.getEmployeeId() == employeeID) {
                 employee.setPromotion(true);
+                int newLevel = employee.getLevel() + 1;
+                employee.setLevel(newLevel);
                 CSVWriter.writeEmployees(employees, "src/resources/employees.csv");
                 System.out.println("Employee promoted.");
                 return;

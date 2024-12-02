@@ -103,18 +103,13 @@ public class FullTimeMenu {
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
                 if (fields.length >= 7) {
-                    try {
+
                         int employeeId = Integer.parseInt(fields[0]);
                         if (employeeId == userId) {
                             boolean isPromoted = Boolean.parseBoolean(fields[6]);
                             return isPromoted;
                         }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Error parsing data from line: " + line);
-                    }
-                } else {
-                    System.out.println("Skipping malformed line: " + line);
-                }
+                   }
             }
 
         } catch (IOException e) {
@@ -154,33 +149,40 @@ public class FullTimeMenu {
         int maxLevel = maxLevelForPosition();
 
         if (incrementLevel && currentLevel < maxLevel) {
-            return currentLevel + 1;
+            currentLevel++;
+            upEmployeeLevel(currentLevel);
         }
         return currentLevel;
     }
+
 
     private int currentLevel() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
             String line;
+
+            reader.readLine();
+
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                if (fields.length >= 6) {
+                if (fields.length >= 5) {
+
                     try {
-                        int employeeId = Integer.parseInt(fields[0]);
+                        int employeeId = Integer.parseInt(fields[0].trim());
                         if (employeeId == userId) {
-                            return Integer.parseInt(fields[4]);
+                            return Integer.parseInt(fields[4].trim());
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Error parsing data from line: " + line);
+                        System.out.println("Invalid employee ID format in the CSV file: " + fields[0]);
                     }
                 }
             }
         } catch (IOException e) {
             System.out.println("Error reading current level: " + e.getMessage());
         }
-        return 0;  // Return 0 if no matching userId was found
+        return 0;  // Return 0 if no matching userId was found or an error occurred
     }
+
     private int maxLevelForPosition() {
         String userPosition = AdminMenu.checkPosition();
         int maxLevel = 0;
@@ -202,5 +204,30 @@ public class FullTimeMenu {
         return maxLevel;
     }
 
+    private void upEmployeeLevel(int newLevel) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            StringBuilder updatedData = new StringBuilder();
+            String line;
+
+            String header = reader.readLine();
+            updatedData.append(header).append("\n");
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (Integer.parseInt(fields[0]) == userId) {
+                    fields[4] = String.valueOf(newLevel);
+                }
+                updatedData.append(String.join(",", fields)).append("\n");
+            }
+            reader.close();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Employees.csv"));
+            writer.write(updatedData.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error updating employee level: " + e.getMessage());
+        }
+    }
 
 }
