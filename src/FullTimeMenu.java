@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class FullTimeMenu {
@@ -14,6 +12,24 @@ public class FullTimeMenu {
     }
 
     public void displayMenu() {
+
+            // Check if the user is promoted
+        if (checkPromotionStatus()) {
+            System.out.println("You have been promoted! Type 'accept' to accept or 'decline' to decline:");
+            String response = scanner.nextLine().toLowerCase();
+
+            if ("accept".equals(response)) {
+                System.out.println("Congratulations on accepting the promotion!");
+                int newLevel = addLevel(true);
+                updatePromotion(false);
+            } else if ("decline".equals(response)) {
+                System.out.println("You have declined the promotion.");
+                updatePromotion(false);
+            } else {
+                System.out.println("Invalid response. Returning to the main menu.");
+            }
+        }
+
         boolean fullTimeMenuRunning = true;
         while (fullTimeMenuRunning) {
             System.out.println("Full-Time Employee Menu:");
@@ -76,5 +92,103 @@ public class FullTimeMenu {
             System.out.println("Error reading employee details: " + e.getMessage());
         }
     }
+
+    private boolean checkPromotionStatus() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            String line;
+
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (Integer.parseInt(fields[0]) == userId) {
+                    boolean isPromoted = Boolean.parseBoolean(fields[6]);
+                    reader.close();
+                    return isPromoted;
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading employee details: " + e.getMessage());
+        }
+
+        return false;
+    }
+    private void updatePromotion(boolean newStatus) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            StringBuilder updatedData = new StringBuilder();
+            String line;
+
+            String header = reader.readLine();
+            updatedData.append(header).append("\n");
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (Integer.parseInt(fields[0]) == userId) {
+                    fields[6] = String.valueOf(newStatus);
+                }
+                updatedData.append(String.join(",", fields)).append("\n");
+            }
+            reader.close();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Employees.csv"));
+            writer.write(updatedData.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error updating promotion status: " + e.getMessage());
+        }
+    }
+
+    private int addLevel(boolean incrementLevel) {
+        int currentLevel = currentLevel();
+        int maxLevel = maxLevelForPosition();
+
+        if (incrementLevel && currentLevel < maxLevel) {
+            return currentLevel + 1;
+        }
+        return currentLevel;
+    }
+
+    private int currentLevel() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (Integer.parseInt(fields[0]) == userId) {
+                    reader.close();
+                    return Integer.parseInt(fields[5]);
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading current level: " + e.getMessage());
+        }
+        return 0;
+    }
+    private int maxLevelForPosition() {
+        String userPosition = AdminMenu.checkPosition();
+        int maxLevel = 0;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/resources/salaries.csv"));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields[0].equalsIgnoreCase(userPosition)) {
+                    maxLevel = Math.max(maxLevel, Integer.parseInt(fields[1])); // Compare levels
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error reading max level: " + e.getMessage());
+        }
+        return maxLevel;
+    }
+
 
 }
