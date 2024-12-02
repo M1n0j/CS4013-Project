@@ -2,9 +2,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class Payslip {
-    private static double grossSalary;
-    private static double netSalary;
-    private static Deductions deductions;
+    private double grossSalary;
+    private double netSalary;
+    private Deductions deductions;
 
     public Payslip(double grossSalary) {
         this.grossSalary = grossSalary;
@@ -41,23 +41,5 @@ public class Payslip {
            String.format("%.2f", deductions.getTotalDeductions()) + "," +
            String.format("%.2f", netSalary);
 
-    } 
-
-    public void writePayslipToCSV(String filename) {
-        try (PrintWriter writer = new PrintWriter(filename)) {
-        writer.println("Gross Salary,PRSI,USC,Income Tax,Union Fee,Total Deductions,Net Salary");
-        writer.println(toCSV());
-        writer.println("\n----- Payslip -----");
-        writer.println("Gross Salary: €" + String.format("%.2f", this.grossSalary));
-        writer.println("PRSI: €" + String.format("%.2f", this.deductions.getPrsi()));
-        writer.println("USC: €" + String.format("%.2f", this.deductions.getUsc()));
-        writer.println("Income Tax: €" + String.format("%.2f", this.deductions.getIncomeTax()));
-        writer.println("Union Fee: €" + String.format("%.2f", this.deductions.getUnionFee()));
-        writer.println("Total Deductions: €" + String.format("%.2f", this.deductions.getTotalDeductions()));
-        writer.println("Net Salary: €" + String.format("%.2f", this.netSalary));
-        writer.println("-------------------");
-    } catch (FileNotFoundException e) {
-        System.out.println("Error writing to file: " + e.getMessage());
-        }
     }
 }

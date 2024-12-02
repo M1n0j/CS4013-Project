@@ -33,7 +33,7 @@ public class CSVWriter {
      * Writes a list of Employee objects to the employee CSV file.
      */
     public static void writeEmployees(List<Employee> employees, String s) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(s))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Employees"))) {
             writer.write("employeeId, name, email, position, level, isFullTime, promotion");
             writer.newLine();
 
@@ -50,7 +50,7 @@ public class CSVWriter {
  * Writes a list of Payslip objects to the payslip CSV file.
  */
     public void writePayslips(List<Payslip> payslips, String payslipCSVPath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(payslipCSVPath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Payslips"))) {
         writer.write("payslipId, employeeId, payDate, grossPay, tax, netPay");
         writer.newLine();
 

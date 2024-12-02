@@ -12,34 +12,43 @@ public class FullTimeEmployee extends Employee {
         return new FullTimeEmployee
                 (Integer.parseInt(fields[0]),
             fields[1],
-            fields[2], 
-            fields[3], 
+            fields[2],
+            fields[3],
             Integer.parseInt(fields[4]),
             Boolean.parseBoolean(fields[5]),
-            Boolean.parseBoolean(fields[6]) 
+            Boolean.parseBoolean(fields[6])
         );
     }
 
     @Override
     public double calculateSalary() {
         List<SalaryScale> salaryScaleList = CSVReader.readSalaryScales("src/Resources/Salaries.csv");
+        System.out.println("Loaded " + salaryScaleList.size() + " salary records.");
 
         double grossSalary = 0.0;
-        double netSalary = 0.0;
-        for(SalaryScale s : salaryScaleList) {
-            if (s.getPosition().equals(this.getPosition()) && s.getLevel() == this.getLevel()) {
+        System.out.println("Attempting to match Position: " + this.getPosition() + ", Level: " + this.getLevel());
+
+        for (SalaryScale s : salaryScaleList) {
+            System.out.println("Checking Position: " + s.getPosition() + ", Level: " + s.getLevel());
+            if (s.getPosition().equalsIgnoreCase(this.getPosition()) && s.getLevel() == this.getLevel()) {
                 grossSalary = s.getSalary();
+                System.out.println("Match found: Gross Salary = " + grossSalary);
                 break;
             }
         }
 
         if (grossSalary == 0.0) {
-            System.err.println("No Salary Found");
-            return 0.0;
+            System.err.println("Error: No match found for Position: " + this.getPosition() + ", Level: " + this.getLevel());
+            return 0.0; // No salary found, returning 0.
         }
+
         Deductions deductions = new Deductions();
         double totalDeductions = deductions.calcDeductions(grossSalary);
-        netSalary = grossSalary - totalDeductions;
+
+        double netSalary = grossSalary - totalDeductions;
+        System.out.println("Gross Salary: " + grossSalary);
+        System.out.println("Total Deductions: " + totalDeductions);
+        System.out.println("Net Salary: " + netSalary);
 
         return netSalary;
     }

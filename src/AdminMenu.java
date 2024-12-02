@@ -162,7 +162,7 @@ public class AdminMenu {
 
             Employee employee;
             if (isFullTime) {
-                employee = new FullTimeEmployee(0, "", "", "", 0, false, true);
+                employee = new FullTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
             } else {
                 while (true) {
                     double hourlyPay;
@@ -193,7 +193,7 @@ public class AdminMenu {
                     }
                 }
 
-                employee = new PartTimeEmployee(0, "", "", "", 0, false, false);
+                employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
             }
 
 
@@ -296,72 +296,12 @@ public class AdminMenu {
 
 
         Admin admin = new Admin();
+        var employees = CSVReader.readEmployees(admin.EmployeesCsv);
+        int finalEmployeeId = employeeId;
+        employees.removeIf(employee -> employee.getEmployeeId() == finalEmployeeId);
 
-
-        File employeesFile = new File(admin.EmployeesCsv);
-        File payslipsFile = new File(admin.PayslipsCsv);
-        File usersFile = new File(admin.UsersCSV);
-        File tempEmployeesFile = new File("src/resources/temp_employees.csv");
-        File tempPayslipsFile = new File("src/resources/temp_payslips.csv");
-        File tempUsersFile = new File("src/resources/temp_users.csv");
-
-
-        BufferedReader reader = new BufferedReader(new FileReader(employeesFile));
-        PrintWriter writerEmployees = new PrintWriter(new FileWriter(tempEmployeesFile));
-        BufferedReader payslipsReader = new BufferedReader(new FileReader(payslipsFile));
-        PrintWriter writerPayslips = new PrintWriter(new FileWriter(tempPayslipsFile));
-        BufferedReader usersReader = new BufferedReader(new FileReader(usersFile));
-        PrintWriter writerUsers = new PrintWriter(new FileWriter(tempUsersFile));
-
-        String line;
-        boolean found = false;
-
-
-        String headerEmployees = reader.readLine();
-        writerEmployees.println(headerEmployees);
-        String headerPayslips = payslipsReader.readLine();
-        writerPayslips.println(headerPayslips);
-        String headerUsers = usersReader.readLine();
-        writerUsers.println(headerUsers);
-
-
-        while ((line = reader.readLine()) != null) {
-            String[] fields = line.split(",");
-            int currentEmployeeId = Integer.parseInt(fields[0]);
-
-            if (currentEmployeeId != employeeId) {
-                writerEmployees.println(line);
-            } else {
-                found = true;
-            }
-        }
-
-
-        while ((line = payslipsReader.readLine()) != null) {
-            String[] fields = line.split(",");
-            int currentEmployeeId = Integer.parseInt(fields[0]);
-
-            if (currentEmployeeId != employeeId) {
-                writerPayslips.println(line);
-            }
-        }
-
-
-        while ((line = usersReader.readLine()) != null) {
-            String[] fields = line.split(",");
-            int currentUserId = Integer.parseInt(fields[0]);
-
-            if (currentUserId != employeeId) {
-                writerUsers.println(line);
-            }
-        }
-
-        reader.close();
-        payslipsReader.close();
-        usersReader.close();
-        writerEmployees.close();
-        writerPayslips.close();
-        writerUsers.close();
+        CSVWriter.writeEmployees(employees, admin.EmployeesCsv);
+        System.out.println("Employee deleted successfully!");
 
     }
 

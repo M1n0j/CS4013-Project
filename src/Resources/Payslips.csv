@@ -1,3 +1,4 @@
 payslipId, employeeId, name, payPeriod, grossPay, usc, prsi, incomeTax, netPay
-55, 4, Oran, 25, 40000, 0.04,
+
+7,,,,N/A,0,true
 7,,,,N/A,0,true

@@ -2,31 +2,19 @@ import java.io.*;
 
 public class Admin {
     public final String EmployeesCsv = "src/resources/employees.csv";
-    public final String PayslipsCsv = "src/resources/payslips.csv";
     public final String UsersCSV = "src/resources/user.csv";
 
 
     public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime, promotion";
-    public final String PayslipsCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime";
     public final String UsersCsvHeader = "userId,password,role, promotion";
 
 
-    public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId) throws IOException {
-        int newEmployeeId = (employeeId != null) ? employeeId : generateNewEmployeeId();
-        int newUserId = newEmployeeId;
-
-
-        String employeeCSVLine = String.format("%d,%s,%s,%s,%s,%d,%b,%b",
-                newEmployeeId, employee.getName(), employee.getEmail(), employee.getPosition(),
-                isFullTime ? salaryScaleId : "N/A", currentPoint, isFullTime, false);
-        String payslipCSVLine = String.format("%d,%s,%s,%s,%s,%d,%b",
-                newEmployeeId, employee.getName(), employee.getEmail(), employee.getPosition(),
-                isFullTime ? salaryScaleId : "N/A", currentPoint, isFullTime);
-        String userCSVLine = String.format("%d,%s,%s,%b", newUserId, password, isFullTime ? "Full-Time" : "Part-Time", false);
+    public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId) throws IOException {;
+        String employeeCSVLine = employee.toCSV();
+        String userCSVLine = String.format("%d,%s,%s,%b", employee.getEmployeeId(), password, isFullTime ? "Full-Time" : "Part-Time", false);
 
 
         writeToCSV(EmployeesCsv, EmployeesCsvHeader, employeeCSVLine);
-        writeToCSV(PayslipsCsv, PayslipsCsvHeader, payslipCSVLine);
         writeToCSV(UsersCSV, UsersCsvHeader, userCSVLine);
     }
 
