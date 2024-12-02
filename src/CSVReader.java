@@ -42,10 +42,7 @@ public class CSVReader {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // Debug print to see what's being read
-                System.out.println("Reading line: " + line);
 
-                // Split the line and validate fields
                 String[] fields = line.split(",");
 
                 // Ensure you have enough fields
