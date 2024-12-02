@@ -36,6 +36,10 @@ class Deductions {
         this.incomeTax = incomeTax;
     }
 
+    public double getUnionFee() {
+        return unionFee;
+    }
+
     public double calcDeductions(double grossSalary) {
         prsi = calcPrsi(grossSalary);
 
@@ -46,7 +50,7 @@ class Deductions {
         return getTotalDeductions();
     }
 
-    private double calcUsc(double grossSalary) {
+    public double calcUsc(double grossSalary) {
         double usc = 0.0;
 
         if (grossSalary <= 12012) {
@@ -77,7 +81,7 @@ class Deductions {
 
         return usc;
     }
-    private double calcIncomeTax(double grossSalary) {
+    public double calcIncomeTax(double grossSalary) {
         double incomeTax = 0.0;
 
         if(grossSalary <= 35300) {
@@ -92,12 +96,12 @@ class Deductions {
         return incomeTax;
     }
 
-    private double calcPrsi(double grossSalary) {
+    public double calcPrsi(double grossSalary) {
         double prsi = grossSalary * 0.04;
         return prsi;
     }
 
-     private double getTotalDeductions() {
+     public double getTotalDeductions() {
          return prsi + usc + incomeTax + unionFee;
      }
 
