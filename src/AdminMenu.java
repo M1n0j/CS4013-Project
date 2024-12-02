@@ -12,6 +12,10 @@ public class AdminMenu {
         this.admin = new Admin();
     }
 
+    double hourlyPay = getHourlyPay();
+    double hoursWorked = getHoursWorked();
+
+
     // Display menu to the admin
     public void displayMenu() {
         boolean adminMenuRunning = true;
@@ -84,7 +88,7 @@ public class AdminMenu {
                     inputPosition = scanner.nextLine();
 
                     // Check if the position is valid using `findPosition` method
-                    String[] positionDetails = PositionChecker.checkPosition("src/Resources/Salaries.csv", inputPosition);
+                    String[] positionDetails = checkPosition("src/Resources/Salaries.csv", inputPosition);
 
                     if (positionDetails != null) {
                         isValidPosition = true; // Exit the loop if position is valid
@@ -223,118 +227,113 @@ public class AdminMenu {
     }
 
     // Method to remove an employee from all CSV files with a confirmation check
-    private void removeEmployee() {
-        try {
-            // Prompt the user for the employee ID to remove
+    private void removeEmployee() throws IOException {
+        // Prompt the user for the employee ID to remove
+        int employeeId;
+        while (true) {
             System.out.print("\nEnter Employee ID to remove: ");
-            int employeeId = scanner.nextInt();
-            scanner.nextLine(); // Clear newline character
-
-            // First, we confirm the deletion with the admin
-            System.out.print("Are you sure you want to delete the employee with ID " + employeeId + "? (yes/no): ");
-            String confirmation = scanner.nextLine().trim().toLowerCase();
-
-            // Check if the admin confirmed the deletion
-            if (!confirmation.equals("yes")) {
-                System.out.println("Employee deletion canceled.");
-                return; // Exit the method if not confirmed
+            String employeeIdInput = scanner.nextLine();
+            try {
+                employeeId = Integer.parseInt(employeeIdInput);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid ID. Please enter a valid integer.");
             }
-
-            // Create an instance of Admin to access the file paths
-            Admin admin = new Admin();
-
-            // Create temporary files for each CSV file to store updated data
-            File employeesFile = new File(admin.EmployeesCsv);  // Accessing instance fields
-            File payslipsFile = new File(admin.PayslipsCsv);    // Accessing instance fields
-            File usersFile = new File(admin.UsersCSV);          // Accessing instance fields
-            File tempEmployeesFile = new File("src/resources/temp_employees.csv");
-            File tempPayslipsFile = new File("src/resources/temp_payslips.csv");
-            File tempUsersFile = new File("src/resources/temp_users.csv");
-
-            // BufferedReader and PrintWriter for all files
-            BufferedReader reader = new BufferedReader(new FileReader(employeesFile));
-            PrintWriter writerEmployees = new PrintWriter(new FileWriter(tempEmployeesFile));
-            BufferedReader payslipsReader = new BufferedReader(new FileReader(payslipsFile));
-            PrintWriter writerPayslips = new PrintWriter(new FileWriter(tempPayslipsFile));
-            BufferedReader usersReader = new BufferedReader(new FileReader(usersFile));
-            PrintWriter writerUsers = new PrintWriter(new FileWriter(tempUsersFile));
-
-            String line;
-            boolean found = false;
-
-            // Read headers and write them to temporary files
-            String headerEmployees = reader.readLine();
-            writerEmployees.println(headerEmployees);
-            String headerPayslips = payslipsReader.readLine();
-            writerPayslips.println(headerPayslips);
-            String headerUsers = usersReader.readLine();
-            writerUsers.println(headerUsers);
-
-            // Remove employee from employees.csv
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                int currentEmployeeId = Integer.parseInt(fields[0]);
-
-                if (currentEmployeeId != employeeId) {
-                    writerEmployees.println(line); // Write non-matching records to tempEmployees
-                } else {
-                    found = true;  // Employee found, we will not write this line to the temp file
-                }
-            }
-
-            // Remove employee from payslips.csv
-            while ((line = payslipsReader.readLine()) != null) {
-                String[] fields = line.split(",");
-                int currentEmployeeId = Integer.parseInt(fields[0]);
-
-                if (currentEmployeeId != employeeId) {
-                    writerPayslips.println(line); // Write non-matching records to tempPayslips
-                }
-            }
-
-            // Remove employee from user.csv
-            while ((line = usersReader.readLine()) != null) {
-                String[] fields = line.split(",");
-                int currentUserId = Integer.parseInt(fields[0]);
-
-                if (currentUserId != employeeId) {
-                    writerUsers.println(line); // Write non-matching records to tempUsers
-                }
-            }
-
-            // Close readers and writers
-            reader.close();
-            payslipsReader.close();
-            usersReader.close();
-            writerEmployees.close();
-            writerPayslips.close();
-            writerUsers.close();
-
-            // If the employee was found and removed, replace the old file with the temp files
-            if (found) {
-                if (employeesFile.delete()) {
-                    tempEmployeesFile.renameTo(employeesFile);  // Replace employees file
-                }
-                if (payslipsFile.delete()) {
-                    tempPayslipsFile.renameTo(payslipsFile);  // Replace payslips file
-                }
-                if (usersFile.delete()) {
-                    tempUsersFile.renameTo(usersFile);  // Replace users file
-                }
-                System.out.println("Employee removed successfully from all files.");
-            } else {
-                // Employee was not found
-                System.out.println("Employee with ID " + employeeId + " not found.");
-                tempEmployeesFile.delete();  // Delete the temp file if employee wasn't found
-                tempPayslipsFile.delete();
-                tempUsersFile.delete();
-            }
-        } catch (IOException e) {
-            System.out.println("Error removing employee: " + e.getMessage());
         }
+
+        boolean confirmDeletion = false;
+        while (true) {
+            System.out.print("Are you sure you want to delete the employee with ID " + employeeId + "? (yes/no): ");
+            String confirmationInput = scanner.nextLine().trim().toLowerCase();
+            if (confirmationInput.equals("yes") || confirmationInput.equals("no")) {
+                confirmDeletion = confirmationInput.equals("yes");
+                break; // Exit the loop if the input is valid
+            }
+            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+        }
+
+        if (!confirmDeletion) {
+            System.out.println("Employee deletion canceled.");
+            return; // Exit the method if not confirmed
+        }
+
+// Proceed with deletion
+        System.out.println("Proceeding with employee deletion...");
+
+        // Create an instance of Admin to access the file paths
+        Admin admin = new Admin();
+
+        // Create temporary files for each CSV file to store updated data
+        File employeesFile = new File(admin.EmployeesCsv);  // Accessing instance fields
+        File payslipsFile = new File(admin.PayslipsCsv);    // Accessing instance fields
+        File usersFile = new File(admin.UsersCSV);          // Accessing instance fields
+        File tempEmployeesFile = new File("src/resources/temp_employees.csv");
+        File tempPayslipsFile = new File("src/resources/temp_payslips.csv");
+        File tempUsersFile = new File("src/resources/temp_users.csv");
+
+        // BufferedReader and PrintWriter for all files
+        BufferedReader reader = new BufferedReader(new FileReader(employeesFile));
+        PrintWriter writerEmployees = new PrintWriter(new FileWriter(tempEmployeesFile));
+        BufferedReader payslipsReader = new BufferedReader(new FileReader(payslipsFile));
+        PrintWriter writerPayslips = new PrintWriter(new FileWriter(tempPayslipsFile));
+        BufferedReader usersReader = new BufferedReader(new FileReader(usersFile));
+        PrintWriter writerUsers = new PrintWriter(new FileWriter(tempUsersFile));
+
+        String line;
+        boolean found = false;
+
+        // Read headers and write them to temporary files
+        String headerEmployees = reader.readLine();
+        writerEmployees.println(headerEmployees);
+        String headerPayslips = payslipsReader.readLine();
+        writerPayslips.println(headerPayslips);
+        String headerUsers = usersReader.readLine();
+        writerUsers.println(headerUsers);
+
+        // Remove employee from employees.csv
+        while ((line = reader.readLine()) != null) {
+            String[] fields = line.split(",");
+            int currentEmployeeId = Integer.parseInt(fields[0]);
+
+            if (currentEmployeeId != employeeId) {
+                writerEmployees.println(line); // Write non-matching records to tempEmployees
+            } else {
+                found = true;  // Employee found, we will not write this line to the temp file
+            }
+        }
+
+        // Remove employee from payslips.csv
+        while ((line = payslipsReader.readLine()) != null) {
+            String[] fields = line.split(",");
+            int currentEmployeeId = Integer.parseInt(fields[0]);
+
+            if (currentEmployeeId != employeeId) {
+                writerPayslips.println(line); // Write non-matching records to tempPayslips
+            }
+        }
+
+        // Remove employee from user.csv
+        while ((line = usersReader.readLine()) != null) {
+            String[] fields = line.split(",");
+            int currentUserId = Integer.parseInt(fields[0]);
+
+            if (currentUserId != employeeId) {
+                writerUsers.println(line); // Write non-matching records to tempUsers
+            }
+        }
+
+        // Close readers and writers
+        reader.close();
+        payslipsReader.close();
+        usersReader.close();
+        writerEmployees.close();
+        writerPayslips.close();
+        writerUsers.close();
+
     }
 
-    public class PositionChecker {
+
+
 
         private static String[] checkPosition(String fileName, String position) {
             File file = new File(fileName);
@@ -373,4 +372,4 @@ public class AdminMenu {
         }
 
     }
-}
+
