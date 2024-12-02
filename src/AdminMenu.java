@@ -156,7 +156,7 @@ public class AdminMenu {
             // Create the employee object
             Employee employee;
             if (isFullTime) {
-                employee = new FullTimeEmployee("", 1004, "", "", false, 1, true);
+                employee = new FullTimeEmployee("", 0, "", "", false, 1, true);
             } else {
                 while (true) {
                     double hourlyPay;

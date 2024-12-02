@@ -1,0 +1,78 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+
+public class Payslip {
+    private int employeeId;
+    private String employeeName;
+    private LocalDate paymentDate;
+    private double grossPay;
+    private Deductions deductions;
+    private double netPay;
+
+    public Payslip(int employeeId, String employeeName, double grossPay) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;  // Set employee name
+        this.paymentDate = LocalDate.now().withDayOfMonth(25);  // Set pay date to the 25th of the current month
+        this.grossPay = grossPay;
+        this.deductions = new Deductions();
+        calculateDeductions();
+    }
+
+    private void calculateDeductions() {
+        deductions.setPrsi(grossPay * 0.04);
+        deductions.setUsc(grossPay * 0.02);
+        
+        double annualGrossPay = grossPay * 12;
+        double incomeTax = 0;
+
+        if (annualGrossPay <= 36800) {
+            incomeTax = grossPay * 0.20;
+        } else {
+            double standardRate = (36800 / 12) * 0.20;
+            double higherRate = (grossPay - (36800 / 12)) * 0.40;
+            incomeTax = standardRate + higherRate;
+        }
+        deductions.setIncomeTax(incomeTax);
+        netPay = grossPay - deductions.getTotalDeductions();
+    }
+
+    public void generatePayslip() {
+        double totalDeductions = deductions.getTotalDeductions();  // Calculate total deductions
+        System.out.println("=== PAYSLIP ===");
+        System.out.println("Employee Name: " + employeeName);  // Display employee name
+        System.out.println("Employee ID: " + employeeId);
+        System.out.println("Payment Date: " + paymentDate);
+        System.out.println("Gross Pay: €" + String.format("%.2f", grossPay));
+        System.out.println("Amount After Tax (Net Pay): €" + String.format("%.2f", netPay));
+        System.out.println("\nDeductions:");
+        System.out.println("PRSI: €" + String.format("%.2f", deductions.getPrsi()));
+        System.out.println("USC: €" + String.format("%.2f", deductions.getUsc()));
+        System.out.println("Income Tax: €" + String.format("%.2f", deductions.getIncomeTax()));
+        System.out.println("\nTotal Deductions: €" + String.format("%.2f", totalDeductions));
+        System.out.println("\nNet Pay: €" + String.format("%.2f", netPay));
+
+        // Write the payslip data to a CSV file
+        writePayslipToCSV();
+    }
+
+    private void writePayslipToCSV() {
+        // CSV file name
+        String fileName = "Payslips.csv";
+
+        // CSV content (columns)
+        String payslipData = String.format("%s,%d,%s,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", 
+                employeeName, employeeId, paymentDate, grossPay, netPay, 
+                deductions.getPrsi(), deductions.getUsc(), deductions.getIncomeTax(), deductions.getTotalDeductions(), netPay);
+
+        try {
+            // Open a FileWriter and BufferedWriter to append data to the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true)); // true to append
+            writer.write(payslipData);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle any I/O errors
+        }
+    }
+
