@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class PartTimeEmployee extends Employee {
+
+    private double hourlyPay;
+    private double hoursWorked;
+    private double currentPayHours = 0;
+
+    // Constructor for PartTimeEmployee
+    public PartTimeEmployee(String name, int employeeId, String email, String position, int level, boolean promotion, boolean fullTime, double hoursWorked, double hourlyPay) {
+        super(name, employeeId, email, position, level, promotion, fullTime);  // Call superclass constructor
+        this.hoursWorked = hoursWorked;
+        this.hourlyPay = hourlyPay;
+    }
+
+    // Factory method to create PartTimeEmployee from a CSV string
+    public static PartTimeEmployee fromCSV(String csvLine) {
+        String[] fields = csvLine.split(",");
+        return new PartTimeEmployee(
+                fields[1].trim(), // name
+                Integer.parseInt(fields[0].trim()), // employeeId
+                fields[2].trim(), // email
+                fields[3].trim(), // position
+                Integer.parseInt(fields[4].trim()), // level
+                Boolean.parseBoolean(fields[5].trim()), // promotion
+                Boolean.parseBoolean(fields[6].trim()), // fullTime
+                Double.parseDouble(fields[7].trim()), // hoursWorked
+                Double.parseDouble(fields[8].trim())  // hourlyPay
+        );
+    }
+
+    // Method to calculate salary based on hours worked and hourly pay
+    @Override
+    public double calculateSalary() {
+        // Calculate gross salary based on hours worked and hourly pay
+        double grossSalary = hoursWorked * hourlyPay;
+        Deductions deductions = new Deductions();
+        return deductions.calcDeductions(grossSalary);
+    }
+
+    // Method to convert PartTimeEmployee to a CSV string
+    @Override
+    public String toCSV() {
+        return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + ","
+                + getLevel() + "," + isFullTime() + "," + isPromotion() + "," + hoursWorked + "," + hourlyPay;
+    }
+
+    // Method to input hours worked for current pay period
+    public void inputHoursWorked() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter hours worked for " + getName() + ": ");
+        try {
+            double hours = Double.parseDouble(scanner.nextLine());
+            if (hours <= 0) {
+                System.out.println("Hours worked can't be 0 or negative!");
+                return;
+            }
+            this.currentPayHours += hours;
+            System.out.println(hours + " hours added to total hours worked.");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! No hours added.");
+        }
+    }
+
+    // Method to get current total hours worked for current pay period
+    public double getCurrentPayHours() {
+        return this.currentPayHours;
+    }
+
+    // Method to calculate salary based on current pay period hours worked
+    @Override
+    public double calculateSalaryForCurrentPeriod() {
+        double grossSalary = currentPayHours * hourlyPay;  // Use currentPayHours instead of hoursWorked
+        Deductions deductions = new Deductions();
+        return deductions.calcDeductions(grossSalary);
+    }
+}
