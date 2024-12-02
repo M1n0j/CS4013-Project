@@ -2,17 +2,29 @@ import java.time.LocalDate;
 
 public class Payslip {
     private int employeeId;
-    private LocalDate paymentDate;
     private double grossPay;
-    private Deductions deductions;
     private double netPay;
+    private int payslipId;
+    private String name;
+    private LocalDate payPeriod;
+    private double usc;
+    private double prsi;
+    private double incomeTax;
 
-    public Payslip(int employeeId, LocalDate paymentDate, double grossPay) {
-        this.employeeId = employeeId;
-        this.paymentDate = paymentDate;
-        this.grossPay = grossPay;
-        this.deductions = new Deductions();
-        calculateDeductions();
+    public Payslip(int employeeId, double grossPay, double netPay, int payslipId, String name, LocalDate payPeriod, double usc, double prsi, double incomeTax) {
+    this.employeeId = employeeId;
+    this.grossPay = grossPay;
+    this.netPay = netPay;
+    this.payslipId = payslipId;
+    this.name = name;
+    this.payPeriod = payPeriod;
+    this.usc = usc;
+    this.prsi = prsi;
+    this.incomeTax = incomeTax;
+    this.netPay = netPay;
+
+    private void calculateNetPay() {
+        netPay = grossPay - Deductions.getTotalDeductions();
     }
 
     private void calculateDeductions() {
