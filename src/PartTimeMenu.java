@@ -23,14 +23,13 @@ public class PartTimeMenu {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Clear newline character
+            scanner.nextLine();
 
             if (choice == 1) {
                 System.out.println("Employee Details:");
                 viewMyDetails();
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
-                // Display most recent payslip
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
                 // Display historical payslips
@@ -48,7 +47,7 @@ public class PartTimeMenu {
             String line;
             boolean found = false;
 
-            // Skiping header
+
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
