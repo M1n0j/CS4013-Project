@@ -12,10 +12,6 @@ public class AdminMenu {
         this.admin = new Admin();
     }
 
-    double hourlyPay = getHourlyPay();
-    double hoursWorked = getHoursWorked();
-
-
     // Display menu to the admin
     public void displayMenu() {
         boolean adminMenuRunning = true;
@@ -144,6 +140,7 @@ public class AdminMenu {
                 employee = new FullTimeEmployee("", 1004, "", "", false, 1, true);
             } else {
                 while (true) {
+                    double hourlyPay;
                     System.out.print("Hourly Pay: ");
                     try {
                         hourlyPay = Double.parseDouble(scanner.nextLine().trim());
@@ -157,6 +154,7 @@ public class AdminMenu {
                     }
                 }
                 while (true) {
+                    double hoursWorked;
                     System.out.print("Hours Worked per week: ");
                     try {
                         hoursWorked = Double.parseDouble(scanner.nextLine().trim());
