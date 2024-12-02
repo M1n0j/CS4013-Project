@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class FullTimeMenu {
     private Scanner scanner;
     private int userId;
+    double grossSalary = 0.0;
 
 
     public FullTimeMenu(Scanner scanner, int userId) {
@@ -47,7 +48,7 @@ public class FullTimeMenu {
                 viewMyDetails();
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
-                // Display most recent payslip
+                Payslip payslip = new Payslip(grossSalary);
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
                 // Display historical payslips
@@ -229,5 +230,7 @@ public class FullTimeMenu {
             System.out.println("Error updating employee level: " + e.getMessage());
         }
     }
+
+
 
 }
