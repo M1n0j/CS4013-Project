@@ -1,5 +1,5 @@
 employeeId, name, email, position, level, isFullTime, promotion
-1,John Doe,john.doe@example.com,Professor,false,true
-3,Bob Brown,bob.brown@example.com,Assistant Professor,false,true
-4,John Doe,john.doe@example.com,Software Engineer,true,true
-5,Jane Smith,jane.smith@example.com,Graphic Designer,1,false,false
+1,John Doe,john.doe@example.com,Professor,1,false,true,
+3,Bob Brown,bob.brown@example.com,Assistant Professor,2,false,true,
+4,John Doe,john.doe@example.com,Administrator,3,false,true,
+5,Jane Smith,jane.smith@example.com,Administrator,1,false,false,
