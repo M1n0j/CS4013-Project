@@ -35,7 +35,7 @@ public class CSVWriter {
      * Writes a list of Employee objects to the employee CSV file.
      */
     public static void writeEmployees(List<Employee> employees, String s) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(employeeCSVPath))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(s))) {
             // Write header
             writer.write("employeeId, name, email, position, level, isFullTime, promotion");
             writer.newLine();
