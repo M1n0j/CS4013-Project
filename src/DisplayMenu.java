@@ -50,7 +50,7 @@ public class DisplayMenu {
                             hrMenu.displayMenu(); // Show HR Menu
                             break;
                         case "part-time":
-                            PartTimeMenu partTimeMenu = new PartTimeMenu(scanner);
+                            PartTimeMenu partTimeMenu = new PartTimeMenu(scanner, userId);
                             partTimeMenu.displayMenu(); // Show Part-Time Menu
                             break;
                         case "full-time":

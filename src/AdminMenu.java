@@ -21,7 +21,7 @@ public class AdminMenu {
                 System.out.println("1. Add New Employee");
                 System.out.println("2. View Employee Details");
                 System.out.println("3. Remove Employee");
-                System.out.println("4. Back to Main Menu");
+                System.out.println("4. Logout");
                 System.out.print("Enter your choice: ");
 
                 int choice = scanner.nextInt();

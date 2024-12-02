@@ -20,7 +20,7 @@ public class FullTimeMenu {
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
-            System.out.println("4. Back to Main Menu");
+            System.out.println("4. Logout");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();

@@ -15,7 +15,7 @@ public class HRMenu {
         while (hrMenuRunning) {
             System.out.println("\nHuman Resources Menu:");
             System.out.println("1. Implement Promotion");
-            System.out.println("2. Back to Main Menu");
+            System.out.println("2. Logout");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
