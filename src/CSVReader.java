@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVReader {
-    private static String employeeCSVPath;
-    private static String userCSVPath;
-    private static String salaryCSVPath;
+    private String employeeCSVPath;
+    private String userCSVPath;
+    private String salaryCSVPath;
 
     // Constructor accepting both paths
     public CSVReader(String employeeCSVPath, String userCSVPath, String salaryCSVPath) {
@@ -21,7 +21,7 @@ public class CSVReader {
      * Reads employee data from the employee CSV file and returns a list of Employee objects.
      * Includes file existence check and improved error handling.
      */
-    public static List<Employee> readEmployees(String employeeCSVPath) {
+    public List<Employee> readEmployees() {
         List<Employee> employees = new ArrayList<>();
 
         // Add file existence check
@@ -89,7 +89,7 @@ public class CSVReader {
     }
 
     // Method to read SalaryScales from a CSV file
-    public static List<SalaryScale> readSalaryScales(String salaryScaleCSVPath) {
+    public List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(salaryCSVPath))) {
