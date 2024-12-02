@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 
 public class Payslip {
     private static double grossSalary;
@@ -29,4 +28,16 @@ public class Payslip {
         System.out.println("Net Salary: €" + String.format("%.2f", netSalary));
         System.out.println("-------------------");
     }
+
+    public String toCSV() {
+        
+        return String.format("%.2f", grossSalary) + "," +
+           String.format("%.2f", deductions.getPrsi()) + "," +
+           String.format("%.2f", deductions.getUsc()) + "," +
+           String.format("%.2f", deductions.getIncomeTax()) + "," +
+           String.format("%.2f", deductions.getUnionFee()) + "," +
+           String.format("%.2f", deductions.getTotalDeductions()) + "," +
+           String.format("%.2f", netSalary);
+
+    } 
 }
