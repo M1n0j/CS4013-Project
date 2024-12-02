@@ -21,7 +21,6 @@ public class Payslip {
     this.usc = usc;
     this.prsi = prsi;
     this.incomeTax = incomeTax;
-    this.netPay = netPay;
 
     private void calculateNetPay() {
         netPay = grossPay - Deductions.getTotalDeductions();
@@ -29,10 +28,10 @@ public class Payslip {
 
     private void calculateDeductions() {
         // Calculate PRSI (4%)
-        deductions.setPrsi(grossPay * 0.04);
+        Deductions.setPrsi(grossPay * 0.04);
 
         // Calculate USC (2%)
-        deductions.setUsc(grossPay * 0.02);
+        Deductions.setUsc(grossPay * 0.02);
 
         // Calculate Income Tax (20% on first €36,800, 40% on remainder)
         double annualGrossPay = grossPay * 12;
@@ -45,35 +44,21 @@ public class Payslip {
             double higherRate = (grossPay - (36800 / 12)) * 0.40;
             incomeTax = standardRate + higherRate;
         }
-        deductions.setIncomeTax(incomeTax);
+        Deductions.setIncomeTax(incomeTax);
 
         // Calculate net pay
-        netPay = grossPay - deductions.getTotalDeductions();
+        //netPay = grossPay - deductions.getTotalDeductions();
     }
 
     public void generatePayslip() {
         System.out.println("=== PAYSLIP ===");
         System.out.println("Employee ID: " + employeeId);
-        System.out.println("Payment Date: " + paymentDate);
+        System.out.println("Payment Date: " + payPeriod);
         System.out.println("Gross Pay: €" + String.format("%.2f", grossPay));
         System.out.println("\nDeductions:");
-        System.out.println("PRSI: €" + String.format("%.2f", deductions.getPrsi()));
-        System.out.println("USC: €" + String.format("%.2f", deductions.getUsc()));
-        System.out.println("Income Tax: €" + String.format("%.2f", deductions.getIncomeTax()));
+        System.out.println("PRSI: €" + String.format("%.2f", Deductions.getPrsi()));
+        System.out.println("USC: €" + String.format("%.2f", Deductions.getUsc()));
+        System.out.println("Income Tax: €" + String.format("%.2f", Deductions.getIncomeTax()));
         System.out.println("\nNet Pay: €" + String.format("%.2f", netPay));
-    }
-
-    //TESTING -------------------------------
-    public String getEmployeeId() {
-        return String.valueOf(employeeId);
-    }
-
-    public String getPaymentDate() {
-        return paymentDate.toString();
-    }
-
-
-    public String getGrossPay() {
-        return getGrossPay();
     }
 }
