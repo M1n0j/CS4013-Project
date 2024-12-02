@@ -21,9 +21,11 @@ public class AdminMenu {
         this.admin = new Admin();
     }
 
+
     public static String checkPosition() {
-        return checkPosition();
+        return null;
     }
+
 
     /**
      * Displays the admin menu and handles user input for various admin operations.
@@ -35,7 +37,7 @@ public class AdminMenu {
         boolean adminMenuRunning = true;
         while (adminMenuRunning) {
             try {
-                System.out.println("Admin Menu:");
+                System.out.println("\nAdmin Menu:");
                 System.out.println("1. Add New Employee");
                 System.out.println("2. View Employee Details");
                 System.out.println("3. Remove Employee");
@@ -230,7 +232,7 @@ public class AdminMenu {
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
                 if (Integer.parseInt(fields[0]) == employeeId) {
-                    System.out.println("Employee Details:");
+                    System.out.println("\nEmployee Details:");
                     System.out.println("Employee ID: " + fields[0]);
                     System.out.println("Name: " + fields[1]);
                     System.out.println("Email: " + fields[2]);
@@ -397,7 +399,7 @@ public class AdminMenu {
 
                     String[] details = line.split(",");
 
-                    if (details[0].equalsIgnoreCase(position)) {
+                    if (details[3].equalsIgnoreCase(position)) {
                         return details;
                     }
                 }

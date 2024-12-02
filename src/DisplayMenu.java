@@ -21,7 +21,7 @@ public class DisplayMenu {
         boolean running = true;
 
         while (running) {
-            System.out.println("-----Welcome to the University Of Limerick Payroll Service-----");
+            System.out.println("\n-----Welcome to the University Of Limerick Payroll Service-----");
             int userId;
             try {
                 System.out.println("Enter your UserID:");

@@ -15,7 +15,7 @@ public class PartTimeMenu {
     public void displayMenu() {
         boolean partTimeMenuRunning = true;
         while (partTimeMenuRunning) {
-            System.out.println("Part-Time Employee Menu:");
+            System.out.println("\nPart-Time Employee Menu:");
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");

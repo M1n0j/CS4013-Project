@@ -32,7 +32,7 @@ public class FullTimeMenu {
 
         boolean fullTimeMenuRunning = true;
         while (fullTimeMenuRunning) {
-            System.out.println("Full-Time Employee Menu:");
+            System.out.println("\nFull-Time Employee Menu:");
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
@@ -102,14 +102,21 @@ public class FullTimeMenu {
 
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                if (Integer.parseInt(fields[0]) == userId) {
-                    boolean isPromoted = Boolean.parseBoolean(fields[6]);
-                    reader.close();
-                    return isPromoted;
+                if (fields.length >= 7) {
+                    try {
+                        int employeeId = Integer.parseInt(fields[0]);
+                        if (employeeId == userId) {
+                            boolean isPromoted = Boolean.parseBoolean(fields[6]);
+                            return isPromoted;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing data from line: " + line);
+                    }
+                } else {
+                    System.out.println("Skipping malformed line: " + line);
                 }
             }
 
-            reader.close();
         } catch (IOException e) {
             System.out.println("Error reading employee details: " + e.getMessage());
         }
@@ -158,16 +165,21 @@ public class FullTimeMenu {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                if (Integer.parseInt(fields[0]) == userId) {
-                    reader.close();
-                    return Integer.parseInt(fields[5]);
+                if (fields.length >= 6) {
+                    try {
+                        int employeeId = Integer.parseInt(fields[0]);
+                        if (employeeId == userId) {
+                            return Integer.parseInt(fields[4]);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error parsing data from line: " + line);
+                    }
                 }
             }
-            reader.close();
         } catch (IOException e) {
             System.out.println("Error reading current level: " + e.getMessage());
         }
-        return 0;
+        return 0;  // Return 0 if no matching userId was found
     }
     private int maxLevelForPosition() {
         String userPosition = AdminMenu.checkPosition();
