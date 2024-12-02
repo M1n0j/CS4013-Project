@@ -1,7 +1,6 @@
 import java.io.*;
 
 public class Admin {
-    //  Final constants for CSV file paths(Bomberclart)
     public final String EmployeesCsv = "src/resources/employees.csv";
     public final String PayslipsCsv = "src/resources/payslips.csv";
     public final String UsersCSV = "src/resources/user.csv";
