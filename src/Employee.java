@@ -11,7 +11,7 @@ public abstract class Employee {
 
 
     // Constructor with all fields
-    public Employee(String name, int employeeId, String email, String position, int level, boolean promotion, boolean fullTime) {
+    public Employee(int employeeId, String name, String email, String position, int level, boolean promotion, boolean fullTime) {
         this.name = name;
         this.employeeId = employeeId;
         this.email = email;
