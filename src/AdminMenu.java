@@ -186,7 +186,7 @@ public class AdminMenu {
     // Method to view employee details
     private void viewEmployeeDetails() {
         try {
-            System.out.print("\nEnter Employee ID to view details: ");
+            System.out.println("Enter Employee ID to view details: ");
             int employeeId = scanner.nextInt();
             scanner.nextLine(); // Clear newline character
 
@@ -201,14 +201,13 @@ public class AdminMenu {
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
                 if (Integer.parseInt(fields[0]) == employeeId) {
-                    System.out.println("\nEmployee Details:");
+                    System.out.println("Employee Details:");
                     System.out.println("Employee ID: " + fields[0]);
                     System.out.println("Name: " + fields[1]);
                     System.out.println("Email: " + fields[2]);
                     System.out.println("Position: " + fields[3]);
-                    System.out.println("Salary Scale: " + fields[4]);
-                    System.out.println("Current Point: " + fields[5]);
-                    System.out.println("Full-Time: " + fields[6]);
+                    System.out.println("Pay Level: " + fields[4]);
+                    System.out.println("Is Full-Time: " + fields[5]);
                     found = true;
                     break;
                 }

@@ -54,7 +54,7 @@ public class DisplayMenu {
                             partTimeMenu.displayMenu(); // Show Part-Time Menu
                             break;
                         case "full-time":
-                            FullTimeMenu fullTimeMenu = new FullTimeMenu(scanner);
+                            FullTimeMenu fullTimeMenu = new FullTimeMenu(scanner, userId);
                             fullTimeMenu.displayMenu(); // Show Full-Time Menu
                             break;
                         default:

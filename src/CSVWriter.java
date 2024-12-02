@@ -19,7 +19,7 @@ public class CSVWriter {
     public void writeUsers(List<User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(userCSVPath))) {
             // Write header
-            writer.write("id,name,email"); // Adjust this header based on your User fields
+            writer.write("userID, userPassword, Role");
             writer.newLine();
 
             for (User  user : users) {
@@ -37,7 +37,7 @@ public class CSVWriter {
     public static void writeEmployees(List<Employee> employees, String s) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(employeeCSVPath))) {
             // Write header
-            writer.write("id,name,department,salary,isFullTime"); // Adjust this header based on your Employee fields
+            writer.write("employeeId, name, email, position, level, isFullTime, promotion");
             writer.newLine();
 
             for (Employee employee : employees) {
