@@ -1,2 +1,2 @@
 payslipId, employeeId, name, payPeriod, grossPay, usc, prsi, incomeTax, netPay
-
+55, 4, Oran, 25, 40000, 0.04,

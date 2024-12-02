@@ -49,9 +49,23 @@ public class CSVWriter {
         }
     }
 
-    /**
-     * Writes a
-     */
+/**
+ * Writes a list of Payslip objects to the payslip CSV file.
+ */
+    public void writePayslips(List<Payslip> payslips, String payslipCSVPath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(payslipCSVPath))) {
+        // Write header
+        writer.write("payslipId, employeeId, payDate, grossPay, tax, netPay");
+        writer.newLine();
+
+        for (Payslip payslip : payslips) {
+            writer.write(payslip.toCSV());
+            writer.newLine();
+        }
+    } catch (IOException e) {
+        System.err.println("Error writing payslip file: " + e.getMessage());
+    }
+}
 
 
 }

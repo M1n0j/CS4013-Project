@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class WorkClaim {
     private LocalDate date;
@@ -21,6 +22,27 @@ public class WorkClaim {
 
     public void approve(){
         this.approved = true;
+    }
+
+    public double submitPayClaim(double hourlyPay) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate submittionDate = currentDate;
+
+        if(currentDate.getDayOfMonth() > 15) {
+            submittionDate = currentDate.plusMonths(1);
+            System.out.println("You are submitting a claim for next month");
+        }else {
+            System.out.println("You are submitting a claim for the current month");
+        }
+
+        Scanner pcInput = new Scanner(System.in);
+        System.out.print("Enter hours worked this month: ");
+        double hoursWorked = pcInput.nextDouble();
+        this.hoursWorked = hoursWorked;
+
+        double grossSalary = hoursWorked * hourlyPay;
+
+        return grossSalary;
     }
 
 }
