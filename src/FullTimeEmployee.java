@@ -2,21 +2,21 @@ import java.util.List;
 
 public class FullTimeEmployee extends Employee {
 
-    public FullTimeEmployee(String name, int employeeId, String email, String position, boolean promotion, int level, boolean fullTime) {
+    public FullTimeEmployee(int employeeId, String name, String email, String position, int level, boolean fullTime, boolean promotion) {
 
-        super(name, employeeId, email, position, level, promotion, fullTime);
+        super(employeeId, name, email, position, level, fullTime, promotion);
     }
 
     // Instance method to create a FullTimeEmployee from a CSV line
     public static FullTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
-        return new FullTimeEmployee(
-            fields[0], 
-            Integer.parseInt(fields[1]), 
+        return new FullTimeEmployee
+                (Integer.parseInt(fields[0]),
+            fields[1],
             fields[2], 
             fields[3], 
-            Boolean.parseBoolean(fields[4]), 
-            Integer.parseInt(fields[5]), 
+            Integer.parseInt(fields[4]),
+            Boolean.parseBoolean(fields[5]),
             Boolean.parseBoolean(fields[6]) 
         );
     }
@@ -47,6 +47,6 @@ public class FullTimeEmployee extends Employee {
 
     @Override
     public String toCSV() {
-        return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + "," + isPromotion() + "," + isFullTime();
+        return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + "," + getLevel() + "," + isFullTime() + "," + isPromotion();
     }
 }

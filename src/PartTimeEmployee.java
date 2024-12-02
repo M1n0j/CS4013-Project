@@ -4,8 +4,8 @@ public class PartTimeEmployee extends Employee {
     private double hoursWorked;
 
     // Constructor for PartTimeEmployee
-    public PartTimeEmployee(String name, int employeeId, String email, String position, int level, boolean promotion, boolean fullTime, double hoursWorked, double hourlyPay) {
-        super(name, employeeId, email, position, level, promotion, fullTime);  // Call superclass constructor
+    public PartTimeEmployee(int employeeId, String name, String email, String position, int level, boolean fullTime, boolean promotion) {
+        super(employeeId, name, email, position, level, promotion, fullTime);  // Call superclass constructor
         this.hoursWorked = hoursWorked;
         this.hourlyPay = hourlyPay;
     }
@@ -29,15 +29,13 @@ public class PartTimeEmployee extends Employee {
     public static PartTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
         return new PartTimeEmployee(
-                fields[1], // name
-                Integer.parseInt(fields[0]), // employeeId
-                fields[2], // email
-                fields[3], // position
-                Integer.parseInt(fields[4]), // level
-                Boolean.parseBoolean(fields[5]), // promotion
-                Boolean.parseBoolean(fields[6]), // fullTime (needs to be correctly parsed from CSV)
-                Double.parseDouble(fields[7]), // hoursWorked
-                Double.parseDouble(fields[8])  // hourlyPay
+                Integer.parseInt(fields[0]),
+                fields[1],
+                fields[2],
+                fields[3],
+                Integer.parseInt(fields[4]),
+                Boolean.parseBoolean(fields[5]),
+                Boolean.parseBoolean(fields[6])
         );
     }
 
@@ -53,6 +51,6 @@ public class PartTimeEmployee extends Employee {
     @Override
     public String toCSV() {
         return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + ","
-                + getLevel() + "," + isFullTime() + "," + isPromotion() + "," + hoursWorked + "," + hourlyPay;
+                + getLevel() + "," + isFullTime() + "," + isPromotion() + ",";
     }
 }
