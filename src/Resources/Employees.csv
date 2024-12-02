@@ -3,7 +3,3 @@ employeeId,name,email,position,level,isFullTime,promotion
 3,Bob Brown,bob.brown@example.com,Assistant Professor,3,TRUE,FALSE
 4,John Doe,john.doe@example.com,Software Engineer,2,true,FALSE
 5,Jane Smith,jane.smith@example.com,Graphic Designer,1,false,FALSE
-
-4,,,,N/A,0,true,false
-8,,,,N/A,0,true,false
-23,, ,,N/A,0,true,false

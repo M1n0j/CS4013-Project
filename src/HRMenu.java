@@ -13,7 +13,7 @@ public class HRMenu {
     public void displayMenu() {
         boolean hrMenuRunning = true;
         while (hrMenuRunning) {
-            System.out.println("\nHuman Resources Menu:");
+            System.out.println("Human Resources Menu:");
             System.out.println("1. Implement Promotion");
             System.out.println("2. Logout");
             System.out.print("Enter your choice: ");

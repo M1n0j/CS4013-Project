@@ -17,7 +17,7 @@ public class AdminMenu {
         boolean adminMenuRunning = true;
         while (adminMenuRunning) {
             try {
-                System.out.println("\nAdmin Menu:");
+                System.out.println("Admin Menu:");
                 System.out.println("1. Add New Employee");
                 System.out.println("2. View Employee Details");
                 System.out.println("3. Remove Employee");

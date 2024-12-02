@@ -15,7 +15,7 @@ public class PartTimeMenu {
     public void displayMenu() {
         boolean partTimeMenuRunning = true;
         while (partTimeMenuRunning) {
-            System.out.println("\nPart-Time Employee Menu:");
+            System.out.println("Part-Time Employee Menu:");
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
@@ -26,13 +26,13 @@ public class PartTimeMenu {
             scanner.nextLine(); // Clear newline character
 
             if (choice == 1) {
-                System.out.println("\nEmployee Details:");
+                System.out.println("Employee Details:");
                 viewMyDetails();
             } else if (choice == 2) {
-                System.out.println("\nMost Recent Payslip:");
+                System.out.println("Most Recent Payslip:");
                 // Display most recent payslip
             } else if (choice == 3) {
-                System.out.println("\nHistorical Payslips:");
+                System.out.println("Historical Payslips:");
                 // Display historical payslips
             } else if (choice == 4) {
                 partTimeMenuRunning = false;
