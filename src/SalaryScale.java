@@ -25,17 +25,24 @@ public class SalaryScale {
         return position + "," + level + "," + salary;
     }
 
-    public SalaryScale fromCSV(String csvLine) {
+    public SalaryScale fromSalaries(String csvLine) {
+        if (csvLine == null || csvLine.trim().isEmpty()) {
+            throw new IllegalArgumentException("CSV line cannot be null or empty: " + csvLine);
+        }
+
         String[] fields = csvLine.split(",");
 
         if (fields.length < 3) {
             throw new IllegalArgumentException("Invalid CSV line for SalaryScale: " + csvLine);
         }
 
-        String position = fields[0];
-        int level = Integer.parseInt(fields[1]);
+        // Parse the salary from the CSV data
         double salary = Double.parseDouble(fields[2]);
 
-        return new SalaryScale(position, level, salary);
+        // Update the current object fields
+        this.salary = salary;
+
+        // Return the current SalaryScale object
+        return this;
     }
 }

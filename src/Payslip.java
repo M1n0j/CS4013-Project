@@ -1,14 +1,32 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Payslip {
     private double netSalary;
     private Deductions deductions;
     private SalaryScale salaryScale;
+    private int salary;
+
 
     public Payslip() {
         this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
         this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
+        readSalaryDataFromCSV("src/Resources/Salaries.csv");
     }
 
+    private void readSalaryDataFromCSV(String csvFilePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+            String line;
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                salaryScale = salaryScale.fromSalaries(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
