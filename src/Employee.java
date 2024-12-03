@@ -12,7 +12,6 @@ public abstract class Employee {
     private boolean promotion;
     public boolean fullTime;
     protected CSVReader csvReader;
-    protected CSVWriter csvWriter;
 
     /**
      * Constructs an Employee object with the specified attributes

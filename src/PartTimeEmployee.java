@@ -37,8 +37,17 @@ public class PartTimeEmployee extends Employee {
      */
     public static PartTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
+
+        int employeeId = 0;
+        try {
+            employeeId = Integer.parseInt(fields[0]);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid employee ID: " + fields[0] + ". Skipping this entry.");
+            return null;
+        }
+
         return new PartTimeEmployee(
-                Integer.parseInt(fields[0]),
+                employeeId,
                 fields[1],
                 fields[2],
                 fields[3],

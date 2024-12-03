@@ -51,7 +51,7 @@ public class HrUser extends User {
                 employee.setPromotion(true);
                 int newLevel = employee.getLevel() + 1;
                 employee.setLevel(newLevel);
-                csvWriter.writeEmployees(employees, "src/Resources/employees.csv");
+                csvWriter.writeEmployees(employees, "src/Resources/Employees.csv");
                 System.out.println("Employee promoted.");
                 return;
             }

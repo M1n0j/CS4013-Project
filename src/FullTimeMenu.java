@@ -199,13 +199,10 @@ public class FullTimeMenu {
                 String[] fields = line.split(",");
                 if (fields.length >= 5) {
 
-                    try {
-                        int employeeId = Integer.parseInt(fields[0].trim());
-                        if (employeeId == userId) {
-                            return Integer.parseInt(fields[4].trim());
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid employee ID format in the CSV file: " + fields[0]);
+
+                    int employeeId = Integer.parseInt(fields[0].trim());
+                    if (employeeId == userId) {
+                        return Integer.parseInt(fields[4].trim());
                     }
                 }
             }
@@ -226,12 +223,18 @@ public class FullTimeMenu {
             String line;
 
             String header = reader.readLine();
-            updatedData.append(header).append("\n");
 
+            if (header == null) {
+                System.err.println("CSV file is empty or cannot be read.");
+                return;
+            }
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(",");
-                if (Integer.parseInt(fields[0]) == userId) {
-                    fields[4] = String.valueOf(newLevel);
+                if (fields.length > 0) {
+                        int employeeId = Integer.parseInt(fields[0]);
+                        if (employeeId == userId) {
+                            fields[4] = String.valueOf(newLevel);
+                        }
                 }
                 updatedData.append(String.join(",", fields)).append("\n");
             }

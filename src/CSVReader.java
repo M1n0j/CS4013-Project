@@ -36,16 +36,15 @@ public class CSVReader {
         List<Employee> employees = new ArrayList<>();
 
 
-        File file = new File("/src/Resources/Employees.csv");
+        File file = new File("src/Resources/Employees.csv");
         if (!file.exists()) {
-            System.err.println("Error: Employee CSV file not found at " + "/src/Resources/Employees.csv");
-            System.err.println("Current working directory: " + System.getProperty("user.dir"));
+            System.err.println("Error: Employee CSV file not found at " + "src/Resources/Employees.csv");
             return employees;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/Employees.csv"))) {
-
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"))) {
             String header = reader.readLine();
+
             if (header == null) {
                 System.err.println("CSV file is empty or cannot be read.");
                 return employees;
@@ -53,10 +52,7 @@ public class CSVReader {
 
             String line;
             while ((line = reader.readLine()) != null) {
-
                 String[] fields = line.split(",");
-
-
                 if (fields.length >= 6) {
                     boolean isFullTime = Boolean.parseBoolean(fields[5]);
                     if (isFullTime) {
@@ -83,7 +79,7 @@ public class CSVReader {
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/user.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/user.csv"))) {
             String line;
 
             reader.readLine();
@@ -106,7 +102,7 @@ public class CSVReader {
     public List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/Salaries.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Salaries.csv"))) {
             reader.readLine();
 
             String line;
