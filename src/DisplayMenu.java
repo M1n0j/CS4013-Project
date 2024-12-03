@@ -20,7 +20,7 @@ public class DisplayMenu {
 
                 if (userIdInput.equalsIgnoreCase("Quit")) {
                     System.out.println("Exiting the system. Goodbye!");
-                    running = false; // Stop the loop and exit
+                    running = false;
                     continue;
                 }
 
