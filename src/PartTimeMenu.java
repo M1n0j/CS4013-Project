@@ -42,7 +42,7 @@ public class PartTimeMenu{
                 System.out.println("Historical Payslips:");
                 // Display historical payslips
             } else if (choice == 4 && isBefore15th) {
-                PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 0, 0);
+                PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 0, 15);
                 partTimeEmployee.inputHoursWorked();
             } else if (choice == 5) {
                 partTimeMenuRunning = false;
