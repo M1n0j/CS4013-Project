@@ -39,7 +39,7 @@ public class PartTimeEmployee extends Employee {
                 + getLevel() + "," + isFullTime() + "," + isPromotion() + ",";
     }
 
-    public void inputHoursWorked() {
+    public void inputHoursWorked(int HoursWorked) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter hours worked for " + getName() + ": ");
         try {

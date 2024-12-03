@@ -6,11 +6,13 @@ public class FullTimeMenu {
     private int userId;
     double grossSalary = 0.0;
     private AdminMenu adminMenu;
+    private PayslipManager payslipManager;
 
 
     public FullTimeMenu(Scanner scanner, int userId) {
         this.scanner = scanner;
         this.userId = userId;
+        this.payslipManager = new PayslipManager();
     }
 
     public void displayMenu() {
@@ -48,11 +50,11 @@ public class FullTimeMenu {
                 viewMyDetails();
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
-                Payslip payslip = new Payslip();
+                Payslip payslip = new Payslip(0);
                 payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
-
+                payslipManager.printEmployeePayslips(String.valueOf(userId));
             } else if (choice == 4) {
                 fullTimeMenuRunning = false;
             } else {

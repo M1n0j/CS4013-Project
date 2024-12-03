@@ -7,10 +7,12 @@ import java.util.Scanner;
 public class PartTimeMenu{
     private Scanner scanner;
     private int userId;
+    private PayslipManager payslipManager;
 
     public PartTimeMenu(Scanner scanner, int userId) {
         this.scanner = scanner;
         this.userId = userId;
+        this.payslipManager = new PayslipManager();
     }
 
     public void displayMenu() {
@@ -36,14 +38,15 @@ public class PartTimeMenu{
                 viewMyDetails();
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
-                Payslip payslip = new Payslip();
+                Payslip payslip = new Payslip(0);
                 payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
-                // Display historical payslips
+                System.out.println("Historical Payslips:");
+                payslipManager.printEmployeePayslips(String.valueOf(userId));
             } else if (choice == 4 && isBefore15th) {
                 PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 40, 15);
-                partTimeEmployee.inputHoursWorked();
+                partTimeEmployee.inputHoursWorked(0);
             } else if (choice == 5) {
                 partTimeMenuRunning = false;
             } else {
