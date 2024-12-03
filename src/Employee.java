@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 
 public abstract class Employee {
     private String name;
@@ -7,7 +6,7 @@ public abstract class Employee {
     private String position;
     private int level;
     private boolean promotion;
-    private boolean fullTime;
+    public boolean fullTime;
     protected CSVReader csvReader;
     protected CSVWriter csvWriter;
 
@@ -80,5 +79,7 @@ public abstract class Employee {
     public abstract double calculateSalary();
 
     public abstract String toCSV();
+
+    public abstract double calculateSalaryForCurrentPeriod();
 }
 

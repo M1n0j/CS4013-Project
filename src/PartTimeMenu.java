@@ -36,7 +36,8 @@ public class PartTimeMenu{
                 viewMyDetails();
             } else if (choice == 2) {
                 System.out.println("Most Recent Payslip:");
-
+                Payslip payslip = new Payslip();
+                payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
                 // Display historical payslips

@@ -55,4 +55,9 @@ public class FullTimeEmployee extends Employee {
     public String toCSV() {
         return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + "," + getLevel() + "," + isFullTime() + "," + isPromotion();
     }
+
+    @Override
+    public double calculateSalaryForCurrentPeriod() {
+        return 0;
+    }
 }

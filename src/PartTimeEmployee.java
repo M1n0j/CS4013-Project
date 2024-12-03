@@ -4,13 +4,11 @@ public class PartTimeEmployee extends Employee {
 
     private double hourlyPay;
     private double hoursWorked;
-    private double partTimeHours;
 
     public PartTimeEmployee(int employeeId, String name, String email, String position, int level, boolean promotion, boolean fullTime, double hoursWorked, double hourlyPay) {
         super(employeeId, name, email, position, level, promotion, fullTime);
         this.hoursWorked = hoursWorked;
         this.hourlyPay = hourlyPay;
-        this.partTimeHours = 0.0;
     }
 
     public static PartTimeEmployee fromCSV(String csvLine) {
@@ -38,7 +36,7 @@ public class PartTimeEmployee extends Employee {
     @Override
     public String toCSV() {
         return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + ","
-                + getLevel() + "," + isFullTime() + "," + isPromotion() + "," + hoursWorked + "," + hourlyPay;
+                + getLevel() + "," + isFullTime() + "," + isPromotion() + ",";
     }
 
     public void inputHoursWorked() {
@@ -50,22 +48,18 @@ public class PartTimeEmployee extends Employee {
                 System.out.println("Hours worked can't be 0 or negative!");
                 return;
             }
-            this.partTimeHours += hours;
+            this.hoursWorked += hours;  // Update the hoursWorked field
             System.out.println(hours + " hours added to total hours worked.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! No hours added.");
         }
     }
 
-    public double getCurrentPayHours() {
-        return this.partTimeHours;
-    }
 
-
+    @Override
     public double calculateSalaryForCurrentPeriod() {
-        double grossSalary = partTimeHours * hourlyPay;
+        double grossSalary = hoursWorked * hourlyPay;
         Deductions deductions = new Deductions();
         return deductions.calcDeductions(grossSalary);
     }
-
 }

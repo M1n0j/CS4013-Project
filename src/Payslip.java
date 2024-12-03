@@ -7,15 +7,24 @@ public class Payslip {
     private Deductions deductions;
     private SalaryScale salaryScale;
     private int salary;
+    private PartTimeEmployee partTimeEmployee;
 
 
     public Payslip() {
         this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
+
         readSalaryDataFromCSV("src/Resources/Salaries.csv");
-        this.deductions.calcDeductions(salaryScale.getSalary());
-        this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
+        if (salaryScale.getSalary() > 0) {
+            this.deductions.calcDeductions(salaryScale.getSalary());
+            this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
+        } else if (salaryScale.getSalary() < 0 && partTimeEmployee != null) {
+            double grossSalary = partTimeEmployee.calculateSalaryForCurrentPeriod();
+            this.deductions.calcDeductions(grossSalary);
+            this.netSalary = grossSalary - deductions.getTotalDeductions();
+        }
     }
+
 
     private void readSalaryDataFromCSV(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
