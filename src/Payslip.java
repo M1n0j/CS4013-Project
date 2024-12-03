@@ -18,7 +18,7 @@ public class Payslip {
         if (salaryScale.getSalary() > 0) {
             this.deductions.calcDeductions(salaryScale.getSalary());
             this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
-        } else if (salaryScale.getSalary() == 0 && partTimeEmployee != null) {
+        } else if (salaryScale.getSalary() == 0) {
             double grossSalary = partTimeEmployee.calculateSalaryForCurrentPeriod();
             this.deductions.calcDeductions(grossSalary);
             this.netSalary = grossSalary - deductions.getTotalDeductions();
