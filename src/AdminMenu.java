@@ -141,6 +141,24 @@ public class AdminMenu {
                 System.out.println("Password cannot be empty. Please try again.");
             }
 
+            String role;
+            while (true) {
+                System.out.print("Set Role type for the employee: ");
+                String roleInput = scanner.nextLine().toLowerCase();
+
+                if (roleInput.equals("part-time") || roleInput.equals("full-time") || roleInput.equals("admin") || roleInput.equals("hr")) {
+                    role = roleInput;
+                    if (roleInput.equals("full-time") || roleInput.equals("admin") || roleInput.equals("hr")) {
+                        isFullTime = true;
+                    } else {
+                        isFullTime = false;
+                    }
+                    break;
+                } else {
+                    System.out.println("Role type must be Admin, Full-Time, or Part-Time. Please try again.");
+                }
+            }
+
 
             Integer employeeId = null;
             while (true) {
@@ -194,7 +212,7 @@ public class AdminMenu {
             }
 
 
-            admin.addEmployee(employee, isFullTime, "N/A", currentPoint, password, employeeId);
+            admin.addEmployee(employee, isFullTime, "N/A", currentPoint, password, employeeId, role);
             System.out.println("Employee added successfully!");
 
         } catch (IOException e) {
