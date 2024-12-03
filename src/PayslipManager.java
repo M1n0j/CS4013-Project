@@ -57,7 +57,7 @@ public class PayslipManager {
             double netSalary = Double.parseDouble(values[8]);
             String payPeriod = values[3];
 
-            System.out.println("Pay Period: " + payPeriod);
+            System.out.println("\nPay Period: " + payPeriod);
             System.out.println("Gross Salary: €" + grossSalary);
             System.out.println("USC: €" + usc);
             System.out.println("PRSI: €" + prsi);
