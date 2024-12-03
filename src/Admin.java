@@ -11,7 +11,7 @@ public class Admin {
 
     public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId, String role) throws IOException {;
         String employeeCSVLine = employee.toCSV();
-        String userCSVLine = String.format("%d,%s,%s", employee.getEmployeeId(), password, role);
+        String userCSVLine = String.format("%d,%s,%s",employee.getEmployeeId(), password, role);
 
 
         writeToCSV(EmployeesCsv, EmployeesCsvHeader, employeeCSVLine);
