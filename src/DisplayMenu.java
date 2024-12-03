@@ -15,9 +15,16 @@ public class DisplayMenu {
             System.out.println("-----Welcome to the University Of Limerick Payroll Service-----");
             int userId;
             try {
-                System.out.println("Enter your UserID:");
-                userId = scanner.nextInt();
-                scanner.nextLine();
+                System.out.println("Enter your UserID (or type 'Quit' to exit):");
+                String userIdInput = scanner.nextLine();
+
+                if (userIdInput.equalsIgnoreCase("Quit")) {
+                    System.out.println("Exiting the system. Goodbye!");
+                    running = false; // Stop the loop and exit
+                    continue;
+                }
+
+                userId = Integer.parseInt(userIdInput);
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input! UserID must be a number!");
                 scanner.nextLine();
