@@ -29,7 +29,7 @@ public class PayslipManager {
                 String[] values = line.split(",");
 
                 if (values.length < 9) {
-                    continue
+                    continue;
                 }
 
                 String empId = values[1];
