@@ -28,8 +28,6 @@ public class AdminMenu {
      * Displays the admin menu and handles user input for various admin operations.
      */
 
-
-
     public void displayMenu() {
         boolean adminMenuRunning = true;
         while (adminMenuRunning) {

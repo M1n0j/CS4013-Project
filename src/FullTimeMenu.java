@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Scanner;
-
+/**
+ * Menu interface for full-time employees, providing options to view details, payslips, and manage promotions.
+ */
 public class FullTimeMenu {
     private Scanner scanner;
     private int userId;
@@ -8,12 +10,22 @@ public class FullTimeMenu {
     private AdminMenu adminMenu;
     private PayslipManager payslipManager;
 
+    /**
+     * Constructor to initialize the FullTimeMenu with the user ID and scanner
+     * @param scanner The scanner object for user input
+     * @param userId  The ID of the logged-in full-time employee
+     */
 
     public FullTimeMenu(Scanner scanner, int userId) {
         this.scanner = scanner;
         this.userId = userId;
         this.payslipManager = new PayslipManager();
     }
+
+
+    /**
+     * Displays the menu for full-time employees and handles user input for various actions
+     */
 
     public void displayMenu() {
 
@@ -64,7 +76,9 @@ public class FullTimeMenu {
             }
         }
     }
-
+    /**
+     * Displays the details of the current logged-in employee by reading from the employee csv
+     */
     private void viewMyDetails() {
         try {
 
@@ -98,6 +112,10 @@ public class FullTimeMenu {
         }
     }
 
+    /**
+     * Checks if the current logged-in employee has a pending promotion status
+     * @return True if the promotion status is true, otherwise false
+     */
     private boolean checkPromotionStatus() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"));
@@ -123,6 +141,10 @@ public class FullTimeMenu {
 
         return false;
     }
+    /**
+     * Updates the promotion status of the logged-in employee in the employee csv
+     * @param newStatus The new promotion status to set
+     */
     private void updatePromotion(boolean newStatus) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"));
@@ -149,6 +171,11 @@ public class FullTimeMenu {
         }
     }
 
+    /**
+     * Increments the pay level of the logged-in employee if they are eligible
+     * @param incrementLevel Whether to increment the level
+     * @return The new level of the employee
+     */
     private int addLevel(boolean incrementLevel) {
         int currentLevel = currentLevel();
 
@@ -159,7 +186,10 @@ public class FullTimeMenu {
         return currentLevel;
     }
 
-
+    /**
+     * Retrieves the current pay level of the logged-in employee
+     * @return The current pay level of the employee
+     */
     private int currentLevel() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
@@ -186,6 +216,10 @@ public class FullTimeMenu {
         }
         return 0;
     }
+    /**
+     * Updates the pay level of the logged-in employee in the employee csv
+     * @param newLevel The new pay level to set
+     */
 
     private void upEmployeeLevel(int newLevel) {
         try {

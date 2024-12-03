@@ -1,13 +1,27 @@
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents an HR user in the system with the ability to manage employee promotions
+ * Extends the User class to provide HR-specific functionality
+ */
 public class HrUser extends User {
 
-
+    /**
+     * Constructs an HrUser object with the specified employee ID and password
+     * @param employeeID The unique identifier for the HR user
+     * @param password   The password for the HR user
+     */
     public HrUser(String employeeID, String password) {
         super(employeeID, password);
     }
 
+    /**
+     * Promotes an employee by increasing their level and marking them as eligible for promotion
+     * Updates the employee records in the csv file
+     * @param inputScanner The scanner object used for user input
+     * @throws IllegalArgumentException If the scanner is null
+     */
     public void promoteEmployee(Scanner inputScanner) {
         if (inputScanner == null) {
             System.out.println("Invalid input scanner.");

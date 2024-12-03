@@ -1,13 +1,30 @@
 import java.util.List;
 
+/**
+ * Represents a full-time employee in the organization
+ * Extends the Employee class to provide specific functionality for full-time employees
+ */
 public class FullTimeEmployee extends Employee {
 
-
+    /**
+     * Constructs a FullTimeEmployee object with the specified attributes
+     * @param employeeId The unique identifier for the employee
+     * @param name       The name of the employee
+     * @param email      The email address of the employee
+     * @param position   The position or job title of the employee
+     * @param fullTime   Indicates if the employee is full-time
+     * @param promotion  Indicates if the employee is eligible for promotion
+     */
     public FullTimeEmployee(int employeeId, String name, String email, String position, int level, boolean fullTime, boolean promotion) {
 
         super(employeeId, name, email, position, level, fullTime, promotion);
     }
 
+    /**
+     * Parses a csv line to create a FullTimeEmployee object
+     * @param csvLine The csv line containing employee details
+     * @return A FullTimeEmployee object created from the csv line
+     */
     public static FullTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
         return new FullTimeEmployee
@@ -21,43 +38,26 @@ public class FullTimeEmployee extends Employee {
         );
     }
 
-    @Override
-    public double calculateSalary() {
-        List<SalaryScale> salaryScaleList = csvReader.readSalaryScales();
 
-        double grossSalary = 0.0;
 
-        for (SalaryScale s : salaryScaleList) {
-            if (s.getPosition().equalsIgnoreCase(this.getPosition()) && s.getLevel() == this.getLevel()) {
-                grossSalary = s.getSalary();
-                System.out.println("Match found: Gross Salary = " + grossSalary);
-                break;
-            }
-        }
-
-        if (grossSalary == 0.0) {
-            System.err.println("Error: No match found for Position: " + this.getPosition() + ", Level: " + this.getLevel());
-            return 0.0; // No salary found, returning 0.
-        }
-
-        Deductions deductions = new Deductions();
-        double totalDeductions = deductions.calcDeductions(grossSalary);
-
-        double netSalary = grossSalary - totalDeductions;
-        System.out.println("Gross Salary: " + grossSalary);
-        System.out.println("Total Deductions: " + totalDeductions);
-        System.out.println("Net Salary: " + netSalary);
-
-        return netSalary;
-    }
-
+    /**
+     * Converts the FullTimeEmployee object to a csv format string
+     * @return A csv representation of the FullTimeEmployee details
+     */
     @Override
     public String toCSV() {
         return getEmployeeId() + "," + getName() + "," + getEmail() + "," + getPosition() + "," + getLevel() + "," + isFullTime() + "," + isPromotion();
     }
 
+    /**
+     * Calculates the salary for the current pay period for the full-time employee
+     * This method is not yet implemented and currently returns 0
+     * @return The salary for the current pay period, currently 0
+     */
     @Override
     public double calculateSalaryForCurrentPeriod() {
         return 0;
     }
+
+
 }

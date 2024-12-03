@@ -5,8 +5,18 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Main menu display class for the payroll service
+ * Handles user authentication and role-based menu navigation
+ */
 public class DisplayMenu {
 
+
+    /**
+     * The main method to run the DisplayMenu application
+     * Prompts the user for UserID and password, validates credentials, and redirects to role-specific menus
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;

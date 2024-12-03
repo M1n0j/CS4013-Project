@@ -4,17 +4,30 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+
+/**
+ * Represents the menu interface for part-time employees
+ * Provides options to view employee details, payslips, and work claims
+ */
 public class PartTimeMenu{
     private Scanner scanner;
     private int userId;
     private PayslipManager payslipManager;
 
+    /**
+     * Constructs a PartTimeMenu object with the specified scanner and user ID
+     * @param scanner The scanner object for user input
+     * @param userId  The ID of the currently logged-in user
+     */
     public PartTimeMenu(Scanner scanner, int userId) {
         this.scanner = scanner;
         this.userId = userId;
         this.payslipManager = new PayslipManager();
     }
 
+    /**
+     * Displays the menu options for part-time employees and handles user interactions
+     */
     public void displayMenu() {
         boolean partTimeMenuRunning = true;
         boolean isSecondFriday = LocalDate.now().getDayOfMonth() < 15;

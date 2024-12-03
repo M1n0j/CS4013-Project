@@ -2,11 +2,24 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for reading data from various csv files
+ * This class includes methods to read employee, user, and salary scale data into their object lists
+ */
+
 public class CSVReader {
     private String employeeCSVPath;
     private String userCSVPath;
     private String salaryCSVPath;
 
+
+
+    /**
+     * Constructs a CSVReader object with the specified paths for employee, user, and salary csv files
+     * @param employeeCSVPath The file path for the employee csv file
+     * @param userCSVPath     The file path for the user csv file
+     * @param salaryCSVPath   The file path for the salary csv file
+     */
 
     public CSVReader(String employeeCSVPath, String userCSVPath, String salaryCSVPath) {
         this.employeeCSVPath = employeeCSVPath;
@@ -15,8 +28,9 @@ public class CSVReader {
     }
 
     /**
-     * Reads employee data from the employee CSV file and returns a list of Employee objects.
-     * Includes file existence check and improved error handling.
+     * Reads employee data from the employee csv file and returns a list of Employee objects
+     * Differentiates between full-time and part-time employees based on the "isFullTime" field
+     * @return A list of Employee objects read from the csv file. Returns an empty list if the file is missing or invalid.
      */
     public List<Employee> readEmployees(String s) {
         List<Employee> employees = new ArrayList<>();
@@ -61,6 +75,11 @@ public class CSVReader {
         return employees;
     }
 
+    /**
+     * Reads user data from the user csv file and returns a list of User objects
+     * @return A list of User objects read from the csv file. Returns an empty list if the file is missing or invalid
+     */
+
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
 
@@ -78,6 +97,11 @@ public class CSVReader {
 
         return users;
     }
+
+    /**
+     * Reads salary scale data from the salary csv file and returns a list of SalaryScale objects
+     * @return A list of SalaryScale objects read from the csv file. Returns an empty list if the file is missing or invalid
+     */
 
     public List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
