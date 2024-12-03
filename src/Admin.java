@@ -1,8 +1,8 @@
 import java.io.*;
 
 public class Admin {
-    public final String EmployeesCsv = "src/resources/employees.csv";
-    public final String UsersCSV = "src/resources/user.csv";
+    public final String EmployeesCsv = "src/Resources/employees.csv";
+    public final String UsersCSV = "src/Resources/user.csv";
 
 
     public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime, promotion";
@@ -35,26 +35,4 @@ public class Admin {
         }
     }
 
-
-    private int generateNewEmployeeId() throws IOException {
-        int maxId = 0;
-        File file = new File(EmployeesCsv);
-
-        if (!file.exists()) {
-            return 1;
-        }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                int currentId = Integer.parseInt(fields[0]);
-                maxId = Math.max(maxId, currentId);
-            }
-        }
-
-        return maxId + 1;
-    }
 }
