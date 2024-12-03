@@ -12,8 +12,9 @@ public class Payslip {
     public Payslip() {
         this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
-        this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
         readSalaryDataFromCSV("src/Resources/Salaries.csv");
+        this.deductions.calcDeductions(salaryScale.getSalary());
+        this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
     }
 
     private void readSalaryDataFromCSV(String csvFilePath) {
@@ -21,12 +22,14 @@ public class Payslip {
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
+
                 salaryScale = salaryScale.fromSalaries(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
