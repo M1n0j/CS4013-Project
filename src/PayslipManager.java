@@ -2,12 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the operations related to payslips, including reading and writing payslips to a csv file
+ */
 public class PayslipManager {
     private static final String FILE_PATH = "src/Resources/Payslips.csv";
 
 
     private static List<Payslip> payslips = new ArrayList<>();
 
+    /**
+     * Writes a payslip to the csv file.
+     * @param payslip The Payslip object to be written to the CSV file
+     */
     public static void writePayslipToCSV(Payslip payslip) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(payslip.getEmployeeId() + "," + payslip.toCSV() + "\n");
@@ -18,6 +25,11 @@ public class PayslipManager {
     }
 
 
+    /**
+     * Reads payslips for a specific employee from the CSV file.
+     * @param employeeId The ID of the employee whose payslips are to be read.
+     * @return A list of Payslip objects for the specified employee.
+     */
     public static List<Payslip> readPayslipsForEmployee(String employeeId) {
         List<Payslip> employeePayslips = new ArrayList<>();
 
@@ -48,6 +60,11 @@ public class PayslipManager {
         return employeePayslips;
     }
 
+    /**
+     * Parses a payslip from a CSV record.
+     * @param values The array of strings representing the values of a payslip record.
+     * @return A Payslip object, or null if parsing fails.
+     */
     private static Payslip parsePayslipFromCSV(String[] values) {
         try {
             double grossSalary = Double.parseDouble(values[4]);
@@ -72,6 +89,10 @@ public class PayslipManager {
         return null;
     }
 
+    /**
+     * Prints all payslips for a specific employee.
+     * @param employeeId The ID of the employee whose payslips will be printed.
+     */
     public void printEmployeePayslips(String employeeId) {
         List<Payslip> employeePayslips = readPayslipsForEmployee(employeeId);
 
@@ -87,6 +108,10 @@ public class PayslipManager {
     }
 
 
+    /**
+     * Adds a payslip to the internal list of payslips.
+     * @param payslip The Payslip object to be added.
+     */
     public static void addPayslip(Payslip payslip) {
         payslips.add(payslip);
     }
