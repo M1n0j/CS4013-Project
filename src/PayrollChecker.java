@@ -9,7 +9,7 @@ public class PayrollChecker {
     private static final String PAYSLIPS_FILE_PATH = "src/Resources/Payslips.csv";
 
 
-    public void checker(String[] args) {
+    public void checker() {
         LocalDate today = LocalDate.now();
 
 
@@ -36,7 +36,7 @@ public class PayrollChecker {
     }
 
 
-    public static boolean isPayrollDay(LocalDate date) {
+    public boolean isPayrollDay(LocalDate date) {
         return date.getDayOfMonth() == 25;
     }
 
@@ -91,9 +91,8 @@ public class PayrollChecker {
         return employees;
     }
 
-    // Method to generate a payslip for an employee on payday
+
     private Payslip generatePayslip(Employee employee, LocalDate payday) {
-        // Generate payslip based on the employee data (You can adapt this as per your logic)
         Payslip payslip = new Payslip(employee.getEmployeeId());
         payslip.setEmployeeId(employee.getEmployeeId());
         payslip.setGrossSalary();
@@ -113,10 +112,5 @@ public class PayrollChecker {
         } catch (IOException e) {
             System.err.println("Error writing to CSV: " + e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        PayrollChecker payrollChecker = new PayrollChecker();
-        payrollChecker.checker(args);
     }
 }
