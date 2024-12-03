@@ -17,13 +17,13 @@ public class PartTimeMenu{
 
     public void displayMenu() {
         boolean partTimeMenuRunning = true;
-        boolean isBefore15th = LocalDate.now().getDayOfMonth() < 15;
+        boolean isSecondFriday = LocalDate.now().getDayOfMonth() < 15;
         while (partTimeMenuRunning) {
             System.out.println("\nPart-Time Employee Menu:");
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
-            if (isBefore15th) {
+            if (isSecondFriday) {
                 System.out.println("4. Work Claim");
             }
 
@@ -44,7 +44,7 @@ public class PartTimeMenu{
                 System.out.println("Historical Payslips:");
                 System.out.println("Historical Payslips:");
                 payslipManager.printEmployeePayslips(String.valueOf(userId));
-            } else if (choice == 4 && isBefore15th) {
+            } else if (choice == 4 && isSecondFriday) {
                 PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 40, 15);
                 partTimeEmployee.inputHoursWorked(0);
             } else if (choice == 5) {
