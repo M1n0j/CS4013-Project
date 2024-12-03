@@ -18,8 +18,6 @@ public class PayrollChecker {
 
     /**
      * Main method to perform payroll checks and generate payslips.
-     *
-     * @param arg Command-line arguments (not used in this implementation).
      */
     public void checker() {
         LocalDate today = LocalDate.now();
@@ -51,7 +49,7 @@ public class PayrollChecker {
      * Checks if the given date is the payroll day (25th of the month).
      *
      * @param date The date to check.
-     * @return {@code true} if the date is the 25th, {@code false} otherwise.
+     * @return true if the date is the 25th, false otherwise.
      */
     public static boolean isPayrollDay(LocalDate date) {
         return date.getDayOfMonth() == 25;
@@ -61,7 +59,7 @@ public class PayrollChecker {
      * Checks if the given date is the second Friday of the month.
      *
      * @param date The date to check.
-     * @return {@code true} if the date is the second Friday of the month, {@code false} otherwise.
+     * @return true if the date is the second Friday of the month, false otherwise.
      */
     public static boolean isSecondFriday(LocalDate date) {
         LocalDate firstDayOfMonth = date.withDayOfMonth(1);

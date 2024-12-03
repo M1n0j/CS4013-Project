@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+/**
+ * Represents a payslip for an employee, including salary details, deductions, and net pay.
+ * Supports both full-time and part-time employees.
+ */
 
 public class Payslip {
     private double netSalary;
@@ -11,7 +15,10 @@ public class Payslip {
     private int employeeId;
     private String payPeriod;
 
-    // Constructor to initialize Payslip with employeeId and calculate salary based on the available data
+    /**
+     * Constructs a Payslip object for a specific employee by calculating salary and deductions
+     * @param employeeId The unique identifier for the employee
+     */
     public Payslip(int employeeId) {
         this.employeeId = employeeId;
         this.salaryScale = new SalaryScale("", 0, 0);
@@ -30,7 +37,10 @@ public class Payslip {
         }
     }
 
-    // Method to read salary data from the provided CSV file
+    /**
+     * Reads salary data from a csv file and updates the salary scale for the employee
+     * @param csvFilePath The file path of the salary data csv file
+     */
     private void readSalaryDataFromCSV(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -44,14 +54,26 @@ public class Payslip {
     }
 
     // Getter and Setter Methods
+    /**
+     * Gets the employee ID associated with this payslip
+     * @return The employee ID
+     */
     public int getEmployeeId() {
         return employeeId;
     }
 
+    /**
+     * Sets the employee ID for this payslip
+     * @param employeeId The employee ID to set
+     */
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 
+    /**
+     * Gets the net salary for this payslip
+     * @return The net salary
+     */
     public double getNetSalary() {
         return netSalary;
     }
@@ -60,47 +82,90 @@ public class Payslip {
         this.netSalary = netSalary;
     }
 
+    /**
+     * Gets the deductions associated with this payslip
+     * @return The deductions object
+     */
     public Deductions getDeductions() {
         return deductions;
     }
 
+    /**
+     * Sets the deductions for this payslip
+     * @param deductions The deductions object to set
+     */
     public void setDeductions(Deductions deductions) {
         this.deductions = deductions;
     }
 
+    /**
+     * Gets the salary scale for this payslip.
+     *
+     * @return The salary scale object.
+     */
     public SalaryScale getSalaryScale() {
         return salaryScale;
     }
 
+    /**
+     * Sets the salary scale for this payslip
+     * @param salaryScale The salary scale object to set
+     */
     public void setSalaryScale(SalaryScale salaryScale) {
         this.salaryScale = salaryScale;
     }
 
+
+    /**
+     * Gets the gross salary for this payslip
+     * @return The gross salary
+     */
     public int getSalary() {
         return salary;
     }
 
+    /**
+     * Sets the gross salary for this payslip
+     * @param salary The gross salary to set
+     */
     public void setSalary(int salary) {
         this.salary = salary;
     }
 
+    /**
+     * Gets the part-time employee object associated with this payslip
+     * @return The PartTimeEmployee object
+     */
     public PartTimeEmployee getPartTimeEmployee() {
         return partTimeEmployee;
     }
-
+    /**
+     * Sets the part-time employee object for this payslip
+     * @param partTimeEmployee The PartTimeEmployee object to set
+     */
     public void setPartTimeEmployee(PartTimeEmployee partTimeEmployee) {
         this.partTimeEmployee = partTimeEmployee;
     }
 
+    /**
+     * Gets the pay period for this payslip
+     * @return The pay period
+     */
     public String getPayPeriod() {
         return payPeriod;
     }
 
+    /**
+     * Sets the pay period for this payslip
+     * @param payPeriod The pay period to set
+     */
     public void setPayPeriod(String payPeriod) {
         this.payPeriod = payPeriod;
     }
 
-    // Method to print the payslip
+    /**
+     * Prints the details of this payslip, including gross salary, deductions, and net salary.
+     */
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
         if (salaryScale.getSalary() > 0) {
@@ -117,7 +182,10 @@ public class Payslip {
         System.out.println("-------------------");
     }
 
-    // Method to return payslip data as CSV
+    /**
+     * Returns a CSV string representation of this payslip
+     * @return A CSV string containing gross salary, deductions, and net salary
+     */
     public String toCSV() {
         return String.format("%.2f", salaryScale.getSalary()) + "," +
                 String.format("%.2f", deductions.getPrsi()) + "," +
