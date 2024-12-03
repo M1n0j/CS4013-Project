@@ -1,4 +1,2 @@
 payslipId, employeeId, name, payPeriod, grossPay, usc, prsi, incomeTax, netPay
 
-7,,,,N/A,0,true
-7,,,,N/A,0,true

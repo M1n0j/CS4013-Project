@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 
 public class Payslip {
     private double grossSalary;

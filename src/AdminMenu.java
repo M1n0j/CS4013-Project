@@ -190,7 +190,7 @@ public class AdminMenu {
                     }
                 }
 
-                employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
+                employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true, 0, 0);
             }
 
 
