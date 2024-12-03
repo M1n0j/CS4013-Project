@@ -24,13 +24,16 @@ public class Admin {
         boolean fileExists = file.exists();
 
         if (!fileExists) {
-            try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
-                writer.println(header);
-                writer.println(dataLine);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+                writer.write(header);
+                writer.newLine();
+                writer.write(dataLine);
+                writer.newLine();
             }
         } else {
-            try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
-                writer.println(dataLine);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+                writer.write(dataLine);
+                writer.newLine();
             }
         }
     }
