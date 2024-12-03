@@ -9,7 +9,9 @@ public class Payslip {
     private int salary;
     private PartTimeEmployee partTimeEmployee;
     private int employeeId;
+    private String payPeriod;
 
+    // Constructor to initialize Payslip with employeeId and calculate salary based on the available data
     public Payslip(int employeeId) {
         this.employeeId = employeeId;
         this.salaryScale = new SalaryScale("", 0, 0);
@@ -28,23 +30,77 @@ public class Payslip {
         }
     }
 
+    // Method to read salary data from the provided CSV file
     private void readSalaryDataFromCSV(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
-            br.readLine();
+            br.readLine(); // Skip the header line
             while ((line = br.readLine()) != null) {
-                salaryScale = salaryScale.fromSalaries(line);
+                salaryScale = salaryScale.fromSalaries(line); // Assuming the fromSalaries method is available
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Add the method to return employee ID
+    // Getter and Setter Methods
     public int getEmployeeId() {
-        return this.employeeId;
+        return employeeId;
     }
 
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public double getNetSalary() {
+        return netSalary;
+    }
+
+    public void setNetSalary() {
+        this.netSalary = netSalary;
+    }
+
+    public Deductions getDeductions() {
+        return deductions;
+    }
+
+    public void setDeductions(Deductions deductions) {
+        this.deductions = deductions;
+    }
+
+    public SalaryScale getSalaryScale() {
+        return salaryScale;
+    }
+
+    public void setSalaryScale(SalaryScale salaryScale) {
+        this.salaryScale = salaryScale;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public PartTimeEmployee getPartTimeEmployee() {
+        return partTimeEmployee;
+    }
+
+    public void setPartTimeEmployee(PartTimeEmployee partTimeEmployee) {
+        this.partTimeEmployee = partTimeEmployee;
+    }
+
+    public String getPayPeriod() {
+        return payPeriod;
+    }
+
+    public void setPayPeriod(String payPeriod) {
+        this.payPeriod = payPeriod;
+    }
+
+    // Method to print the payslip
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
         if (salaryScale.getSalary() > 0) {
@@ -61,6 +117,7 @@ public class Payslip {
         System.out.println("-------------------");
     }
 
+    // Method to return payslip data as CSV
     public String toCSV() {
         return String.format("%.2f", salaryScale.getSalary()) + "," +
                 String.format("%.2f", deductions.getPrsi()) + "," +
@@ -71,4 +128,19 @@ public class Payslip {
                 String.format("%.2f", netSalary);
     }
 
+    public void setGrossSalary() {
+        return;
+    }
+
+    public void setIncomeTax() {
+        return;
+    }
+
+    public void setPrsi() {
+        return;
+    }
+
+    public void setUsc() {
+        return;
+    }
 }
