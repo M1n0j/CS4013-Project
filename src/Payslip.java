@@ -13,6 +13,7 @@ public class Payslip {
     public Payslip() {
         this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
+        this.partTimeEmployee = new PartTimeEmployee(0,"","","",0,false,false,40,15);
 
         readSalaryDataFromCSV("src/Resources/Salaries.csv");
         if (salaryScale.getSalary() > 0) {
@@ -42,7 +43,11 @@ public class Payslip {
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
-        System.out.println("Gross Salary: €" + String.format("%.2f",salaryScale.getSalary()));
+        if (salaryScale.getSalary() > 0) {
+            System.out.println("Gross Salary: €" + String.format("%.2f", salaryScale.getSalary()));
+        } else if (salaryScale.getSalary() == 0) {
+            System.out.println("Gross Salary: €" + String.format("%.2f", partTimeEmployee.calculateSalaryForCurrentPeriod()));
+        }
         System.out.println("PRSI: €" + String.format("%.2f", this.deductions.getPrsi()));
         System.out.println("USC: €" + String.format("%.2f", this.deductions.getUsc()));
         System.out.println("Income Tax: €" + String.format("%.2f", this.deductions.getIncomeTax()));
