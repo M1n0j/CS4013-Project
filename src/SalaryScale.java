@@ -57,7 +57,7 @@ public class SalaryScale {
      * @throws IllegalArgumentException if the csv line is null, empty, or improperly formatted
      */
     public SalaryScale fromSalaries(String csvLine) {
-        if (csvLine == null || csvLine.trim().isEmpty()) {
+        if (csvLine == null || csvLine.isEmpty()) {
             throw new IllegalArgumentException("CSV line cannot be null or empty: " + csvLine);
         }
 
