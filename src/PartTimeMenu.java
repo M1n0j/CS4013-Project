@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PartTimeMenu{
@@ -14,12 +15,16 @@ public class PartTimeMenu{
 
     public void displayMenu() {
         boolean partTimeMenuRunning = true;
+        boolean isBefore15th = LocalDate.now().getDayOfMonth() < 15;
         while (partTimeMenuRunning) {
             System.out.println("\nPart-Time Employee Menu:");
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
-            System.out.println("4. Input Hours");
+            if (isBefore15th) {
+                System.out.println("4. Work Claim");
+            }
+
             System.out.println("5. Logout");
             System.out.print("Enter your choice: ");
 
@@ -35,9 +40,9 @@ public class PartTimeMenu{
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
                 // Display historical payslips
-            } else if (choice == 4) {
-                PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0,"","","",0,false,false,0,0);
-               partTimeEmployee.inputHoursWorked();
+            } else if (choice == 4 && isBefore15th) {
+                PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 0, 0);
+                partTimeEmployee.inputHoursWorked();
             } else if (choice == 5) {
                 partTimeMenuRunning = false;
             } else {
