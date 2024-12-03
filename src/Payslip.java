@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class Payslip {
     private double grossSalary;
@@ -7,15 +8,8 @@ public class Payslip {
     public Payslip(double grossSalary) {
         this.grossSalary = grossSalary;
         this.deductions = new Deductions();
-        calculateDeductions();
         this.netSalary = grossSalary - deductions.getTotalDeductions();
     }
-
-    public void calculateDeductions() {
-        deductions.calcDeductions(grossSalary);
-    }
-
-
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
@@ -30,14 +24,15 @@ public class Payslip {
     }
 
     public String toCSV() {
-        
+
         return String.format("%.2f", grossSalary) + "," +
-           String.format("%.2f", deductions.getPrsi()) + "," +
-           String.format("%.2f", deductions.getUsc()) + "," +
-           String.format("%.2f", deductions.getIncomeTax()) + "," +
-           String.format("%.2f", deductions.getUnionFee()) + "," +
-           String.format("%.2f", deductions.getTotalDeductions()) + "," +
-           String.format("%.2f", netSalary);
+                String.format("%.2f", deductions.getPrsi()) + "," +
+                String.format("%.2f", deductions.getUsc()) + "," +
+                String.format("%.2f", deductions.getIncomeTax()) + "," +
+                String.format("%.2f", deductions.getUnionFee()) + "," +
+                String.format("%.2f", deductions.getTotalDeductions()) + "," +
+                String.format("%.2f", netSalary);
 
     }
+
 }

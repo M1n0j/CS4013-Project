@@ -24,13 +24,10 @@ public class FullTimeEmployee extends Employee {
     @Override
     public double calculateSalary() {
         List<SalaryScale> salaryScaleList = csvReader.readSalaryScales();
-        System.out.println("Loaded " + salaryScaleList.size() + " salary records.");
 
         double grossSalary = 0.0;
-        System.out.println("Attempting to match Position: " + this.getPosition() + ", Level: " + this.getLevel());
 
         for (SalaryScale s : salaryScaleList) {
-            System.out.println("Checking Position: " + s.getPosition() + ", Level: " + s.getLevel());
             if (s.getPosition().equalsIgnoreCase(this.getPosition()) && s.getLevel() == this.getLevel()) {
                 grossSalary = s.getSalary();
                 System.out.println("Match found: Gross Salary = " + grossSalary);

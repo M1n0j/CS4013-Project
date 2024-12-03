@@ -25,7 +25,7 @@ public class SalaryScale {
         return position + "," + level + "," + salary;
     }
 
-    public static SalaryScale fromCSV(String csvLine) {
+    public SalaryScale fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
 
         if (fields.length < 3) {
