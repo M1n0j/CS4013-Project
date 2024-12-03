@@ -179,35 +179,6 @@ public class AdminMenu {
             if (isFullTime) {
                 employee = new FullTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
             } else {
-                while (true) {
-                    double hourlyPay;
-                    System.out.print("Hourly Pay: ");
-                    try {
-                        hourlyPay = Double.parseDouble(scanner.nextLine().trim());
-                        if (hourlyPay > 0) {
-                            break;
-                        } else {
-                            System.out.println("Hourly pay must be positive. Please try again.");
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Please enter a numeric value.");
-                    }
-                }
-                while (true) {
-                    double hoursWorked;
-                    System.out.print("Hours Worked per week: ");
-                    try {
-                        hoursWorked = Double.parseDouble(scanner.nextLine().trim());
-                        if (hoursWorked > 0) {
-                            break;
-                        } else {
-                            System.out.println("Hours worked must be positive. Please try again.");
-                        }
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Please enter a numeric value.");
-                    }
-                }
-
                 employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true, 0, 0);
             }
 
@@ -334,39 +305,38 @@ public class AdminMenu {
      */
 
 
-        public String[] checkPosition(String fileName, String position) {
-            File file = new File(fileName);
+    public String[] checkPosition(String fileName, String position) {
+        File file = new File(fileName);
 
 
-            if (!file.exists()) {
-                System.out.println("Error: File not found. Please contact the administrator.");
-                return null;
-            }
-
-            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-                String line;
-                boolean isHeader = true;
-
-                while ((line = br.readLine()) != null) {
-
-                    if (isHeader) {
-                        isHeader = false;
-                        continue;
-                    }
-
-
-                    String[] details = line.split(",");
-
-                    if (details[0].equalsIgnoreCase(position)) {
-                        return details;
-                    }
-                }
-            } catch (IOException e) {
-                System.err.println("Error reading the file: " + e.getMessage());
-            }
-
+        if (!file.exists()) {
+            System.out.println("Error: File not found. Please contact the administrator.");
             return null;
         }
 
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean isHeader = true;
+
+            while ((line = br.readLine()) != null) {
+
+                if (isHeader) {
+                    isHeader = false;
+                    continue;
+                }
+
+
+                String[] details = line.split(",");
+
+                if (details[0].equalsIgnoreCase(position)) {
+                    return details;
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+
+        return null;
     }
 
+}
