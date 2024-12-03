@@ -22,14 +22,14 @@ public class CSVReader {
         List<Employee> employees = new ArrayList<>();
 
 
-        File file = new File(employeeCSVPath);
+        File file = new File("/src/Resources/Employees.csv");
         if (!file.exists()) {
-            System.err.println("Error: Employee CSV file not found at " + employeeCSVPath);
+            System.err.println("Error: Employee CSV file not found at " + "/src/Resources/Employees.csv");
             System.err.println("Current working directory: " + System.getProperty("user.dir"));
             return employees;
         }
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(employeeCSVPath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/Employees.csv"))) {
 
             String header = reader.readLine();
             if (header == null) {
@@ -64,7 +64,7 @@ public class CSVReader {
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(userCSVPath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/user.csv"))) {
             String line;
 
             reader.readLine();
@@ -82,7 +82,7 @@ public class CSVReader {
     public List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(salaryCSVPath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("/src/Resources/Salaries.csv"))) {
             reader.readLine();
 
             String line;

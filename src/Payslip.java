@@ -3,11 +3,12 @@ public class Payslip {
     private Deductions deductions;
     private SalaryScale salaryScale;
 
-    public Payslip(double grossSalary) {
+    public Payslip() {
         this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
-        this.netSalary = grossSalary - deductions.getTotalDeductions();
+        this.netSalary = salaryScale.getSalary() - deductions.getTotalDeductions();
     }
+
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
