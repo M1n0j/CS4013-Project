@@ -66,8 +66,6 @@ public class FullTimeMenu {
                 payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
-                PayrollChecker payrollChecker = new PayrollChecker();
-                payrollChecker.checker();
                 payslipManager.printEmployeePayslips(String.valueOf(userId));
             } else if (choice == 4) {
                 fullTimeMenuRunning = false;
