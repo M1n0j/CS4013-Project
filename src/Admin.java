@@ -6,12 +6,12 @@ public class Admin {
 
 
     public final String EmployeesCsvHeader = "employeeId,name,email,role,salaryScale,currentPoint,isFullTime, promotion";
-    public final String UsersCsvHeader = "userId,password,role, promotion";
+    public final String UsersCsvHeader = "userId,password,position";
 
 
     public void addEmployee(Employee employee, boolean isFullTime, String salaryScaleId, int currentPoint, String password, Integer employeeId) throws IOException {;
         String employeeCSVLine = employee.toCSV();
-        String userCSVLine = String.format("%d,%s,%s,%b", employee.getEmployeeId(), password, isFullTime ? "Full-Time" : "Part-Time", false);
+        String userCSVLine = String.format("%d,%s,%s", employee.getEmployeeId(), password, employee.getPosition());
 
 
         writeToCSV(EmployeesCsv, EmployeesCsvHeader, employeeCSVLine);

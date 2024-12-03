@@ -5,6 +5,7 @@ public class FullTimeMenu {
     private Scanner scanner;
     private int userId;
     double grossSalary = 0.0;
+    private AdminMenu adminMenu;
 
 
     public FullTimeMenu(Scanner scanner, int userId) {
@@ -145,9 +146,8 @@ public class FullTimeMenu {
 
     private int addLevel(boolean incrementLevel) {
         int currentLevel = currentLevel();
-        int maxLevel = maxLevelForPosition();
 
-        if (incrementLevel && currentLevel < maxLevel) {
+        if (incrementLevel && currentLevel > 0) {
             currentLevel++;
             upEmployeeLevel(currentLevel);
         }
@@ -180,27 +180,6 @@ public class FullTimeMenu {
             System.out.println("Error reading current level: " + e.getMessage());
         }
         return 0;
-    }
-
-    private int maxLevelForPosition() {
-        String userPosition = AdminMenu.checkPosition();
-        int maxLevel = 0;
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/resources/salaries.csv"));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                if (fields[0].equalsIgnoreCase(userPosition)) {
-                    maxLevel = Math.max(maxLevel, Integer.parseInt(fields[1])); // Compare levels
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            System.out.println("Error reading max level: " + e.getMessage());
-        }
-        return maxLevel;
     }
 
     private void upEmployeeLevel(int newLevel) {

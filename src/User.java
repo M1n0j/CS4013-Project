@@ -2,6 +2,8 @@ public class User {
     private String employeeID;
     private String password;
     private String role;
+    protected CSVWriter csvWriter;
+    protected CSVReader csvReader;
 
     public User(String employeeID, String password, String role) {
         this.employeeID = employeeID;
@@ -59,7 +61,7 @@ public class User {
         String[] fields = csvLine.split(",");
 
 
-        if (fields.length < 2) { // Assuming le Bomberclarting CSV has two parameters
+        if (fields.length < 2) {
             throw new IllegalArgumentException("Invalid CSV line for User: " + csvLine);
         }
 

@@ -1,7 +1,5 @@
-import java.util.List;
 import java.util.Scanner;
 import java.io.*;
-import java.time.LocalDate;
 
 /**
  * AdminMenu class provides menu for admin users to manage employees.
@@ -10,6 +8,8 @@ import java.time.LocalDate;
 public class AdminMenu {
     private Scanner scanner;
     private Admin admin;
+    private CSVWriter csvWriter;
+    private CSVReader csvReader;
 
     /**
      * Constructs AdminMenu instance with a scanner for user input/
@@ -19,11 +19,8 @@ public class AdminMenu {
     public AdminMenu(Scanner scanner) {
         this.scanner = scanner;
         this.admin = new Admin();
-    }
-
-
-    public static String checkPosition() {
-        return null;
+        this.csvWriter = new CSVWriter("/src/resources/Employees.csv","/src/resources/user.csv");
+        this.csvReader = new CSVReader("/src/resources/Employees.csv","/src/resources/user.csv","/src/resources/Salaries.csv");
     }
 
 
@@ -197,7 +194,6 @@ public class AdminMenu {
             }
 
 
-
             admin.addEmployee(employee, isFullTime, "N/A", currentPoint, password, employeeId);
             System.out.println("Employee added successfully!");
 
@@ -291,17 +287,22 @@ public class AdminMenu {
             return;
         }
 
-
         System.out.println("Proceeding with employee deletion...");
 
-
         Admin admin = new Admin();
-        var employees = CSVReader.readEmployees(admin.EmployeesCsv);
-        int finalEmployeeId = employeeId;
-        employees.removeIf(employee -> employee.getEmployeeId() == finalEmployeeId);
 
-        CSVWriter.writeEmployees(employees, admin.EmployeesCsv);
-        System.out.println("Employee deleted successfully!");
+        String csvName = "Employees";
+        String filePath = new File("").getAbsolutePath() + "/src/Resources/" + csvName + ".csv";
+        boolean isDelete = csvWriter.deleteRow(employeeId, filePath);
+
+        String csvName2 = "user";
+        String filePath2 = new File("").getAbsolutePath() + "/src/Resources/" + csvName2 + ".csv";
+        boolean isDelete2 = csvWriter.deleteRow(employeeId, filePath2);
+        if (isDelete2 && isDelete) {
+            System.out.println("Employee deleted successfully.");
+        }else{
+            System.out.println("Employee not found.");
+        }
 
     }
 
@@ -315,7 +316,7 @@ public class AdminMenu {
      */
 
 
-        private static String[] checkPosition(String fileName, String position) {
+        public String[] checkPosition(String fileName, String position) {
             File file = new File(fileName);
 
 

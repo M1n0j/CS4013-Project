@@ -2,6 +2,7 @@ import java.util.List;
 
 public class FullTimeEmployee extends Employee {
 
+
     public FullTimeEmployee(int employeeId, String name, String email, String position, int level, boolean fullTime, boolean promotion) {
 
         super(employeeId, name, email, position, level, fullTime, promotion);
@@ -22,7 +23,7 @@ public class FullTimeEmployee extends Employee {
 
     @Override
     public double calculateSalary() {
-        List<SalaryScale> salaryScaleList = CSVReader.readSalaryScales("src/Resources/Salaries.csv");
+        List<SalaryScale> salaryScaleList = csvReader.readSalaryScales();
         System.out.println("Loaded " + salaryScaleList.size() + " salary records.");
 
         double grossSalary = 0.0;

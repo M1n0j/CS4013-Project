@@ -1,10 +1,9 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CSVWriter {
-    private static String employeeCSVPath;
+    private String employeeCSVPath;
     private String userCSVPath;
 
     public CSVWriter(String employeeCSVPath, String userCSVPath) {
@@ -32,7 +31,7 @@ public class CSVWriter {
     /**
      * Writes a list of Employee objects to the employee CSV file.
      */
-    public static void writeEmployees(List<Employee> employees, String s) {
+    public void writeEmployees(List<Employee> employees, String s) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Employees"))) {
             writer.write("employeeId, name, email, position, level, isFullTime, promotion");
             writer.newLine();
@@ -62,6 +61,46 @@ public class CSVWriter {
         System.err.println("Error writing payslip file: " + e.getMessage());
     }
 }
+    public boolean deleteRow(int id, String path) {
+        ArrayList<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String header = reader.readLine();
+            lines.add(header);
 
+            String line;
+            boolean found = false;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values[0].isEmpty()) {
+                    continue;
+                }
+                int currentId = Integer.parseInt(values[0]);
+
+                if (currentId != id) {
+                    lines.add(line);
+                } else {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Employee not found");
+                return false;
+            }
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+            for (int i = 0; i < lines.size(); i++) {
+                writer.write(lines.get(i));
+                if (i < lines.size() - 1) {
+                    writer.newLine();
+                }
+            }
+            writer.close();
+            return true;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

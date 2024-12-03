@@ -1,14 +1,11 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVReader {
-    private static String employeeCSVPath;
+    private String employeeCSVPath;
     private String userCSVPath;
-    private static String salaryCSVPath;
+    private String salaryCSVPath;
 
 
     public CSVReader(String employeeCSVPath, String userCSVPath, String salaryCSVPath) {
@@ -17,15 +14,11 @@ public class CSVReader {
         this.salaryCSVPath = salaryCSVPath;
     }
 
-    public static List<SalaryScale> readSalaryScales(String s) {
-        return null;
-    }
-
     /**
      * Reads employee data from the employee CSV file and returns a list of Employee objects.
      * Includes file existence check and improved error handling.
      */
-    public static List<Employee> readEmployees(String s) {
+    public List<Employee> readEmployees(String s) {
         List<Employee> employees = new ArrayList<>();
 
 
@@ -63,7 +56,6 @@ public class CSVReader {
             }
         } catch (IOException e) {
             System.err.println("Error reading employee file: " + e.getMessage());
-            e.printStackTrace();
         }
 
         return employees;
@@ -87,7 +79,7 @@ public class CSVReader {
         return users;
     }
 
-    public static List<SalaryScale> readSalaryScales() {
+    public List<SalaryScale> readSalaryScales() {
         List<SalaryScale> salaryScales = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(salaryCSVPath))) {

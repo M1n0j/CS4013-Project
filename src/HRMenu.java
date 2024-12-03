@@ -6,7 +6,6 @@ public class HRMenu {
 
     public HRMenu(Scanner scanner) {
         this.scanner = scanner;
-        this.hrUser = hrUser;
     }
 
     public void displayMenu() {
@@ -21,7 +20,7 @@ public class HRMenu {
             scanner.nextLine();
 
             if (choice == 1) {
-                HrUser.promoteEmployee(scanner);
+                hrUser.promoteEmployee(scanner);
             } else if (choice == 2) {
                 hrMenuRunning = false;
             } else {

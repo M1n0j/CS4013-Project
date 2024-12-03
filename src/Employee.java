@@ -8,6 +8,8 @@ public abstract class Employee {
     private int level;
     private boolean promotion;
     private boolean fullTime;
+    protected CSVReader csvReader;
+    protected CSVWriter csvWriter;
 
 
     public Employee(int employeeId, String name, String email, String position, int level, boolean promotion, boolean fullTime) {

@@ -3,18 +3,19 @@ import java.util.Scanner;
 
 public class HrUser extends User {
 
+
     public HrUser(String employeeID, String password) {
         super(employeeID, password);
     }
 
-    public static void promoteEmployee(Scanner inputScanner) {
+    public void promoteEmployee(Scanner inputScanner) {
         if (inputScanner == null) {
             System.out.println("Invalid input scanner.");
             return;
         }
 
 
-        List<Employee> employees = CSVReader.readEmployees("src/resources/employees.csv");
+        List<Employee> employees = csvReader.readEmployees("src/resources/employees.csv");
 
         if (employees == null || employees.isEmpty()) {
             System.out.println("No employees found.");
@@ -36,7 +37,7 @@ public class HrUser extends User {
                 employee.setPromotion(true);
                 int newLevel = employee.getLevel() + 1;
                 employee.setLevel(newLevel);
-                CSVWriter.writeEmployees(employees, "src/resources/employees.csv");
+                csvWriter.writeEmployees(employees, "src/resources/employees.csv");
                 System.out.println("Employee promoted.");
                 return;
             }
