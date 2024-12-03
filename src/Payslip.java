@@ -8,12 +8,13 @@ public class Payslip {
     private SalaryScale salaryScale;
     private int salary;
     private PartTimeEmployee partTimeEmployee;
+    private int employeeId;
 
-
-    public Payslip() {
-        this.salaryScale = new SalaryScale("",0,0);
+    public Payslip(int employeeId) {
+        this.employeeId = employeeId;
+        this.salaryScale = new SalaryScale("", 0, 0);
         this.deductions = new Deductions();
-        this.partTimeEmployee = new PartTimeEmployee(0,"","","",0,false,false,40,15);
+        this.partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 40, 15);
 
         readSalaryDataFromCSV("src/Resources/Salaries.csv");
         if (salaryScale.getSalary() > 0) {
@@ -26,13 +27,11 @@ public class Payslip {
         }
     }
 
-
     private void readSalaryDataFromCSV(String csvFilePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
-
                 salaryScale = salaryScale.fromSalaries(line);
             }
         } catch (IOException e) {
@@ -40,6 +39,10 @@ public class Payslip {
         }
     }
 
+    // Add the method to return employee ID
+    public int getEmployeeId() {
+        return this.employeeId;
+    }
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
@@ -58,7 +61,6 @@ public class Payslip {
     }
 
     public String toCSV() {
-
         return String.format("%.2f", salaryScale.getSalary()) + "," +
                 String.format("%.2f", deductions.getPrsi()) + "," +
                 String.format("%.2f", deductions.getUsc()) + "," +
@@ -66,7 +68,6 @@ public class Payslip {
                 String.format("%.2f", deductions.getUnionFee()) + "," +
                 String.format("%.2f", deductions.getTotalDeductions()) + "," +
                 String.format("%.2f", netSalary);
-
     }
 
 }
