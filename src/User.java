@@ -12,7 +12,7 @@ public class User {
         this.employeeID = employeeID;
         this.password = password;
         this.role = role;
-        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv");
+        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv", "src/Resources/Payslips.csv");
         this.csvReader = new CSVReader("src/Resources/Employees.csv","src/Resources/user.csv","src/Resources/Salaries.csv");
     }
 
@@ -20,7 +20,7 @@ public class User {
         this.employeeID = employeeID;
         this.password = password;
         this.role = "Unknown";
-        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv");
+        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv", "src/Resources/Payslips.csv");
         this.csvReader = new CSVReader("src/Resources/Employees.csv","src/Resources/user.csv","src/Resources/Salaries.csv");
     }
 
