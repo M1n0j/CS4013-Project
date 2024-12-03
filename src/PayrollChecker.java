@@ -19,9 +19,9 @@ public class PayrollChecker {
     /**
      * Main method to perform payroll checks and generate payslips.
      *
-     * @param args Command-line arguments (not used in this implementation).
+     * @param arg Command-line arguments (not used in this implementation).
      */
-    public void checker(String[] args) {
+    public void checker() {
         LocalDate today = LocalDate.now();
 
 
@@ -152,13 +152,4 @@ public class PayrollChecker {
         }
     }
 
-    /**
-     * Main method to run the PayrollChecker.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        PayrollChecker payrollChecker = new PayrollChecker();
-        payrollChecker.checker(args); // Start the payroll check and payslip generation
-    }
 }
