@@ -1,27 +1,18 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
-import java.io.IOException;
 
-/**
- *  DisplayMenu class provides the main menu for users to log into the payroll service
- *  It authenticates the user based on their UserId and Password, then directs the user to the appropriate menu based on their role
- */
 public class DisplayMenu {
-
-    /**
-     * Main method that runs the menu interface for the payroll system
-     * Prompts users for their UserId and password, checks their role and moves them to the respective menu
-     */
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
-            System.out.println("\n-----Welcome to the University Of Limerick Payroll Service-----");
+            System.out.println("-----Welcome to the University Of Limerick Payroll Service-----");
             int userId;
             try {
                 System.out.println("Enter your UserID:");
@@ -83,7 +74,6 @@ public class DisplayMenu {
      * @param fileName The name of the CSV file to read.
      * @param userId   The UserID to search for.
      * @return An array of user details (UserID, Password, Role) if found, or null if not found.
-     * @throws IOException if error occurs while reading file
      */
     private static String[] getUserDetails(String fileName, int userId) {
         File file = new File(fileName);

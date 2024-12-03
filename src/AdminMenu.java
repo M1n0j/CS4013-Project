@@ -19,7 +19,7 @@ public class AdminMenu {
     public AdminMenu(Scanner scanner) {
         this.scanner = scanner;
         this.admin = new Admin();
-        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv");
+        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv", "src/Resources/Payslips.csv");
         this.csvReader = new CSVReader("src/Resources/Employees.csv","src/Resources/user.csv","src/Resources/Salaries.csv");
     }
 

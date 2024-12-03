@@ -5,10 +5,13 @@ import java.util.List;
 public class CSVWriter {
     private String employeeCSVPath;
     private String userCSVPath;
+    private String paySlipCSVPath;
 
-    public CSVWriter(String employeeCSVPath, String userCSVPath) {
+    public CSVWriter(String employeeCSVPath, String userCSVPath, String paySlipCSVPath) {
         this.employeeCSVPath = employeeCSVPath;
         this.userCSVPath = userCSVPath;
+        this.paySlipCSVPath = paySlipCSVPath;
+
     }
 
     /**

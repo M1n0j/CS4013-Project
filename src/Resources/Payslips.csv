@@ -1,2 +1,6 @@
-payslipId, employeeId, name, payPeriod, grossPay, usc, prsi, incomeTax, netPay
-
+payslipId,employeeId,name,payPeriod,grossPay,usc,prsi,incomeTax,netPay
+1,1,John Doe,November 2024,3000.00,100.00,150.00,250.00,2500.00
+2,2,Bob Brown,October 2024,3500.00,120.00,180.00,280.00,2920.00
+3,1,John Doe,October 2024,3000.00,100.00,150.00,250.00,2500.00
+4,3,John Doe,September 2024,2800.00,90.00,140.00,220.00,2350.00
+5,2,Bob Brown,September 2024,3500.00,120.00,180.00,280.00,2920.00
