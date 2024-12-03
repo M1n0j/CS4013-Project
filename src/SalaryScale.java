@@ -1,7 +1,7 @@
 public class SalaryScale {
     private String position;
     private int level;
-    private double salary;
+    public double salary;
 
     public SalaryScale(String position, int level, double salary) {
         this.position = position;

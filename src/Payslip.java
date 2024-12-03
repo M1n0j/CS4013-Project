@@ -1,19 +1,17 @@
-import java.util.List;
-
 public class Payslip {
-    private double grossSalary;
     private double netSalary;
     private Deductions deductions;
+    private SalaryScale salaryScale;
 
     public Payslip(double grossSalary) {
-        this.grossSalary = grossSalary;
+        this.salaryScale = new SalaryScale("",0,0);
         this.deductions = new Deductions();
         this.netSalary = grossSalary - deductions.getTotalDeductions();
     }
 
     public void printPayslip() {
         System.out.println("\n----- Payslip -----");
-        System.out.println("Gross Salary: €" + String.format("%.2f", this.grossSalary));
+        System.out.println("Gross Salary: €" + String.format("%.2f",salaryScale.getSalary()));
         System.out.println("PRSI: €" + String.format("%.2f", this.deductions.getPrsi()));
         System.out.println("USC: €" + String.format("%.2f", this.deductions.getUsc()));
         System.out.println("Income Tax: €" + String.format("%.2f", this.deductions.getIncomeTax()));
@@ -25,7 +23,7 @@ public class Payslip {
 
     public String toCSV() {
 
-        return String.format("%.2f", grossSalary) + "," +
+        return String.format("%.2f", salaryScale.getSalary()) + "," +
                 String.format("%.2f", deductions.getPrsi()) + "," +
                 String.format("%.2f", deductions.getUsc()) + "," +
                 String.format("%.2f", deductions.getIncomeTax()) + "," +

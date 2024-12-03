@@ -67,4 +67,5 @@ public class PartTimeEmployee extends Employee {
         Deductions deductions = new Deductions();
         return deductions.calcDeductions(grossSalary);
     }
+
 }
