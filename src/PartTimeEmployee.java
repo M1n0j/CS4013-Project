@@ -11,6 +11,12 @@ public class PartTimeEmployee extends Employee {
         this.hourlyPay = 15;
     }
 
+    public double setHoursWorked() {
+        this.hoursWorked = inputHoursWorked();
+        return this.hoursWorked;
+    }
+
+
     public static PartTimeEmployee fromCSV(String csvLine) {
         String[] fields = csvLine.split(",");
         return new PartTimeEmployee(
@@ -39,20 +45,20 @@ public class PartTimeEmployee extends Employee {
                 + getLevel() + "," + isFullTime() + "," + isPromotion() + ",";
     }
 
-    public void inputHoursWorked(int HoursWorked) {
+    public double inputHoursWorked() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter hours worked for " + getName() + ": ");
         try {
             double hours = Double.parseDouble(scanner.nextLine());
             if (hours <= 0) {
                 System.out.println("Hours worked can't be 0 or negative!");
-                return;
             }
             this.hoursWorked += hours;
             System.out.println(hours + " hours added to total hours worked.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! No hours added.");
         }
+        return hoursWorked;
     }
 
     public double getCurrentPayHours() {

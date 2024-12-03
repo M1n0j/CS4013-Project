@@ -14,7 +14,8 @@ public class Payslip {
         this.employeeId = employeeId;
         this.salaryScale = new SalaryScale("", 0, 0);
         this.deductions = new Deductions();
-        this.partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 40, 15);
+        this.partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 0, 15);
+        this.partTimeEmployee.setHoursWorked();
 
         readSalaryDataFromCSV("src/Resources/Salaries.csv");
         if (salaryScale.getSalary() > 0) {

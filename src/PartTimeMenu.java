@@ -23,11 +23,7 @@ public class PartTimeMenu{
             System.out.println("1. View My Details");
             System.out.println("2. View My Most Recent Payslip");
             System.out.println("3. View My Historical Payslips");
-            if (isSecondFriday) {
-                System.out.println("4. Work Claim");
-            }
-
-            System.out.println("5. Logout");
+            System.out.println("4. Logout");
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
@@ -42,12 +38,8 @@ public class PartTimeMenu{
                 payslip.printPayslip();
             } else if (choice == 3) {
                 System.out.println("Historical Payslips:");
-                System.out.println("Historical Payslips:");
                 payslipManager.printEmployeePayslips(String.valueOf(userId));
-            } else if (choice == 4 && isSecondFriday) {
-                PartTimeEmployee partTimeEmployee = new PartTimeEmployee(0, "", "", "", 0, false, false, 40, 15);
-                partTimeEmployee.inputHoursWorked(0);
-            } else if (choice == 5) {
+            } else if (choice == 4) {
                 partTimeMenuRunning = false;
             } else {
                 System.out.println("Invalid selection. Please try again.");
