@@ -117,6 +117,6 @@ public class PayrollChecker {
 
     public static void main(String[] args) {
         PayrollChecker payrollChecker = new PayrollChecker();
-        payrollChecker.checker(args); // Start the payroll check and payslip generation
+        payrollChecker.checker(args);
     }
 }

@@ -179,7 +179,7 @@ public class AdminMenu {
             if (isFullTime) {
                 employee = new FullTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
             } else {
-                employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true, 0, 0);
+                employee = new PartTimeEmployee(employeeId, name, email, inputPosition, 0, isFullTime, true);
             }
 
 

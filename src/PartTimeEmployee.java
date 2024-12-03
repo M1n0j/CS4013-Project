@@ -5,7 +5,7 @@ public class PartTimeEmployee extends Employee {
     private double hourlyPay;
     private double hoursWorked;
 
-    public PartTimeEmployee(int employeeId, String name, String email, String position, int level, boolean promotion, boolean fullTime, double hoursWorked, double hourlyPay) {
+    public PartTimeEmployee(int employeeId, String name, String email, String position, int level, boolean promotion, boolean fullTime) {
         super(employeeId, name, email, position, level, promotion, fullTime);
         this.hoursWorked = hoursWorked;
         this.hourlyPay = 15;
@@ -26,9 +26,7 @@ public class PartTimeEmployee extends Employee {
                 fields[3],
                 Integer.parseInt(fields[4]),
                 Boolean.parseBoolean(fields[5]),
-                Boolean.parseBoolean(fields[6]),
-                Double.parseDouble(fields[7]),
-                Double.parseDouble(fields[8])
+                Boolean.parseBoolean(fields[6])
         );
     }
 
