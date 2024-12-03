@@ -15,7 +15,7 @@ public class HrUser extends User {
         }
 
 
-        List<Employee> employees = csvReader.readEmployees("src/resources/employees.csv");
+        List<Employee> employees = csvReader.readEmployees("src/Resources/Employees.csv");
 
         if (employees == null || employees.isEmpty()) {
             System.out.println("No employees found.");

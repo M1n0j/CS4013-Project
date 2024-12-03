@@ -33,7 +33,7 @@ public class DisplayMenu {
                 continue;
             }
 
-            String[] userDetails = getUserDetails("src/resources/User.csv", userId);
+            String[] userDetails = getUserDetails("src/Resources/user.csv", userId);
             if (userDetails != null) {
                 String correctPassword = userDetails[1];
                 String role = userDetails[2];
@@ -52,7 +52,7 @@ public class DisplayMenu {
                             adminMenu.displayMenu();
                             break;
                         case "hr":
-                            HRMenu hrMenu = new HRMenu(scanner);
+                            HRMenu hrMenu = new HRMenu(scanner, userId);
                             hrMenu.displayMenu();
                             break;
                         case "part-time":

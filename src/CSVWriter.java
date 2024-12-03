@@ -16,12 +16,12 @@ public class CSVWriter {
      */
     public void writeUsers(List<User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(userCSVPath))) {
-            writer.write("userID, userPassword, Role");
             writer.newLine();
+            writer.write("userID, userPassword, Role");
 
             for (User  user : users) {
-                writer.write(user.toCSV());
                 writer.newLine();
+                writer.write(user.toCSV());
             }
         } catch (IOException e) {
             System.err.println("Error writing user file: " + e.getMessage());
@@ -32,13 +32,13 @@ public class CSVWriter {
      * Writes a list of Employee objects to the employee CSV file.
      */
     public void writeEmployees(List<Employee> employees, String s) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Employees"))) {
-            writer.write("employeeId, name, email, position, level, isFullTime, promotion");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/Employees.csv"))) {
             writer.newLine();
+            writer.write("employeeId, name, email, position, level, isFullTime, promotion");
 
             for (Employee employee : employees) {
-                writer.write(employee.toCSV());
                 writer.newLine();
+                writer.write(employee.toCSV());
             }
         } catch (IOException e) {
             System.err.println("Error writing employee file: " + e.getMessage());
@@ -49,7 +49,7 @@ public class CSVWriter {
  * Writes a list of Payslip objects to the payslip CSV file.
  */
     public void writePayslips(List<Payslip> payslips, String payslipCSVPath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/resources/Payslips"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/Payslips.csv"))) {
         writer.write("payslipId, employeeId, payDate, grossPay, tax, netPay");
         writer.newLine();
 

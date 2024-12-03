@@ -95,7 +95,7 @@ public class FullTimeMenu {
 
     private boolean checkPromotionStatus() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"));
             String line;
 
             reader.readLine();
@@ -104,8 +104,8 @@ public class FullTimeMenu {
                 String[] fields = line.split(",");
                 if (fields.length >= 7) {
 
-                        int employeeId = Integer.parseInt(fields[0]);
-                        if (employeeId == userId) {
+                        String employeeId = (fields[0]);
+                        if (employeeId.equals(Integer.toString(userId)) ) {
                             boolean isPromoted = Boolean.parseBoolean(fields[6]);
                             return isPromoted;
                         }
@@ -120,7 +120,7 @@ public class FullTimeMenu {
     }
     private void updatePromotion(boolean newStatus) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"));
             StringBuilder updatedData = new StringBuilder();
             String line;
 

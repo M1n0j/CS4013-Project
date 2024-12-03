@@ -4,8 +4,9 @@ public class HRMenu {
     private Scanner scanner;
     private HrUser hrUser;
 
-    public HRMenu(Scanner scanner) {
+    public HRMenu(Scanner scanner, int userId) {
         this.scanner = scanner;
+        this.hrUser = new HrUser(Integer.toString(userId),"password");
     }
 
     public void displayMenu() {

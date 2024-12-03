@@ -43,7 +43,7 @@ public class PartTimeMenu {
     private void viewMyDetails() {
         try {
 
-            BufferedReader reader = new BufferedReader(new FileReader("src/resources/Employees.csv"));
+            BufferedReader reader = new BufferedReader(new FileReader("src/Resources/Employees.csv"));
             String line;
             boolean found = false;
 

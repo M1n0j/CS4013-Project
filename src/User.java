@@ -1,3 +1,6 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+
 public class User {
     private String employeeID;
     private String password;
@@ -9,12 +12,16 @@ public class User {
         this.employeeID = employeeID;
         this.password = password;
         this.role = role;
+        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv");
+        this.csvReader = new CSVReader("src/Resources/Employees.csv","src/Resources/user.csv","src/Resources/Salaries.csv");
     }
 
     public User(String employeeID, String password) {
         this.employeeID = employeeID;
         this.password = password;
         this.role = "Unknown";
+        this.csvWriter = new CSVWriter("src/Resources/Employees.csv","src/Resources/user.csv");
+        this.csvReader = new CSVReader("src/Resources/Employees.csv","src/Resources/user.csv","src/Resources/Salaries.csv");
     }
 
     public String getEmployeeID() {
