@@ -3,13 +3,25 @@ import java.time.DayOfWeek;
 import java.util.*;
 import java.time.LocalDate;
 
+/**
+ * The PayrollChecker class handles payroll processing and payslip generation for employees.
+ * It checks whether today is a payroll day or the second Friday of the month
+ * and generates payslips for all employees accordingly.
+ */
 public class PayrollChecker {
 
+    /** Path to the CSV file containing employee data. */
     private static final String EMPLOYEES_FILE_PATH = "src/Resources/Employees.csv";
+
+    /** Path to the CSV file where payslips will be saved. */
     private static final String PAYSLIPS_FILE_PATH = "src/Resources/Payslips.csv";
 
-
-    public void checker() {
+    /**
+     * Main method to perform payroll checks and generate payslips.
+     *
+     * @param args Command-line arguments (not used in this implementation).
+     */
+    public void checker(String[] args) {
         LocalDate today = LocalDate.now();
 
 
@@ -35,12 +47,22 @@ public class PayrollChecker {
         }
     }
 
-
-    public boolean isPayrollDay(LocalDate date) {
+    /**
+     * Checks if the given date is the payroll day (25th of the month).
+     *
+     * @param date The date to check.
+     * @return {@code true} if the date is the 25th, {@code false} otherwise.
+     */
+    public static boolean isPayrollDay(LocalDate date) {
         return date.getDayOfMonth() == 25;
     }
 
-
+    /**
+     * Checks if the given date is the second Friday of the month.
+     *
+     * @param date The date to check.
+     * @return {@code true} if the date is the second Friday of the month, {@code false} otherwise.
+     */
     public static boolean isSecondFriday(LocalDate date) {
         LocalDate firstDayOfMonth = date.withDayOfMonth(1);
         int daysUntilFriday = DayOfWeek.FRIDAY.getValue() - firstDayOfMonth.getDayOfWeek().getValue();
@@ -52,7 +74,12 @@ public class PayrollChecker {
         return date.equals(secondFriday);
     }
 
-    // Method to read employees from CSV and return a list of Employee objects
+    /**
+     * Reads employees from a CSV file and returns a list of Employee objects.
+     *
+     * @param filePath The path to the CSV file.
+     * @return A list of Employee objects.
+     */
     public List<Employee> readEmployees(String filePath) {
         List<Employee> employees = new ArrayList<>();
         File file = new File(filePath);
@@ -91,7 +118,13 @@ public class PayrollChecker {
         return employees;
     }
 
-
+    /**
+     * Generates a payslip for a given employee on a specific payday.
+     *
+     * @param employee The employee for whom the payslip is generated.
+     * @param payday   The date of the payday.
+     * @return The generated Payslip object.
+     */
     private Payslip generatePayslip(Employee employee, LocalDate payday) {
         Payslip payslip = new Payslip(employee.getEmployeeId());
         payslip.setEmployeeId(employee.getEmployeeId());
@@ -105,12 +138,27 @@ public class PayrollChecker {
         return payslip;
     }
 
+    /**
+     * Writes a Payslip object to the payslips CSV file.
+     *
+     * @param payslip The Payslip object to write.
+     */
     public static void writePayslipToCSV(Payslip payslip) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Resources/Payslips.csv", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PAYSLIPS_FILE_PATH, true))) {
             writer.write(payslip.getEmployeeId() + "," + payslip.toCSV() + "\n");
             System.out.println("Payslip for Employee ID " + payslip.getEmployeeId() + " written to CSV.");
         } catch (IOException e) {
             System.err.println("Error writing to CSV: " + e.getMessage());
         }
+    }
+
+    /**
+     * Main method to run the PayrollChecker.
+     *
+     * @param args Command-line arguments.
+     */
+    public static void main(String[] args) {
+        PayrollChecker payrollChecker = new PayrollChecker();
+        payrollChecker.checker(args); // Start the payroll check and payslip generation
     }
 }
